@@ -1,51 +1,86 @@
-$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
+#
+# Copyright (C) 2009 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+#
+# This is the product configuration for a generic GSM sunfire,
+# not specialized for any geography.
+#
 
 # The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
 
-
-## (1) First, the most specific values, i.e. the aspects that are specific to this phone
+## (1) First, the most specific values, i.e. the aspects that are specific to GSM
 PRODUCT_COPY_FILES += \
-    device/motorola/sunfire/init.sunfire.rc:root/init.sunfire.rc \
-    device/motorola/sunfire/ueventd.sunfire.rc:root/ueventd.sunfire.rc
+    device/moto/sunfire/init.sunfire.rc:root/init.sunfire.rc \
+    device/moto/sunfire/init.sunfire.usb.rc:root/init.sunfire.usb.rc \
+    device/moto/sunfire/ueventd.sunfire.rc:root/ueventd.sunfire.rc
 
-## (2) Also get non-open-source phone-specific aspects if available
-$(call inherit-product-if-exists, vendor/motorola/sunfire/sunfire-vendor.mk)
-
-
-# motorola helper scripts
-PRODUCT_COPY_FILES += \
-    device/motorola/sunfire/scripts/pds_perm_fix.sh:system/bin/pds_perm_fix.sh \
-    device/motorola/sunfire/scripts/bt_init_wrapper.sh:system/bin/bt_init_wrapper.sh \
-    device/motorola/sunfire/scripts/hciattach_wrapper.sh:system/bin/hciattach_wrapper.sh
-
-# sysctl conf
-PRODUCT_COPY_FILES += \
-    device/motorola/sunfire/config/sysctl.conf:system/etc/sysctl.conf
+## (2) Also get non-open-source GSM-specific aspects if available
+$(call inherit-product-if-exists, vendor/moto/sunfire/sunfire-vendor.mk)
 
 ## (3)  Finally, the least specific parts, i.e. the non-GSM-specific aspects
-
-
-# Telephony property for CDMA
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.ril.ntmodeglobal=true \
+    ro.kernel.android.ril=yes \
+    persist.ril.mux.noofchannels=10 \
+    persist.radio.reset_on_switch=true \
+    persist.ril.mux.ttydevice=/dev/ttyHS3 \
+    persist.ril.modem.ttydevice=/dev/ttySPI0 \
+    persist.ril.features=0x0C \
+    persist.ril.mux.retries=500 \
+    persist.ril.mux.sleep=2 \
+    ro.telephony.sms_segment_size=160 \
+    ro.telephony.ril.v3=datacall,icccardstatus,signalstrength,facilitylock,skipbrokendatacall  \
+    ro.setupwizard.mode=OPTIONAL \
+    ro.telephony.call_ring.multiple=false \
+    ro.telephony.call_ring.delay=500 \
+    ro.setupwizard.enable_bypass=1 \
+    ro.url.legal=http://www.google.com/intl/%s/mobile/android/basic/phone-legal.html \
+    ro.url.legal.android_privacy=http://www.google.com/intl/%s/mobile/android/basic/privacy.html \
     ro.cdma.home.operator.numeric=310120 \
     ro.cdma.home.operator.alpha=Sprint \
     ro.cdma.homesystem=64,65,76,77,78,79,80,81,82,83 \
-    ro.cdma.otaspnumschema=SELC,1,80,99 \
-    ro.HorizontalVVM=false
+    ro.cdma.otaspnumschema=SELC,1,80,99
 
-# we have enough storage space to hold precise GC data
-PRODUCT_TAGS += dalvik.gc.type-precise
+# motorola helper scripts
+PRODUCT_COPY_FILES += \
+    device/moto/sunfire/scripts/pds_perm_fix.sh:system/bin/pds_perm_fix.sh \
+    device/moto/sunfire/scripts/bt_init_wrapper.sh:system/bin/bt_init_wrapper.sh \
+    device/moto/sunfire/scripts/hciattach_wrapper.sh:system/bin/hciattach_wrapper.sh
+
+# sysctl conf
+PRODUCT_COPY_FILES += \
+    device/moto/sunfire/config/sysctl.conf:system/etc/sysctl.conf
+
+## (3)  Finally, the least specific parts, i.e. the non-GSM-specific aspects
+
+# Set en_US as default locale
+PRODUCT_LOCALES := zh_CN
+
+# sunfire uses high-density artwork where available
+PRODUCT_LOCALES += hdpi
 
 # copy all kernel modules under the "modules" directory to system/lib/modules
 PRODUCT_COPY_FILES += $(shell \
-    find device/motorola/sunfire/modules -name '*.ko' \
+    find device/moto/sunfire/modules -name '*.ko' \
     | sed -r 's/^\/?(.*\/)([^/ ]+)$$/\1\2:system\/lib\/modules\/\2/' \
     | tr '\n' ' ')
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-	LOCAL_KERNEL := device/motorola/sunfire/kernel
+	LOCAL_KERNEL := device/moto/sunfire/kernel
 else
 	LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
@@ -53,51 +88,41 @@ endif
 PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel
 
+$(call inherit-product-if-exists, vendor/moto/sunfire/sunfire-vendor.mk)
 
+$(call inherit-product, build/target/product/full_base_telephony.mk)
 
-$(call inherit-product, build/target/product/full_base.mk)
+PRODUCT_PACKAGES += Usb \
+			DockAudio \
+			Torch \
+			audio.primary.sunfire \
+			audio.a2dp.default
 
-# sunfire uses high-density artwork where available
-PRODUCT_LOCALES += hdpi
-
-PRODUCT_PACKAGES += \
-	Usb \
-	FM \
-	DockAudio \
-	Torch
-
-DEVICE_PACKAGE_OVERLAYS += device/motorola/sunfire/overlay
+DEVICE_PACKAGE_OVERLAYS += device/moto/sunfire/overlay
 
 # Board-specific init
 PRODUCT_COPY_FILES += \
-    device/motorola/sunfire/config/vold.fstab:system/etc/vold.fstab \
-    device/motorola/sunfire/scripts/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh \
-    device/motorola/sunfire/config/media_profiles.xml:system/etc/media_profiles.xml \
-    device/motorola/sunfire/config/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
-
-# Digitizer files
-# Pulled from http://forum.xda-developers.com/showthread.php?t=1238306
-PRODUCT_COPY_FILES += \
-    device/motorola/sunfire/config/touchpad/20/touchpad.cfg:system/etc/touchpad/20/touchpad.cfg \
-    device/motorola/sunfire/config/touchpad/21/touchpad.cfg:system/etc/touchpad/21/touchpad.cfg \
-    device/motorola/sunfire/config/touchpad/22/touchpad.cfg:system/etc/touchpad/22/touchpad.cfg
+    device/moto/sunfire/config/vold.fstab:system/etc/vold.fstab \
+    device/moto/sunfire/init.vsnet:system/bin/init.vsnet \
+    device/moto/sunfire/scripts/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh \
+    device/moto/sunfire/prebuilts/liba2dp.so:system/lib/liba2dp.so
 
 #keyboard files
 PRODUCT_COPY_FILES += \
-    device/motorola/sunfire/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
-    device/motorola/sunfire/keylayout/Motorola_Mobility_Motorola_HD_Dock.kl:system/usr/keylayout/Motorola_Mobility_Motorola_HD_Dock.kl \
-    device/motorola/sunfire/keylayout/cpcap-key.kl:system/usr/keylayout/cpcap-key.kl \
-    device/motorola/sunfire/keylayout/evfwd.kl:system/usr/keylayout/evfwd.kl \
-    device/motorola/sunfire/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl \
-    device/motorola/sunfire/keylayout/tegra-kbc.kl:system/usr/keylayout/tegra-kbc.kl \
-    device/motorola/sunfire/keylayout/usb_keyboard_102_en_us.kl:system/usr/keylayout/usb_keyboard_102_en_us.kl \
-    device/motorola/sunfire/keylayout/Motorola_Bluetooth_Wireless_Keyboard.kl:system/usr/keylayout/Motorola_Bluetooth_Wireless_Keyboard.kl \
-    device/motorola/sunfire/keychars/usb_keyboard_102_en_us.kcm.bin:system/usr/keychars/usb_keyboard_102_en_us.kcm.bin \
-    device/motorola/sunfire/keychars/tegra-kbc.kcm.bin:system/usr/keychars/tegra-kbc.kcm.bin \
-    device/motorola/sunfire/keychars/evfwd.kcm.bin:system/usr/keychars/evfwd.kcm.bin \
-    device/motorola/sunfire/keychars/qwerty.kcm.bin:system/usr/keychars/qwerty.kcm.bin \
-    device/motorola/sunfire/keychars/qwerty2.kcm.bin:system/usr/keychars/qwerty2.kcm.bin \
-    device/motorola/sunfire/keychars/Motorola_Bluetooth_Wireless_Keyboard.kcm.bin:system/usr/keychars/Motorola_Bluetooth_Wireless_Keyboard.kcm.bin
+    device/moto/sunfire/keylayout/qtouch-obp-ts.kl:system/usr/keylayout/qtouch-obp-ts.kl \
+    device/moto/sunfire/config/qtouch-obp-ts.idc:system/usr/idc/qtouch-obp-ts.idc \
+    device/moto/sunfire/keylayout/tegra-kbc.kl:system/usr/keylayout/tegra-kbc.kl \
+    device/moto/sunfire/keychars/tegra-kbc.kcm.bin:system/usr/keychars/tegra-kbc.kcm.bin \
+    device/moto/sunfire/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl \
+    device/moto/sunfire/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
+    device/moto/sunfire/keylayout/Motorola_Mobility_Motorola_HD_Dock.kl:system/usr/keylayout/Motorola_Mobility_Motorola_HD_Dock.kl \
+    device/moto/sunfire/keylayout/cpcap-key.kl:system/usr/keylayout/cpcap-key.kl \
+    device/moto/sunfire/keylayout/evfwd.kl:system/usr/keylayout/evfwd.kl \
+    device/moto/sunfire/keychars/evfwd.kcm.bin:system/usr/keychars/evfwd.kcm.bin \
+    device/moto/sunfire/keylayout/usb_keyboard_102_en_us.kl:system/usr/keylayout/usb_keyboard_102_en_us.kl \
+    device/moto/sunfire/keychars/usb_keyboard_102_en_us.kcm.bin:system/usr/keychars/usb_keyboard_102_en_us.kcm.bin \
+    device/moto/sunfire/keylayout/usb_keyboard_102_en_us.kl:system/usr/keylayout/Motorola_Bluetooth_Wireless_Keyboard.kl \
+    device/moto/sunfire/keychars/usb_keyboard_102_en_us.kcm.bin:system/usr/keychars/Motorola_Bluetooth_Wireless_Keyboard.kcm.bin
 
 # Permission files
 PRODUCT_COPY_FILES += \
@@ -114,10 +139,10 @@ PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
 
+PRODUCT_COPY_FILES += device/moto/sunfire/apns-conf.xml:system/etc/apns-conf.xml
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
 PRODUCT_NAME := generic_sunfire
 PRODUCT_DEVICE := sunfire
 PRODUCT_MODEL := MB855
-PRODUCT_BRAND := sprint

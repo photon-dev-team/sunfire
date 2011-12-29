@@ -2,10 +2,10 @@
 # system.prop for sunfire
 #
 ro.sf.lcd_density=240
-dalvik.vm.heapsize=42m
+dalvik.vm.heapsize=64m
 
 #RIL
-ro.telephony.ril_class=mototegraworld
+ro.telephony.ril_class=mototegraglobal
 rild.libpath=/system/lib/libmoto_ril.so
 persist.ril.mux.ttydevice=/dev/ttyHS3
 ro.telephony.call_ring.multiple=false
@@ -37,8 +37,6 @@ persist.ril.ecclist=911,*911,#911
 #ro.cdma.homesystem=64,65,76,77,78,79,80,81,82,83
 #ro.cdma.otaspnumschema=SELC,1,80,99
 persist.radio.cdma.min=0
-#ro.cdma.home.operator.numeric=310120
-#ro.cdma.home.operator.alpha=Sprint
 
 # ERI feature
 # 0 OFF
@@ -50,9 +48,9 @@ ro.HorizontalVVM=false
 
 #BEGIN Motorola, 30Jan2011, w19837, IKSUNFIRE-215, Feature ID: 35761.
 #[sprint tv transport protocol support]
-sprint.mm.http.proxy = pd.vog.sprintpcs.com
+sprint.mm.http.proxy = 0.0.0.0
 sprint.mm.http.port = 8085
-sprint.mm.rtsp.proxy = rtsp.vog.sprintpcs.com
+sprint.mm.rtsp.proxy = 0.0.0.0
 sprint.mm.rtsp.port = 554
 sprint.mm.network.type = unknow
 sprint.mm.nai = unknown
@@ -109,3 +107,16 @@ persist.tegra.nvlog.level=4
 # DRM
 #persist.tegra.drmlib.asfdrm=libnvdrm.so
 #Drmdll.asfdrm=libnvdrm.so
+
+# Set locale to English CN by default
+ro.product.locale.language=zh
+ro.product.locale.region=CN
+persist.sys.timezone=Asia/Shanghai
+
+# Enable detailed GC data and SMP dexopt
+dalvik.vm.dexopt-flags=m=y,u=n
+
+# Enable HDMI mirroring
+ro.hdmi.mirror.enable=true
+
+persist.sys.usb.config=mass_storage,adb

@@ -32,6 +32,7 @@
   <item name="radio.active">205</item>
   <item name="gps.on">56</item>
   <item name="radio.scanning">49</item>
+  <item name="battery.capacity">1930</item>
   <array name="radio.on"> <!-- Strength 0 to BINS-1 -->
       <value>5</value>
       <value>5</value>

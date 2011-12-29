@@ -80,7 +80,7 @@
 
 # CDMA radio interface MUX
 /dev/ts0710mux*           0660   radio      radio
-/dev/ttyHS4               0640   radio      radio
+/dev/ttyHS4/*             0640   radio      radio
 /dev/ppp                  0660   radio      vpn
 /dev/tun                  0640   vpn        vpn
 
@@ -143,7 +143,7 @@
 /dev/wakeup_timer         0660   root       radio
 /dev/modem_pm_driver      0660   root       radio
 /dev/power                0660   root       radio
-/dev/cpcap                0660   root       system
+/dev/cpcap                0666   root       system
 /dev/cpcap_batt           0660   root       system
 /dev/cpcap_uc             0660   root       system
 /dev/sec                  0660   root       system
@@ -153,7 +153,7 @@
 /dev/i2c-0                0660   root       system
 /dev/i2c-1                0660   root       system
 /dev/i2c-2                0660   root       system
-/dev/i2c-3                0660   system     camera
+/dev/i2c-3                0660   system   camera
 /dev/i2c-4                0660   root       system
 /dev/pvrsrvkm             0666   system     graphics
 /dev/bd7885               0770   media      camera
@@ -203,7 +203,3 @@
 /dev/bus/usb/002/123      0660   root       radio
 
 /sys/devices/virtual/usb_composite/*   enable      0664  root   system
-
-#beceem wimax device
-/dev/tarang               0666   root       root
-

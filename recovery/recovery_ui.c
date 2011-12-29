@@ -20,29 +20,8 @@
 #include "common.h"
 #include "extendedcommands.h"
 
-char* MENU_HEADERS[] = { NULL };
-
-char* MENU_ITEMS[] = { "reboot system now",
-                       "apply update from sdcard",
-                       "wipe data/factory reset",
-                       "wipe cache partition",
-                       "install zip from sdcard",
-                       "backup and restore",
-                       "mounts and storage",
-                       "advanced",
-                       "power off",
-                       NULL };
-
-int device_recovery_start() {
-    return 0;
-}
-
 int device_toggle_display(volatile char* key_pressed, int key_code) {
         return 0;
-}
-
-int device_reboot_now(volatile char* key_pressed, int key_code) {
-    return 0;
 }
 
 int device_handle_key(int key_code, int visible) {
@@ -71,12 +50,4 @@ int device_handle_key(int key_code, int visible) {
     }
 
     return NO_ACTION;
-}
-
-int device_perform_action(int which) {
-    return which;
-}
-
-int device_wipe_data() {
-    return 0;
 }

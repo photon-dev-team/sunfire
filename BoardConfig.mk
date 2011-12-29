@@ -28,7 +28,7 @@ USE_CAMERA_STUB := true
 BOARD_USES_GENERIC_AUDIO := false
 
 # inherit from the proprietary version
--include vendor/motorola/sunfire/BoardConfigVendor.mk
+-include vendor/moto/sunfire/BoardConfigVendor.mk
 
 TARGET_NO_BOOTLOADER := true
 TARGET_BOOTLOADER_BOARD_NAME := sunfire
@@ -41,8 +41,8 @@ TARGET_ARCH_VARIANT_FPU := vfpv3-d16
 TARGET_CPU_SMP := true
 TARGET_HAVE_TEGRA_ERRATA_657451 := true
 
-BOARD_CUSTOM_GRAPHICS := ../../../device/motorola/sunfire/recovery/graphics.c
-BOARD_CUSTOM_RECOVERY_KEYMAPPING:= ../../device/motorola/sunfire/recovery/recovery_ui.c
+BOARD_CUSTOM_GRAPHICS := ../../../device/moto/sunfire/recovery/graphics.c
+BOARD_CUSTOM_RECOVERY_KEYMAPPING:= ../../device/moto/sunfire/recovery/recovery_ui.c
 BOARD_HAS_SDCARD_INTERNAL := true
 
 BOARD_KERNEL_CMDLINE :=
@@ -51,13 +51,13 @@ BOARD_PAGE_SIZE := 0x00000800
 
 BOARD_HAS_NO_MISC_PARTITION := true
 # fix this up by examining /proc/mtd on a running device
-BOARD_BOOTIMAGE_PARTITION_SIZE := 4194304
+BOARD_BOOTIMAGE_PARTITION_SIZE := 8355840
 #BOARD_RECOVERYIMAGE_PARTITION_SIZE := 4194304
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 167772160
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 197772160
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 1073741824
 BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_HAS_JANKY_BACKBUFFER := true
-TARGET_PREBUILT_KERNEL := device/motorola/sunfire/kernel
+TARGET_PREBUILT_KERNEL := device/moto/sunfire/kernel
 TARGET_USERIMAGES_USE_EXT4 := true
 # Below is a sample of how you can tweak the mount points using the board config.
 BOARD_HAS_NO_MISC_PARTITION := true
@@ -79,7 +79,7 @@ TARGET_NO_RECOVERY := false
 BOARD_SDCARD_DEVICE_PRIMARY := /dev/block/mmcblk1p1
 BOARD_SDCARD_DEVICE_SECONDARY := /dev/block/mmcblk1
 #BOARD_SDCARD_DEVICE_INTERNAL := /dev/block/mmcblk0p18
-BOARD_VOLD_MAX_PARTITIONS := 18
+BOARD_VOLD_MAX_PARTITIONS := 19
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 
 BOARD_SDEXT_DEVICE := /dev/block/mmcblk1p2
@@ -104,13 +104,15 @@ TARGET_ELECTRONBEAM_FRAMES := 20
 
 # WiFi
 BOARD_WPA_SUPPLICANT_DRIVER := WEXT
-WPA_SUPPLICANT_VERSION      := VER_0_6_X
+WPA_SUPPLICANT_VERSION      := VER_0_8_X
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_wext
 BOARD_WLAN_DEVICE           := bcm4329
 WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/dhd.ko"
-WIFI_DRIVER_FW_STA_PATH     := "/system/etc/wl/sdio-ag-cdc-full11n-minioctl-roml-pno-wme-aoe-pktfilter-keepalive.bin"
-WIFI_DRIVER_FW_AP_PATH      := "/system/etc/wl/sdio-g-cdc-roml-reclaim-wme-apsta-idauth-minioctl.bin"
+WIFI_DRIVER_FW_PATH_STA     := "/system/etc/wl/sdio-ag-cdc-full11n-minioctl-roml-pno-wme-aoe-pktfilter-keepalive.bin"
+WIFI_DRIVER_FW_PATH_AP      := "/system/etc/wl/sdio-g-cdc-roml-reclaim-wme-apsta-idauth-minioctl.bin"
 WIFI_DRIVER_MODULE_ARG      := "firmware_path=/system/etc/wl/sdio-ag-cdc-full11n-minioctl-roml-pno-wme-aoe-pktfilter-keepalive.bin nvram_path=/system/etc/wl/nvram.txt"
 WIFI_DRIVER_MODULE_NAME     := "dhd"
+WIFI_DRIVER_SOCKET_IFACE    := eth0
 
 #Fix _sync functions for RIL
 TARGET_MOTO_SYNC_FUNCTIONS := true
@@ -121,14 +123,24 @@ BOARD_HAVE_BLUETOOTH_BCM := true
 
 #Camera
 TARGET_USE_MOTO_CUSTOM_CAMERA_PARAMETERS := true
-TARGET_SPECIFIC_HEADER_PATH := device/motorola/sunfire/include
+TARGET_SPECIFIC_HEADER_PATH := device/moto/sunfire/include
 
 #EGL
-BOARD_EGL_CFG := device/motorola/sunfire/config/egl.cfg
+BOARD_EGL_CFG := device/moto/sunfire/config/egl.cfg
+COMMON_GLOBAL_CFLAGS += -DMISSING_EGL_EXTERNAL_IMAGE -DMISSING_EGL_PIXEL_FORMAT_YV12 -DMISSING_GRALLOC_BUFFERS
+#USE_OPENGL_RENDERER := true
+BOARD_NO_ALLOW_DEQUEUE_CURRENT_BUFFER := true
 
 #USB Tethering
-BOARD_CUSTOM_USB_CONTROLLER := ../../device/motorola/sunfire/UsbController.cpp
+BOARD_CUSTOM_USB_CONTROLLER := ../../device/moto/sunfire/UsbController.cpp
 BOARD_HAS_LARGE_FILESYSTEM := true
+
+#UMS
+TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun%d/file"
 
 # Dock Audio
 BOARD_USE_MOTO_DOCK_HACK := true
+
+BOARD_USES_AUDIO_LEGACY := true
+
+BOARD_MOBILEDATA_INTERFACE_NAME := "ppp0"
