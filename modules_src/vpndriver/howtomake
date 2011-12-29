@@ -1,0 +1,3 @@
+Example of how to make the vpndriver module
+
+make -C $KERNEL_SRC M=$PLATFORM_DIR/device/motorola/sunfire/modules_src/vpndriver KDIR=/Depot/devel/android/cm/kernel/3-tegra-atrix-gingerbread KERNELDIR=/Depot/devel/android/cm/kernel/3-tegra-atrix-gingerbread -I/Depot/devel/android/cm/kernel/3-tegra-atrix-gingerbread modules

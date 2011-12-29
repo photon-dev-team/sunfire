@@ -1,0 +1,5 @@
+Example of how to make bcm-sdio driver. This is a wimax interface layer that may or may not be used in the future.
+
+make KERNELDIR=/Depot/devel/android/cm/kernel/3-tegra-atrix-gingerbread
+
+Do not forget the environment (arch, cross-compiler and all). there's primers in the motodoc readme file.

@@ -1,0 +1,111 @@
+#
+# system.prop for sunfire
+#
+ro.sf.lcd_density=240
+dalvik.vm.heapsize=42m
+
+#RIL
+ro.telephony.ril_class=mototegraworld
+rild.libpath=/system/lib/libmoto_ril.so
+persist.ril.mux.ttydevice=/dev/ttyHS3
+ro.telephony.call_ring.multiple=false
+ro.telephony.call_ring.delay=500
+persist.ril.modem.ttydevice=/dev/ttySPI0
+persist.ril.modem.mode=1
+persist.ril.mux.retries=500
+persist.ril.mux.sleep=2
+ro.kernel.android.ril=yes
+persist.ril.pppd.start.fail.max=16
+mobiledata.interfaces=ppp0
+
+# From Motorola's own.
+persist.ril.mux.noofchannels=10
+persist.ril.features=0x0C
+
+# From MOTO
+# Feature 33857 support DualMode switch, UMTS/CDMA
+# This does not apply to Etna as it is not a Global phone.
+# IKXETNA-337 turned off this flag.
+# Enabling the flag for sunfire.
+ro.mot.FTR.33857=true
+
+# RIL hardcodes imported from Motorola's own
+ro.mot.ril.danlist=611,*611,#611
+persist.ril.ecclist=911,*911,#911
+
+# CDMA Carrier support - Native carrier is Sprint
+#ro.cdma.homesystem=64,65,76,77,78,79,80,81,82,83
+#ro.cdma.otaspnumschema=SELC,1,80,99
+persist.radio.cdma.min=0
+#ro.cdma.home.operator.numeric=310120
+#ro.cdma.home.operator.alpha=Sprint
+
+# ERI feature
+# 0 OFF
+# 1 ON
+ro.mot.eri=1
+
+# VVM is not bundled. Need to get it from the market!
+ro.HorizontalVVM=false
+
+#BEGIN Motorola, 30Jan2011, w19837, IKSUNFIRE-215, Feature ID: 35761.
+#[sprint tv transport protocol support]
+sprint.mm.http.proxy = pd.vog.sprintpcs.com
+sprint.mm.http.port = 8085
+sprint.mm.rtsp.proxy = rtsp.vog.sprintpcs.com
+sprint.mm.rtsp.port = 554
+sprint.mm.network.type = unknow
+sprint.mm.nai = unknown
+#END IKSUNFIRE-215
+
+#Define TCP buffer sizes for various networks
+#ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
+net.tcp.buffersize.default=131072,262144,524288,4096,16384,147456
+net.tcp.buffersize.wifi=131072,262144,524288,4096,16384,147456
+net.tcp.buffersize.hspa=131072,262144,524288,4096,16384,147456
+net.tcp.buffersize.umts=131072,262144,524288,4096,16384,147456
+net.tcp.buffersize.edge=16384,32768,65536,4096,16384,32768
+net.tcp.buffersize.gprs=4096,8192,12288,4096,8192,12288
+
+# Default network type.
+# 0 -> WCDMA preferred
+ro.telephony.default_network=0
+
+# Mount the internal SD card, too
+ro.additionalmounts=/mnt/emmc
+
+#special moto usb handling
+ro.usb.use_custom_service=1
+
+# Time between scans in seconds. Keep it high to minimize battery drain.
+# This only affects the case in which there are remembered access points,
+# but none are in range.
+wifi.supplicant_scan_interval=30
+
+# To set wifi (AP) driver's firmware path
+ro.wifi-ap.fw-path=/system/etc/wl/sdio-g-cdc-roml-reclaim-wme-apsta-idauth-minioctl.bin
+
+ro.bt.bdaddr_path=/pds/bt/bt_bdaddr
+
+# use 1% battery steps
+ro.product.use_charge_counter=1
+
+#OpenGL ES version
+ro.opengles.version = 131072
+
+# Forbid format of these partitions in mount menu :
+ro.cwm.forbid_format=/misc,/radio,/pds,/bootloader,/recovery,/efs
+
+# Battery light while charging, enabled by default
+ro.battery_light=true
+
+# Allow people to exchange sdcard and emmc mountpoints from CMParts
+ro.vold.switchablepair=/mnt/sdcard,/mnt/emmc
+
+# Tegra debugging
+persist.tegra.nvlog.level=4
+#persist.tegra.nvlog.14.level=5
+
+# DRM
+#persist.tegra.drmlib.asfdrm=libnvdrm.so
+#Drmdll.asfdrm=libnvdrm.so

@@ -1,0 +1,885 @@
+on init
+# motorola mountpoints
+    export PHONE_STORAGE /mnt/emmc
+    mkdir /mnt/emmc 0000 system system      # Feature 34534
+    mkdir /osh 0755 root root
+    mkdir /pds 0755 root root
+    mkdir /misc 0770 system misc
+
+on fs
+# mount mtd partitions
+    # Mount /system rw first to give the filesystem a chance to save a checkpoint
+#    mount ext3 /dev/block/mmcblk0p12 /system noatime nodiratime wait ro barrier=1
+#    mount ext3 /dev/block/mmcblk0p16 /data nosuid nodev noatime nodiratime wait barrier=1
+#    mount ext3 /dev/block/mmcblk0p15 /cache nosuid nodev noatime nodiratime wait barrier=1
+
+    mount ext4 /dev/block/mmcblk0p12 /system noatime nodiratime wait ro barrier=1
+    mount ext4 /dev/block/mmcblk0p16 /data nosuid nodev noatime nodiratime wait barrier=1 noauto_da_alloc
+    mount ext4 /dev/block/mmcblk0p15 /cache nosuid nodev noatime nodiratime wait barrier=1 noauto_da_alloc
+    mount ext3 /dev/block/mmcblk0p13 /osh nodev noatime nodiratime wait barrier=1 noauto_da_alloc
+
+
+on post-fs
+    # once everything is setup, no need to modify /
+    mkdir /mnt/usbdisk_1.0 0000 system system
+    mkdir /mnt/usbdisk_1.1 0000 system system
+    mkdir /mnt/usbdisk_1.2 0000 system system
+    mkdir /mnt/usbdisk_1.3 0000 system system
+    mkdir /mnt/usbdisk_1.4 0000 system system
+    mkdir /mnt/usbdisk_1.5 0000 system system
+    mkdir /mnt/usbdisk_1.6 0000 system system
+    mkdir /mnt/usbdisk_1.7 0000 system system
+    mount rootfs rootfs / ro remount
+
+    # We chown/chmod /data again so because mount is run as root + defaults
+    chown system system /data
+    chmod 0771 /data
+
+    # Create dump dir and collect dumps.
+    # Do this before we mount cache so eventually we can use cache for
+    # storing dumps on platforms which do not have a dedicated dump partition.
+   
+    mkdir /data/dontpanic
+    chown root log /data/dontpanic
+    chmod 0750 /data/dontpanic
+
+    # Collect apanic data, free resources and re-arm trigger
+
+    write /proc/apanic /dev/block/mmcblk0p9
+
+    copy /proc/apanic_console /data/dontpanic/apanic_console
+    chown root log /data/dontpanic/apanic_console
+    chmod 0640 /data/dontpanic/apanic_console
+
+    copy /proc/apanic_threads /data/dontpanic/apanic_threads
+    chown root log /data/dontpanic/apanic_threads
+    chmod 0640 /data/dontpanic/apanic_threads
+
+    write /proc/apanic_console 1
+
+    # Same reason as /data above
+    chown system cache /cache
+    chmod 0770 /cache
+
+    chown system misc /misc
+    chmod 0770 /misc
+
+    # This may have been created by the recovery system with odd permissions
+    chown system cache /cache/recovery
+    chmod 0770 /cache/recovery
+
+    #change permissions on vmallocinfo so we can grab it from bugreports
+    chown root log /proc/vmallocinfo
+    chmod 0440 /proc/vmallocinfo
+
+    #change permissions on kmsg & sysrq-trigger so bugreports can grab kthread stacks
+    chown root system /proc/kmsg
+    chmod 0440 /proc/kmsg
+    chown root system /proc/sysrq-trigger
+    chmod 0220 /proc/sysrq-trigger
+
+# create basic filesystem structure
+
+    # Part of TCMD
+    mkdir /data/local/12m 0771 system shell
+    mkdir /data/local/12m/batch 0771 system shell
+    chown system shell /data/local/12m
+    chown system shell /data/local/12m/batch
+    mkdir /data/tmp 0777 system system
+    mkdir /data/data/slate 0777 root root
+
+    #wlan
+    mkdir /data/misc/wifi 0771 wifi wifi
+    mkdir /data/misc/wifi/sockets 0771 wifi wifi
+    mkdir /data/misc/dhcp 0770 dhcp dhcp
+    chmod 0771 /data/misc/wifi
+
+    # allow net_raw to have access to /dev/socket directory
+    # CM feat
+    chown root net_raw /dev/socket
+    chmod 0775 /dev/socket
+
+on boot
+
+# set RLIMIT_NOFILE to allow maximum num of file open to be 2048
+#    setrlimit 7 2048 2048
+
+
+#chown chmod disable_charging
+##why would we want to disable charging?
+#    chown root radio /sys/class/power_supply/battery/disable_charging
+#    chmod 0660 /sys/class/power_supply/battery/disable_charging
+
+# Define TCP buffer sizes for various networks
+#   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
+#    This is motorola's own.
+#    setprop net.tcp.buffersize.default 65536,131072,262144,65536,131072,262144
+
+# nVidia's own
+#on property:persist.service.adb.enable_NV_DISABLED=1
+#    start adbd
+
+service tund /system/bin/tund
+    class pre-zygote_services
+    socket tund stream 0660 vpn system
+    ioprio be 2
+
+## Not present in stock ROM. Eh?
+#service nexus /system/bin/nexus
+#    class pre-zygote_services
+#    socket nexus stream 0660 root system
+#    disabled
+
+
+#qbplogd service
+service qbplogd /system/bin/qbplogd
+   class late_start
+   user radio
+   group sdcard_rw radio system inet
+   oneshot
+
+## Not in CM?
+#service ftp /system/bin/sdptool add --channel=13 FTP
+#    class post-zygote_services
+#    user bluetooth
+#    group bluetooth net_bt_admin
+#    disabled
+#    oneshot
+
+# Copy 12M/batch files
+service 12m_files_copy /system/etc/12m_files_copy.sh
+     class pre-zygote_services
+     oneshot
+
+service ap_fmloader /system/bin/logwrapper /system/bin/wlan_loader -f /system/etc/wifi/fw_tiwlan_ap.bin -i /system/etc/wifi/tiwlan_ap.ini -e /pds/wifi/nvs_map.bin
+    class post-zygote_services
+    disabled
+    oneshot
+
+service ap_fmloader_rfmd /system/bin/logwrapper /system/bin/wlan_loader -f /system/etc/wifi/fw_tiwlan_ap_rfmd.bin -i /system/etc/wifi/tiwlan_ap_rfmd.ini -e /pds/wifi/nvs_map.bin
+    class post-zygote_services
+    disabled
+    oneshot
+
+service hostapd /system/bin/logwrapper /system/bin/Hostapd /data/misc/wifi/hostapd.conf
+    class post-zygote_services
+    socket hostapd_tiwlan0 dgram 660 wifi wifi
+    disabled
+    oneshot
+
+service dnsmasq /system/bin/logwrapper /system/bin/dnsmasq -C/data/misc/wifi/dns.conf -k
+    class post-zygote_services
+    group wifi
+    disabled
+    oneshot
+
+#service mynet_start /system/bin/logwrapper /system/bin/sh /data/misc/wifi/forward_start.sh
+#    class post-zygote_services
+#    disabled
+#    oneshot
+
+#service mynet_stop /system/bin/logwrapper /system/bin/sh /data/misc/wifi/forward_stop.sh
+#    class post-zygote_services
+#    disabled
+#    oneshot
+
+#vcnw83, IKSUNFIRE-318 start slateipcd service
+service slateipcd /system/bin/slateipcd
+    class post-zygote_services
+    user root
+
+on boot
+    # nvrm permissions
+    chmod 666 /dev/nvrm
+
+    # knvrm permissions
+    chmod 660 /dev/knvrm
+    chown root system /dev/knvrm
+
+    # nvrpc permissions
+    chmod 666 /dev/nvrpc
+
+    # nvmap permissions
+    chmod 666 /dev/nvmap
+
+    # nvos/knvos permissions
+    chmod 660 /dev/knvos
+    chown root system /dev/knvos
+    chmod 666 /dev/nvos
+
+    # nvhost permissions
+    chmod 666 /dev/nvhost-ctrl
+    chmod 666 /dev/nvhost-display
+    chmod 666 /dev/nvhost-gr3d
+    chmod 666 /dev/nvhost-gr2d
+    chmod 666 /dev/nvhost-dsi
+    chmod 666 /dev/nvhost-isp
+    chmod 666 /dev/nvhost-mpe
+    chmod 666 /dev/nvhost-vi
+
+    # make framebuffer accessible
+    chmod 660 /dev/graphics/fb0
+
+    #  USB3 IPC permissions
+    chmod 0660 /dev/ttyUSB1
+
+    # nvodmcam permissions
+    chmod 666 /dev/nvodmcam
+
+# mount PDS partition
+#    exec /system/bin/remountpds -d /dev/block/mmcblk0p3 -m rw
+# secondary process'd
+
+# create directory for Sprint OMA-DM feature
+    mkdir /pds/omadm 0770 system system
+# TODO: check it doesn't totally splode
+
+# bluetooth permissions
+    chmod 0664 /pds/bt/bt_bdaddr
+    chmod 0660 /dev/ttyHS2
+    chown bluetooth bluetooth /dev/ttyHS2
+    chmod 0660 /sys/class/rfkill/rfkill0/state
+    chmod 0660 /sys/class/rfkill/rfkill0/type
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
+    write /sys/class/rfkill/rfkill0/state 1
+
+# bluetooth for BCM
+    chown root bluetooth /proc/bt_power
+    chown root bluetooth /proc/bt_stat
+    chown root bluetooth /proc/bt_status
+    chown root bluetooth /proc/bluetooth/sleep/proto
+
+    chmod 0664 /proc/bt_power
+    chmod 0664 /proc/bt_stat
+    chmod 0664 /proc/bt_status
+    chmod 0664 /proc/bluetooth/sleep/proto
+
+# wlan permissions
+    mkdir /data/misc/wifi 0771 wifi wifi  
+    mkdir /data/misc/wifi/sockets 0771 system wifi 
+    chown system wifi /data/misc/wifi/sockets 
+    chmod 0771 /data/misc/wifi
+    mkdir /data/misc/dhcp 0771 dhcp dhcp 
+    chown dhcp dhcp /data/misc/dhcp
+    mkdir /data/misc/dhcpcd 0771 dhcp dhcp 
+    chown dhcp dhcp /data/misc/dhcpcd
+    setprop wifi.interface eth0
+    setprop softap.interface wl0.1
+
+
+# multimedia power regulators
+    chown root system /sys/devices/platform/reg-virt-vcam/enabled
+    chown root system /sys/devices/platform/reg-virt-vcsi/enabled
+    chown root system /sys/devices/platform/reg-virt-vcsi_2/enabled
+    chown root system /sys/devices/platform/reg-virt-sw5/enabled
+
+# create the necessary dirs for tpapi with proper permission
+    mkdir /data/tpapi
+    mkdir /data/tpapi/etc
+    mkdir /data/tpapi/etc/tpa
+    mkdir /data/tpapi/etc/tpa/persistent
+    chmod 2770 /data/tpapi
+    chmod 2770 /data/tpapi/etc
+    chmod 2770 /data/tpapi/etc/tpa
+    chmod 2770 /data/tpapi/etc/tpa/persistent
+    chown mot_tpapi mot_tpapi /data/tpapi
+    chown mot_tpapi mot_tpapi /data/tpapi/etc
+    chown mot_tpapi mot_tpapi /data/tpapi/etc/tpa
+    chown mot_tpapi mot_tpapi /data/tpapi/etc/tpa/persistent
+
+    chmod 0660 /dev/nvaes
+    chown mot_tpapi mot_tpapi /dev/nvaes
+
+# for feature 33302 device encryption
+    mkdir /data/emt
+    chmod 0700 /data/emt
+    exec /system/bin/enc_mgt_tool
+
+    #create folder for bp panic logs
+    mkdir /data/panicreports
+    chown root radio /data/panicreports
+    chmod 0777 /data/panicreports
+
+#===================================================================
+# Backlight needs 0664 for TCMD
+#===================================================================
+    chmod 0664 /sys/class/leds/lcd-backlight/brightness
+    chmod 0664 /sys/class/leds/lcd-backlight-tcmd/brightness
+    chmod 0664 /sys/class/leds/lcd-backlight-webtop/brightness
+    chmod 0664 /sys/class/leds/button-backlight/brightness
+    chmod 0664 /sys/class/leds/button-backlight-tcmd/brightness
+    chmod 0664 /sys/class/leds/red/brightness
+    chmod 0664 /sys/class/leds/green/brightness
+    chmod 0664 /sys/class/leds/blue/brightness
+    chown system system /sys/class/leds/red/blink
+    chown system system /sys/class/leds/green/blink
+    chown system system /sys/class/leds/blue/blink
+    chmod 0664 /sys/class/leds/red/blink
+    chmod 0664 /sys/class/leds/green/blink
+    chmod 0664 /sys/class/leds/blue/blink
+    chown system system /sys/class/leds/soc/brightness
+    chmod 0664 /sys/class/leds/soc/brightness
+    chown system system /sys/class/leds/lcd-backlight-nr/brightness
+    chown system system /sys/class/leds/lcd-backlight-tcmd/brightness
+    chown system system /sys/class/leds/lcd-backlight-webtop/brightness
+    chown system system /sys/class/leds/button-backlight-tcmd/brightness
+    chown system system /sys/class/leds/lcd-backlight/pwm
+    chown system system /sys/class/leds/lcd-backlight/registers
+    chown system system /sys/class/leds/lcd-backlight/suspend
+    chown system system /sys/class/leds/white/brightness
+    chmod 0664 /sys/class/leds/white/brightness
+
+#===================================================================
+# TCMD 
+#===================================================================
+
+    mkdir /data/local 0771 system shell
+    mkdir /data/local/12m 0771 system shell
+    mkdir /data/local/12m/batch 0771 system shell
+    mkdir /data/local/tmp 0771 system shell
+
+    chown system shell /data/local
+    chown system shell /data/local/12m
+    chown system shell /data/local/12m/batch
+    chown system shell /data/local/tmp
+
+    mkdir /data/tombstones
+    chmod 2775 /data/tombstones
+    chown system mot_tombstone  /data/tombstones
+
+    mkdir /data/anr
+    chmod 0777 /data/anr
+    chown system system /data/anr
+
+    # Required for copying 12M/Batch files to Olympus/Photon
+    mkdir /system/local 0771 system shell
+    mkdir /system/local/12m 0771 system shell
+    mkdir /system/local/12m/batch 0771 system shell
+
+    chown system shell /system/local
+    chown system shell /system/local/12m
+    chown system shell /system/local/12m/batch
+
+    # Required for Blur Bypass menu required for factory/user testing.
+    mkdir /system/etc/motorola/com.motorola.blur.setup 0771 system shell
+    chown system shell /system/etc/motorola/com.motorola.blur.setup
+
+    # vibrator permissions
+    chmod 0664 /sys/class/timed_output/vibrator/enable
+
+    # sensor interface
+
+    chown compass compass /dev/kxtf9
+    chmod 660 /dev/kxtf9
+    chown compass compass /dev/akm8975
+    chmod 660 /dev/akm8975
+    chown compass compass /dev/isl29030
+    chmod 660 /dev/isl29030
+    chown compass compass /dev/akm8975_dev
+    chmod 660 /dev/akm8975_dev
+    chown compass compass /dev/akm8975_aot
+    chmod 660 /dev/akm8975_aot
+# atvc stuff
+# Define Motorola DBVC ATVC Property defaults (failsafe properties)
+       setprop ro.sys.atvc_allow_netmon_usb 0
+       setprop ro.sys.atvc_allow_netmon_ih 0
+       setprop ro.sys.atvc_allow_res_core 0
+       setprop ro.sys.atvc_allow_res_panic 0
+       setprop ro.sys.atvc_allow_all_adb 0
+       setprop ro.sys.atvc_allow_all_core 0
+       setprop ro.sys.atvc_allow_efem 0
+       setprop ro.sys.atvc_allow_bp_log 0
+       setprop ro.sys.atvc_allow_ap_mot_log 0
+       setprop ro.sys.atvc_allow_gki_log 0
+       mkdir /data/atvc 0775 system shell
+       chown system shell /data/atvc
+
+# touchpad stuff
+    chmod 660 /sys/class/misc/touchpad
+    chown compass compass /sys/bus/i2c/drivers/qtouch-obp-ts/0-004a/irqStatus
+
+# Load Authentec VPN kernel module
+    insmod /system/lib/vpnclient.ko
+
+# Start services
+    exec /system/bin/mot_boot_mode
+
+service tcmd /system/bin/tcmd
+    class post-zygote_services
+    group system radio input system log camera graphics sdcard_rw audio inet bluetooth wifi compass cache system mount net_bt_admin net_raw net_admin
+    socket local_tcmd stream 0660 system system
+    socket batch_socket stream 0600 system system
+
+service tcmdhelp /system/bin/tcmdhelp
+    class post-zygote_services
+    socket tcmdhelp stream 0600 system system
+    oneshot
+    disabled
+
+#execute tcmdhelp
+on property:tcmd.start_tcmdhelp=1
+    start tcmdhelp
+
+service ftmipcd /system/bin/ftmipcd
+    class post-zygote_services
+    user radio
+    group radio inet
+    disabled
+
+# Power up to normal
+on property:tcmd.suspend=0
+    class_start pre-zygote_services
+    class_start zygote_services
+    class_start post-zygote_services
+
+# Power up to suspend 
+on property:tcmd.suspend=1
+    write /sys/power/nvrm/lp2policy 0
+    stop wpa_supplicant
+    stop mdm_panicd
+    class_start pre-zygote_services
+    class_start post-zygote_services
+
+# Normal to suspend 
+on property:tcmd.suspend=2
+    write /sys/power/nvrm/lp2policy 0
+    stop wpa_supplicant
+    stop mdm_panicd
+    class_stop zygote_services
+
+# Control ftmipcd 
+on property:tcmd.usb_cable="connected"
+    start ftmipcd
+
+on property:tcmd.usb_cable="disconnected"
+    stop ftmipcd
+
+on property:tcmd.ctrl_adb=1
+    setprop persist.service.adb.enable 1
+    setprop persist.factory.allow_adb  1
+    stop usbd
+    start usbd
+
+on property:tcmd.ctrl_adb=0
+    setprop persist.service.adb.enable 0
+    setprop persist.factory.allow_adb  0
+    stop usbd
+    start usbd
+
+service wlan_prod /system/bin/insmod /system/lib/dhd.ko "firmware_path=/system/etc/firmware/wifi/sdio-ag-cdc-full11n-minioctl-roml-pno-wme-aoe-pktfilter-keepalive.bin nvram_path=/system/etc/firmware/wifi/nvram.txt"
+    class post-zygote_services
+    group wifi system system
+    oneshot
+    disabled
+
+service wlan_mfg /system/bin/insmod /system/lib/dhd.ko "firmware_path=/system/etc/firmware/wifi/sdio-ag-cdc-11n-mfgtest-roml-seqcmds.bin nvram_path=/system/etc/firmware/wifi/nvram.txt"
+    class post-zygote_services
+    group wifi system system
+    oneshot
+    disabled
+
+service wlan_12m /system/bin/insmod /system/lib/dhd.ko "firmware_path=/data/local/12m/sdio-ag-cdc-11n-mfgtest-roml-seqcmds.bin nvram_path=/system/etc/wifi/nvram.txt"
+    class post-zygote_services
+    group wifi system system
+    oneshot
+    disabled
+
+# turn on wifi for tcmd load production firmware
+on property:tcmd.load_wlan="production"
+   start wlan_prod
+
+# turn on wifi for tcmd load manufacturing firmware
+on property:tcmd.load_wlan="manufacturing"
+   start wlan_mfg 
+
+# turn on wifi for tcmd load 12m firmware
+on property:tcmd.load_wlan="12m"
+   start wlan_12m 
+
+# turn off wifi for tcmd step two
+on property:tcmd.load_wlan="unload"
+    exec /system/bin/rmmod dhd
+
+# hook to stop supplicant from tcmd engine
+on property:tcmd.ctl_supplicant="stop"
+   stop wpa_supplicant
+
+# turn on bluetooth for tcmd
+# on property:tcmd.bt_mod=1
+#    insmod /system/lib/modules/wl127x-test.ko
+
+
+#turn off bluetooth for tcmd
+# on property:tcmd.bt_mod=0
+#    exec /system/bin/rmmod wl127x_test
+#===================================================================
+
+on property:sys.chargeonly.mode=1
+    class_start pre-zygote_services
+    exec /system/bin/charge_only_mode
+
+# Moto safe power down
+on property:sys.reboot=1
+    stop ssmgrd
+    exec /system/bin/sleep 10
+    exec /system/bin/reboot
+
+on property:sys.shutdown=1
+    stop ssmgrd
+    exec /system/bin/sleep 10
+    exec /system/bin/reboot -p
+    setprop Drmdll.asfdrm libnvdrm.so
+
+# NvLogger settings for NvMM
+    setprop persist.tegra.nvlog.level 4
+#   setprop persist.tegra.nvlog.14.level 5
+
+#Setting required to load DRm lib
+   setprop persist.tegra.drmlib.asfdrm  libnvdrm.so
+
+service nvrm_daemon /system/bin/logwrapper /system/bin/nvrm_daemon
+    class pre-zygote_services
+    user root
+    onrestart restart servicemanager
+
+service bt_start /system/bin/bt_init /system/etc/bt_init.config
+    user bluetooth
+    group bluetooth net_bt_admin net_raw net_admin misc
+    disabled
+    oneshot
+
+
+service bt_stop /system/bin/bt_init -stop
+    user bluetooth
+    group bluetooth net_bt_admin misc
+    disabled
+    oneshot
+
+service wpa_supplicant /system/bin/wpa_supplicant -D wext -i eth0 -c/data/misc/wifi/wpa_supplicant.conf
+    class post-zygote_services
+    socket wpa_eth0 dgram 660 wifi wifi	
+    oneshot
+    disabled
+
+on property:init.svc.wpa_supplicant=stopped
+    stop dhcpcd_eth0
+
+service dhcpcd_eth0 /system/bin/dhcpcd
+    class post-zygote_services
+    disabled
+    oneshot
+
+# Ecompass daemon
+service akmd2 /system/bin/akmd2
+    class post-zygote_services
+    user compass
+    group compass misc input
+
+service secclkd /system/bin/secclkd
+    class post-zygote_services
+    socket secclk_socket stream 660 mot_secclkd mot_secclkd
+    user system
+    group system radio mot_sec_rtc mot_tpapi
+    oneshot
+
+on property:persist.service.adb.enable=1
+    start adbd
+
+# Battery Daemon
+service battd /system/bin/battd
+    class pre-zygote_services
+    socket battdsock stream 0660 system system
+    user root
+    group system system
+    oneshot
+
+service usbd /system/bin/usbd
+    class pre-zygote_services
+    group system
+
+service touch /system/bin/logwrapper /system/bin/touchpad -a
+    user system
+    group system
+    class pre-zygote_services
+    oneshot
+
+service whisperd /system/bin/whisperd /dev/ttyHS0
+    class post-zygote_services
+    user root
+    oneshot
+
+#start Authentec VPN service
+service vpnclientpm /system/bin/vpnclientpm
+    class post-zygote_services
+    oneshot
+    user root
+
+# ppp daemon used by the ATCMD to support DUN function
+service pppd /system/bin/pppd silent ipparam dun plugin /system/lib/libpppd_plugin.so
+    class post-zygote_services
+    user root
+    disabled
+    oneshot
+
+service map /system/bin/sdptool add --channel=20 MAP
+    class post-zygote_services
+    user bluetooth
+    group bluetooth net_bt_admin
+    disabled
+    oneshot
+
+
+# The following services are added by moto
+
+# Set property strings for ATVC logging
+# This conditionally sets :
+# ro.sys.atvc_allow_bp_log
+# ro.sys.atvc_allow_gki_log
+# ro.sys.atvc_allow_ap_mot_log
+# ro.sys.atvc_allow_all_core
+# ro.sys.atvc_allow_res_core
+# ro.sys.atvc_allow_res_panic
+# ro.sys.atvc_allow_efem
+# ro.sys.atvc_allow_netmon_usb
+# ro.sys.atvc_allow_netmon_ih
+# ro.sys.atvc_allow_all_adb
+#service atvc /system/bin/dbvc_atvc_property_set
+#       class pre-zygote_services
+#       user system
+#       group system
+#       oneshot
+
+#Check available storage space to execute device encryption or decryprion
+#on property:sys.mot.encrypt.test=1
+#    exec /system/bin/encryption_test
+#    exec /system/bin/setprop sys.mot.encrypt.test ""
+# For CDMA
+
+on device-added-/dev/ttyHS3
+   chmod 640 /dev/ttyHS3
+   chown radio.radio /dev/ttyHS3
+
+on device-added-/dev/ttyHS4
+   chmod 640 /dev/ttyHS4
+   chown radio.radio /dev/ttyHS4
+
+#on property:dev.bootcomplete=1
+#    start loadpreinstalls
+
+# start ubuntu.sh after load_pia.sh has completed
+#on property:init.svc.loadpreinstalls=stopped
+#    setprop ro.webtop.boot 1
+
+#on property:ro.webtop.boot=1
+#    exec /system/bin/logwrapper /ubuntu.sh
+
+#service loadpreinstalls /system/bin/logwrapper /system/bin/load_pia.sh
+#    disabled
+#    oneshot
+
+on early-boot
+    setprop ro.FOREGROUND_APP_MEM 3072
+    setprop ro.VISIBLE_APP_MEM 4608
+    setprop ro.PERCEPTIBLE_APP_MEM 7200
+    setprop ro.HEAVY_WEIGHT_APP_MEM 7200
+    setprop ro.SECONDARY_SERVER_MEM 11776
+    setprop ro.BACKUP_APP_MEM 11776
+    setprop ro.HOME_APP_MEM 11776
+    setprop ro.HIDDEN_APP_MEM 17408
+    setprop ro.EMPTY_APP_MEM 21000
+
+on boot
+
+# Adjust Android LMK
+    write /sys/module/lowmemorykiller/parameters/minfree 3072,4608,7200,11776,17408,21000
+
+# USB IPC Power Management Settings
+    write /sys/devices/platform/tegra-ehci.2/usb2/2-1/power/autosuspend 2
+    write /sys/devices/platform/tegra-ehci.2/usb2/2-1/power/level auto
+
+# OSH properties
+    setprop sys.SystemMode RM_SM_MOBILE
+    setprop sys.FbOwner 3
+    setprop sys.DispOwnerLcd 3
+    setprop sys.DispOwnerHdmi 1
+    setprop sys.AiwFocus 3
+    setprop sys.AMActiveTask 2
+
+# Mount OSH
+#    exec /system/bin/mountosh -d /dev/block/mmcblk0p13
+# done at system init
+
+# internal sdcard
+#    exec /system/bin/sh /system/bin/check_sdc.sh
+
+# USB1 Host Power Management Settings
+    write /sys/devices/platform/tegra-ehci.0/usb1/power/autosuspend -1
+
+# Work around to go into low power mode
+#    write /sys/module/usbcore/parameters/lpm_autosuspend 1
+
+#Set the default value for bluedroid_ref
+    write /data/tmp/bluedroid_ref 0
+    chown system system /data/tmp/bluedroid_ref
+
+# Define the BLAN interface
+#    setprop ro.blan.interface usb0
+#    chmod 0666 /dev/ttyUSB0
+
+# IKSUNFIRE-2410 WiMAX DL Throughput Improvement
+# set prop Readmin, readInitial, readMax, WriteMin, WriteInitial, WriteMax
+setprop net.tcp.buffersize.wimax 4092,87380,1520768,4096,16384,1900544
+
+#OSH Startup
+#service slrestart /usr/local/bin/start_syslog.sh
+#	class pre-zygote_services
+#	oneshot
+#	disabled
+
+on property:ro.build.type=userdebug
+	start slrestart
+
+on property:ro.build.type=eng
+	start slrestart
+
+#service fbcp /etc/init.d/start_fbcp.sh
+#    class pre-zygote_services
+#    user osh
+#    group osh
+#    oneshot
+
+#on property:sys.SystemMode=RM_SM_DOCKED
+#    exec /osh/etc/init.d/startX.sh
+
+on device-added-/dev/ttyUSB0
+    write /sys/devices/platform/tegra-ehci.2/usb2/2-1/power/autosuspend 2
+    write /sys/devices/platform/tegra-ehci.2/usb2/2-1/power/level auto
+
+
+# For WIMAX see below
+
+# cscm daemon
+service wimaxd /system/bin/wimaxd -D -c /system/etc/wimax/wimaxd.conf 
+    disabled
+    oneshot
+
+service dhcpcd_wimax0 /system/bin/dhcpcd
+    class post-zygote_services
+    disabled
+    oneshot
+
+# bcm dev
+on device-added-/dev/tarang
+    chmod 666 /dev/tarang
+
+service gadget-qbp-diag /system/bin/tty2ttyd /dev/ttyUSB0 /dev/ttyGS3 0 1024
+    oneshot
+    disabled
+
+service gadget-qbp-modem /system/bin/tty2ttyd /dev/ttyUSB4 /dev/ttyGS2 0 1024
+    oneshot
+    disabled
+
+#FM radio
+#service fmradio /system/bin/fmradioserver
+#    class pre-zygote_services
+#    user system
+#    group bluetooth net_bt_admin net_raw net_admin misc
+#    disabled
+
+#Enable DUN and PAN support
+service dund_dialup /system/bin/dund --listen --channel=6 --nodetach --dialup
+    class post-zygote_services
+    group net_bt net_bt_admin
+    disabled
+    oneshot
+
+service nap /system/bin/sdptool add NAP
+    class post-zygote_services
+    user bluetooth
+    group bluetooth net_bt_admin
+    disabled
+    oneshot
+
+service del_nap /system/bin/sdptool remove NAP
+    class post-zygote_services
+    user bluetooth
+    group bluetooth net_bt_admin
+    disabled
+    oneshot
+
+service panu /system/bin/sdptool add PANU
+    class post-zygote_services
+    user bluetooth
+    group bluetooth net_bt_admin
+    disabled
+    oneshot
+
+service del_panu /system/bin/sdptool remove PANU
+    class post-zygote_services
+    user bluetooth
+    group bluetooth net_bt_admin
+    disabled
+    oneshot
+
+service napics /system/bin/sh /system/bin/napics.sh
+    class post-zygote_services
+    user root
+    disabled
+    oneshot
+
+service btdhcpd /system/bin/dnsmasq -C /system/etc/btpan.conf
+    class post-zygote_services
+    user root
+    disabled
+    oneshot
+
+# Modem panic daemon
+service mdm_panicd /system/bin/mdm_panicd
+    class post-zygote_services
+    oneshot
+
+# For WIMAX TCMD Firmware Support see below
+
+service wimax_sdio /system/bin/insmod /system/lib/bcmsdio.ko
+    class post-zygote_services
+    group system system
+    oneshot
+    disabled
+
+service wimax_mfg /system/bin/insmod /system/lib/bcmwimax.ko "fw_dir=/system/etc/wimax/mfg intf_name=wimax0"
+    class post-zygote_services
+    group system system
+    oneshot
+    disabled
+
+service wimax_prod /system/bin/insmod /system/lib/bcmwimax.ko "fw_dir=/system/etc/wimax/ intf_name=wimax0"
+    class post-zygote_services
+    group system system
+    oneshot
+    disabled
+
+# turn on wimax for tcmd load sdio firmware
+on property:tcmd.load_wimax="sdio"
+   start wimax_sdio
+
+# turn on wimax for tcmd load manufacturing firmware
+on property:tcmd.load_wimax="mfg"
+   start wimax_mfg
+
+# turn on wimax for tcmd load production firmware
+on property:tcmd.load_wimax="prod"
+   start wimax_prod
+
+# turn off wimax
+on property:tcmd.load_wimax="unload1"
+   exec /system/bin/rmmod bcmwimax
+
+on property:tcmd.load_wimax="unload2"
+   exec /system/bin/rmmod bcmsdio
+
+# turn on wimax for tcmd load cal api firmware
+on property:tcmd.load_wimax="calapi_proxy_start"
+    exec /system/bin/calapi_tgtxvi0350
+
