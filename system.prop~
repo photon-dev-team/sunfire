@@ -108,6 +108,11 @@ persist.tegra.nvlog.level=4
 #persist.tegra.drmlib.asfdrm=libnvdrm.so
 #Drmdll.asfdrm=libnvdrm.so
 
+# Set locale to English CN by default
+ro.product.manufacturer=Motorola
+ro.product.locale.language=eng
+ro.product.locale.region=
+
 # Enable detailed GC data and SMP dexopt
 dalvik.vm.dexopt-flags=m=y,u=n
 
