@@ -49,9 +49,9 @@ ro.HorizontalVVM=false
 #BEGIN Motorola, 30Jan2011, w19837, IKSUNFIRE-215, Feature ID: 35761.
 #[sprint tv transport protocol support]
 sprint.mm.http.proxy = 0.0.0.0
-sprint.mm.http.port = 8085
+sprint.mm.http.port = 0
 sprint.mm.rtsp.proxy = 0.0.0.0
-sprint.mm.rtsp.port = 554
+sprint.mm.rtsp.port = 0
 sprint.mm.network.type = unknow
 sprint.mm.nai = unknown
 #END IKSUNFIRE-215
@@ -67,7 +67,7 @@ net.tcp.buffersize.gprs=4096,8192,12288,4096,8192,12288
 
 # Default network type.
 # 0 -> WCDMA preferred
-ro.telephony.default_network=0
+ro.telephony.default_network=7
 
 # Mount the internal SD card, too
 ro.additionalmounts=/mnt/emmc
@@ -109,9 +109,9 @@ persist.tegra.nvlog.level=4
 #Drmdll.asfdrm=libnvdrm.so
 
 # Set locale to English CN by default
-ro.product.locale.language=zh
-ro.product.locale.region=CN
-persist.sys.timezone=Asia/Shanghai
+ro.product.manufacturer=Motorola
+ro.product.locale.language=eng
+ro.product.locale.region=
 
 # Enable detailed GC data and SMP dexopt
 dalvik.vm.dexopt-flags=m=y,u=n
