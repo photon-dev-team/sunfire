@@ -68,7 +68,7 @@ PRODUCT_COPY_FILES += \
 ## (3)  Finally, the least specific parts, i.e. the non-GSM-specific aspects
 
 # Set en_US as default locale
-PRODUCT_LOCALES := en_US
+PRODUCT_LOCALES := zh_CN
 
 # sunfire uses high-density artwork where available
 PRODUCT_LOCALES += hdpi
