@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <resources>
     <string-array name="usb_mode_entries" translatable="false">
         <item>@string/usb_mode_msc</item>
@@ -18,7 +18,7 @@
     <bool name="allow_mode_change_while_tethered">false</bool>
 
     <!-- Whether a notification should be shown while USB is connected -->
-    <bool name="show_connection_notification">false</bool>
+    <bool name="show_connection_notification">true</bool>
 
     <!-- This file is used by netd to read usb tethering state -->
     <string name="current_usb_state_file_name" translatable="false">/data/usbd/current_state</string>

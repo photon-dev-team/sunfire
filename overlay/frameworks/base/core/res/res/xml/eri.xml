@@ -4,7 +4,7 @@
     <CallPromptId Id="1" CallPromptText="CallPromptId1" />
     <CallPromptId Id="2" CallPromptText="CallPromptId2" />
     <EriInfo RoamingIndicator="0" IconIndex="0" IconMode="0" EriText="Digital Roaming" CallPromptId="0" AlertId="0" />
-    <EriInfo RoamingIndicator="1" IconIndex="1" IconMode="0" EriText="中国电信" CallPromptId="0" AlertId="0" />
+    <EriInfo RoamingIndicator="1" IconIndex="1" IconMode="0" EriText="Sprint" CallPromptId="0" AlertId="0" />
     <EriInfo RoamingIndicator="2" IconIndex="2" IconMode="0" EriText="Digital Roaming" CallPromptId="0" AlertId="0" />
     <EriInfo RoamingIndicator="64" IconIndex="64" IconMode="0" EriText="Preferred System" CallPromptId="0" AlertId="0" />
     <EriInfo RoamingIndicator="65" IconIndex="65" IconMode="0" EriText="Available System" CallPromptId="0" AlertId="0" />
@@ -41,7 +41,7 @@
     <EriInfo RoamingIndicator="96" IconIndex="96" IconMode="0" EriText="Hotel Guest" CallPromptId="0" AlertId="0" />
     <EriInfo RoamingIndicator="97" IconIndex="97" IconMode="0" EriText="Rental" CallPromptId="0" AlertId="0" />
     <EriInfo RoamingIndicator="98" IconIndex="1" IconMode="0" EriText="Corporate" CallPromptId="0" AlertId="0" />
-    <EriInfo RoamingIndicator="99" IconIndex="1" IconMode="0" EriText="中国电信" CallPromptId="0" AlertId="0" />
+    <EriInfo RoamingIndicator="99" IconIndex="1" IconMode="0" EriText="Sprint" CallPromptId="0" AlertId="0" />
     <EriInfo RoamingIndicator="100" IconIndex="1" IconMode="0" EriText="Campus" CallPromptId="0" AlertId="0" />
     <EriInfo RoamingIndicator="101" IconIndex="1" IconMode="0" EriText="In Building" CallPromptId="0" AlertId="0" />
     <EriInfo RoamingIndicator="102" IconIndex="102" IconMode="0" EriText="Regional" CallPromptId="0" AlertId="0" />
@@ -65,7 +65,7 @@
     <EriInfo RoamingIndicator="120" IconIndex="120" IconMode="0" EriText="Hotel Guest" CallPromptId="0" AlertId="0" />
     <EriInfo RoamingIndicator="121" IconIndex="121" IconMode="0" EriText="Rental" CallPromptId="0" AlertId="0" />
     <EriInfo RoamingIndicator="122" IconIndex="1" IconMode="0" EriText="Corporate" CallPromptId="0" AlertId="0" />
-    <EriInfo RoamingIndicator="123" IconIndex="1" IconMode="0" EriText="中国电信" CallPromptId="0" AlertId="0" />
+    <EriInfo RoamingIndicator="123" IconIndex="1" IconMode="0" EriText="Sprint" CallPromptId="0" AlertId="0" />
     <EriInfo RoamingIndicator="124" IconIndex="124" IconMode="0" EriText="International" CallPromptId="0" AlertId="0" />
     <EriInfo RoamingIndicator="125" IconIndex="125" IconMode="0" EriText="International" CallPromptId="0" AlertId="0" />
     <EriInfo RoamingIndicator="126" IconIndex="126" IconMode="0" EriText="International" CallPromptId="0" AlertId="0" />
