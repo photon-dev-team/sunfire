@@ -34,6 +34,9 @@
         <item>wl.*</item>
     </string-array>
 
+   <!-- Software blur is too slow on this device. -->
+    <bool name="config_sf_slowBlur">true</bool>
+
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
          bluetooth interfaces.  If the device doesn't want to support tethering over bluetooth this
          should be empty. -->
@@ -85,7 +88,7 @@
     
     <!-- If this value is true, The mms content-disposition field is supported correctly.
         If false, Content-disposition fragments are ignored -->
-    <bool name="config_mms_content_disposition_support">false</bool>
+    <bool name="config_mms_content_disposition_support">true</bool>
 
     <!-- If true, the screen can be rotated via the accelerometer in all 4
          rotations as the default behavior. -->
@@ -249,6 +252,10 @@
     <!-- Minimum screen brightness allowed by the power manager. -->
     <integer name="config_screenBrightnessDim">5</integer>
 
+    <!-- Flag indicating whether the we should enable the automatic brightness in Settings.
+         Software implementation will be used if config_hardware_auto_brightness_available is not set -->
+    <bool name="config_automatic_brightness_available">true</bool>
+
     <!-- Array of light sensor LUX values to define our levels for auto backlight brightness support.
          The N entries of this array define N + 1 zones as follows:
 
@@ -259,24 +266,48 @@
          Zone N + 1:    array[N] <= LUX < infinity
 
          Must be overridden in platform specific overlays -->
-     <integer-array name="config_autoBrightnessLevels">
-	<item>15</item>
-	<item>100</item>
-	<item>3000</item>
-	<item>8000</item>
-     </integer-array>
+    <integer-array name="config_autoBrightnessLevels">
+         <item>10</item>
+         <item>25</item>
+         <item>50</item>
+         <item>100</item>
+         <item>150</item>
+         <item>200</item>
+         <item>700</item>
+         <item>1300</item>
+         <item>2000</item>
+         <item>3000</item>
+         <item>4000</item>
+         <item>5000</item>
+         <item>6000</item>
+         <item>7000</item>
+         <item>8000</item>
+         <item>9000</item>
+    </integer-array>
 
     <!-- Array of output values for LCD backlight corresponding to the LUX values
          in the config_autoBrightnessLevels array.  This array should have size one greater
          than the size of the config_autoBrightnessLevels array.
          This must be overridden in platform specific overlays -->
-      <integer-array name="config_autoBrightnessLcdBacklightValues">
-	<item>24</item>
-	<item>48</item>
-	<item>108</item>
-	<item>206</item>
-	<item>246</item>
-      </integer-array>
+    <integer-array name="config_autoBrightnessLcdBacklightValues">
+         <item>32</item>
+         <item>32</item>
+         <item>32</item>
+         <item>32</item>
+         <item>64</item>
+         <item>64</item>
+         <item>95</item>
+         <item>95</item>
+         <item>122</item>
+         <item>149</item>
+         <item>176</item>
+         <item>197</item>
+         <item>228</item>
+         <item>255</item>
+         <item>255</item>
+         <item>255</item>
+         <item>255</item>
+    </integer-array>
 
     <!-- Array of output values for button backlight corresponding to the LUX values
          in the config_autoBrightnessLevels array.  This array should have size one greater
@@ -399,4 +430,3 @@
     <integer name="config_networkPolicyDefaultWarning">500</integer>
 
 </resources>
-
