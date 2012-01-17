@@ -57,7 +57,7 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 197772160
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 1073741824
 BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_HAS_JANKY_BACKBUFFER := true
-TARGET_PREBUILT_KERNEL := device/motorola/sunfire/kernel
+TARGET_PREBUILT_KERNEL := device/moto/sunfire/kernel
 TARGET_USERIMAGES_USE_EXT4 := true
 # Below is a sample of how you can tweak the mount points using the board config.
 BOARD_HAS_NO_MISC_PARTITION := true
@@ -123,7 +123,7 @@ BOARD_HAVE_BLUETOOTH_BCM := true
 
 #Camera
 TARGET_USE_MOTO_CUSTOM_CAMERA_PARAMETERS := true
-TARGET_SPECIFIC_HEADER_PATH := device/motorola/sunfire/include
+TARGET_SPECIFIC_HEADER_PATH := device/moto/sunfire/include
 
 #EGL
 BOARD_EGL_CFG := device/moto/sunfire/config/egl.cfg
