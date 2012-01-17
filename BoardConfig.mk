@@ -57,19 +57,19 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 197772160
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 1073741824
 BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_HAS_JANKY_BACKBUFFER := true
-TARGET_PREBUILT_KERNEL := device/moto/sunfire/kernel
-TARGET_USERIMAGES_USE_EXT4 := false
+TARGET_PREBUILT_KERNEL := device/motorola/sunfire/kernel
+TARGET_USERIMAGES_USE_EXT4 := true
 # Below is a sample of how you can tweak the mount points using the board config.
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_RECOVERY_IGNORE_BOOTABLES := true
 BOARD_DATA_DEVICE := /dev/block/mmcblk0p16
-BOARD_DATA_FILESYSTEM := ext3
+BOARD_DATA_FILESYSTEM := ext4
 BOARD_DATA_FILESYSTEM_OPTIONS := nosuid,nodev,relatime,barrier=1,noauto_da_alloc
 BOARD_SYSTEM_DEVICE := /dev/block/mmcblk0p12
 BOARD_SYSTEM_FILESYSTEM_OPTIONS := noatime,nodiratime,barrier=1,noauto_da_alloc
-BOARD_SYSTEM_FILESYSTEM := ext3
+BOARD_SYSTEM_FILESYSTEM := ext4
 BOARD_CACHE_DEVICE := /dev/block/mmcblk0p15
-BOARD_CACHE_FILESYSTEM := ext3
+BOARD_CACHE_FILESYSTEM := ext4
 BOARD_CACHE_FILESYSTEM_OPTIONS := nosuid,nodev,relatime,barrier=1,noauto_da_alloc
 BOARD_HIJACK_RECOVERY_PATH := /preinstall/
 BOARD_HAS_PREINSTALL := true
@@ -123,7 +123,7 @@ BOARD_HAVE_BLUETOOTH_BCM := true
 
 #Camera
 TARGET_USE_MOTO_CUSTOM_CAMERA_PARAMETERS := true
-TARGET_SPECIFIC_HEADER_PATH := device/moto/sunfire/include
+TARGET_SPECIFIC_HEADER_PATH := device/motorola/sunfire/include
 
 #EGL
 BOARD_EGL_CFG := device/moto/sunfire/config/egl.cfg

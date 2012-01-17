@@ -96,6 +96,7 @@ PRODUCT_PACKAGES += Usb \
 			DockAudio \
 			Torch \
 			audio.primary.sunfire \
+			cmparts \
 			audio.a2dp.default
 
 DEVICE_PACKAGE_OVERLAYS += device/moto/sunfire/overlay

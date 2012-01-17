@@ -3,9 +3,9 @@
     <CallPromptId Id="0" CallPromptText="CallPromptId0" />
     <CallPromptId Id="1" CallPromptText="CallPromptId1" />
     <CallPromptId Id="2" CallPromptText="CallPromptId2" />
-    <EriInfo RoamingIndicator="0" IconIndex="0" IconMode="0" EriText="Digital Roaming" CallPromptId="0" AlertId="0" />
-    <EriInfo RoamingIndicator="1" IconIndex="1" IconMode="0" EriText="So totally not roaming" CallPromptId="0" AlertId="0" />
-    <EriInfo RoamingIndicator="2" IconIndex="2" IconMode="0" EriText="Digital Roaming" CallPromptId="0" AlertId="0" />
+    <EriInfo RoamingIndicator="0" IconIndex="0" IconMode="0" EriText="Cheater" CallPromptId="0" AlertId="0" />
+    <EriInfo RoamingIndicator="1" IconIndex="1" IconMode="0" EriText="awesome club" CallPromptId="0" AlertId="0" />
+    <EriInfo RoamingIndicator="2" IconIndex="2" IconMode="0" EriText="Cheater" CallPromptId="0" AlertId="0" />
     <EriInfo RoamingIndicator="64" IconIndex="64" IconMode="0" EriText="Preferred System" CallPromptId="0" AlertId="0" />
     <EriInfo RoamingIndicator="65" IconIndex="65" IconMode="0" EriText="Available System" CallPromptId="0" AlertId="0" />
     <EriInfo RoamingIndicator="66" IconIndex="66" IconMode="0" EriText="Alliance Partner" CallPromptId="0" AlertId="0" />
@@ -16,7 +16,7 @@
     <EriInfo RoamingIndicator="71" IconIndex="71" IconMode="0" EriText="Analog B" CallPromptId="0" AlertId="0" />
     <EriInfo RoamingIndicator="72" IconIndex="72" IconMode="0" EriText="CDMA 800 A" CallPromptId="0" AlertId="0" />
     <EriInfo RoamingIndicator="73" IconIndex="73" IconMode="0" EriText="CDMA 800 B" CallPromptId="0" AlertId="0" />
-    <EriInfo RoamingIndicator="74" IconIndex="74" IconMode="0" EriText="International Roaming" CallPromptId="0" AlertId="0" />
+    <EriInfo RoamingIndicator="74" IconIndex="74" IconMode="0" EriText="International spy" CallPromptId="0" AlertId="0" />
     <EriInfo RoamingIndicator="75" IconIndex="75" IconMode="0" EriText="Extended Network" CallPromptId="0" AlertId="0" />
     <EriInfo RoamingIndicator="76" IconIndex="1" IconMode="0" EriText="Campus" CallPromptId="0" AlertId="0" />
     <EriInfo RoamingIndicator="77" IconIndex="1" IconMode="0" EriText="In Building" CallPromptId="0" AlertId="0" />

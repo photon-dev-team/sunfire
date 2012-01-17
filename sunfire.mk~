@@ -68,7 +68,7 @@ PRODUCT_COPY_FILES += \
 ## (3)  Finally, the least specific parts, i.e. the non-GSM-specific aspects
 
 # Set en_US as default locale
-PRODUCT_LOCALES := zh_CN
+PRODUCT_LOCALES := en_US
 
 # sunfire uses high-density artwork where available
 PRODUCT_LOCALES += hdpi
@@ -96,6 +96,7 @@ PRODUCT_PACKAGES += Usb \
 			DockAudio \
 			Torch \
 			audio.primary.sunfire \
+			cmparts \
 			audio.a2dp.default
 
 DEVICE_PACKAGE_OVERLAYS += device/moto/sunfire/overlay
