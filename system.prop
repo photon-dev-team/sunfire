@@ -115,3 +115,15 @@ dalvik.vm.dexopt-flags=m=y,u=n
 ro.hdmi.mirror.enable=true
 
 persist.sys.usb.config=mass_storage,adb
+
+# tweaks
+dalvik.vm.heapstartsize=5m
+dalvik.vm.heapgrowthlimit=64m
+dalvik.vm.heapsize=256m
+debug.sf.hw = 1
+persist.sys.use_dithering = 0
+ro.HOME_APP_ADJ = 1
+pm.sleep_mode = 1
+windowsmgr.max_events_per_sec=150
+debug.performance.tuning=1
+video.accelerate.hw=1
