@@ -8,6 +8,7 @@ on init
     mkdir /mnt/sdcard-ext 0000 system system
     symlink /mnt/sdcard /sdcard
     symlink /mnt/sdcard-ext /sdcard-ext
+    symlink /mnt/sdcard-ext /sdcard/sdcard-ext
     # battery driver permissions
     mkdir /pds 0755 root root
     mkdir /osh 0000 root root
@@ -216,6 +217,15 @@ on boot
     chown system system /sys/class/leds/white/brightness
     chmod 0664 /sys/class/leds/white/brightness
 
+# add missing camera crap
+# Camera
+    chown media camera /sys/class/leds/privacy-led/brightness
+    chown media camera /sys/class/leds/flash/brightness
+    chown media camera /sys/class/leds/torch/brightness
+    chmod 660 /sys/class/leds/privacy-led/brightness
+    chmod 660 /sys/class/leds/flash/brightness
+    chmod 660 /sys/class/leds/torch/brightness
+
 #===================================================================
 # TCMD 
 #===================================================================
@@ -246,10 +256,6 @@ on boot
     chown system shell /system/local
     chown system shell /system/local/12m
     chown system shell /system/local/12m/batch
-
-    # Required for Blur Bypass menu required for factory/user testing.
-    mkdir /system/etc/motorola/com.motorola.blur.setup 0771 system shell
-    chown system shell /system/etc/motorola/com.motorola.blur.setup
 
     # vibrator permissions
     chmod 0664 /sys/class/timed_output/vibrator/enable
@@ -525,6 +531,9 @@ on boot
       setprop net.tcp.buffersize.edge    16384,32768,65536,4096,16384,32768
       setprop net.tcp.buffersize.gprs    4096,8192,12288,4096,8192,12288
 
+# IKSUNFIRE-2410 WiMAX DL Throughput Improvement
+# set prop Readmin, readInitial, readMax, WriteMin, WriteInitial, WriteMax
+setprop net.tcp.buffersize.wimax 4092,87380,1520768,4096,16384,1900544
 
 # ppp daemon used by DUN.
 service pppd /system/xbin/pppd silent ipparam dun plugin /system/lib/libpppd_plugin.so
@@ -541,4 +550,47 @@ on device-added-/dev/ttyUSB0
 service mdm_panicd /system/bin/mdm_panicd
     class post-zygote_services
     oneshot
+
+# For WIMAX TCMD Firmware Support see below
+
+service wimax_sdio /system/bin/insmod /system/lib/bcmsdio.ko
+    class post-zygote_services
+    group system system
+    oneshot
+    disabled
+
+service wimax_mfg /system/bin/insmod /system/lib/bcmwimax.ko "fw_dir=/system/etc/wimax/mfg intf_name=wimax0"
+    class post-zygote_services
+    group system system
+    oneshot
+    disabled
+
+service wimax_prod /system/bin/insmod /system/lib/bcmwimax.ko "fw_dir=/system/etc/wimax/ intf_name=wimax0"
+    class post-zygote_services
+    group system system
+    oneshot
+    disabled
+
+# turn on wimax for tcmd load sdio firmware
+on property:tcmd.load_wimax="sdio"
+   start wimax_sdio
+
+# turn on wimax for tcmd load manufacturing firmware
+on property:tcmd.load_wimax="mfg"
+   start wimax_mfg
+
+# turn on wimax for tcmd load production firmware
+on property:tcmd.load_wimax="prod"
+   start wimax_prod
+
+# turn off wimax
+on property:tcmd.load_wimax="unload1"
+   exec /system/bin/rmmod bcmwimax
+
+on property:tcmd.load_wimax="unload2"
+   exec /system/bin/rmmod bcmsdio
+
+# turn on wimax for tcmd load cal api firmware
+on property:tcmd.load_wimax="calapi_proxy_start"
+    exec /system/bin/calapi_tgtxvi0350
 

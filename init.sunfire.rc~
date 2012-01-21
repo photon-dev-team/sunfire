@@ -5,9 +5,9 @@ on init
     export PHONE_STORAGE /mnt/emmc
     # create mountpoints for storage
     mkdir /mnt/sdcard 0000 system system
-    mkdir /mnt/emmc 0000 system system
+    mkdir /mnt/sdcard-ext 0000 system system
     symlink /mnt/sdcard /sdcard
-    symlink /mnt/emmc /emmc
+    symlink /mnt/sdcard-ext /sdcard-ext
     # battery driver permissions
     mkdir /pds 0755 root root
     mkdir /osh 0000 root root

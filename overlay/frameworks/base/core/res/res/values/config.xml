@@ -20,6 +20,17 @@
 <!-- These resources are around just to allow their values to be customized
      for different hardware and product builds. -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Flag indicating whether the surface flinger has limited
+         alpha compositing functionality in hardware.  If set, the window
+         manager will disable alpha trasformation in animations where not
+         strictly needed. -->
+    <bool name="config_sf_limitedAlpha">false</bool>
+    <!-- Flag indicating whether the surface flinger is inefficient
+         at performing a blur.  Used by parts of the UI to turn off
+         the blur effect where it isn't worth the performance hit.
+         As of Honeycomb, blurring is not supported anymore. -->
+    <bool name="config_sf_slowBlur">true</bool>
+
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
          USB interfaces.  If the device doesn't want to support tething over USB this should
          be empty.  An example would be "usb.*" -->
@@ -34,8 +45,11 @@
         <item>wl.*</item>
     </string-array>
 
-   <!-- Software blur is too slow on this device. -->
-    <bool name="config_sf_slowBlur">true</bool>
+    <!-- List of regexpressions describing the interface (if any) that represent tetherable
+         WiMAX interfaces.  If the device doesn't want to support tethering over Wifi this
+         should be empty.  An example would be "softap.*" -->
+    <string-array translatable="false" name="config_tether_wimax_regexs">
+    </string-array>
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
          bluetooth interfaces.  If the device doesn't want to support tethering over bluetooth this
@@ -86,13 +100,28 @@
          Software implementation will be used if config_hardware_auto_brightness_available is not set -->
     <bool name="config_automatic_brightness_available">true</bool>
 
+    <!-- Don't name config resources like this.  It should look like config_annoyDianne -->
+    <bool name="config_annoy_dianne">false</bool>
+
+    <!-- If this is true, the screen will come on when you unplug usb/power/whatever. -->
+    <bool name="config_unplugTurnsOnScreen">false</bool>
+
+    <!-- If this is true, the screen will fade off. -->
+    <bool name="config_animateScreenLights">true</bool>
+
+    <!-- XXXXXX END OF RESOURCES USING WRONG NAMING CONVENTION -->
+
     <!-- If true, the screen can be rotated via the accelerometer in all 4
          rotations as the default behavior. -->
     <bool name="config_allowAllRotations">true</bool>
 
+
+    <!-- The number of degrees to rotate the display when the keyboard is open. -->
+    <integer name="config_lidOpenRotation">90</integer>
+
     <!-- The number of degrees to rotate the display when the device is in a desk dock.
          A value of -1 means no change in orientation by default. -->
-    <integer name="config_deskDockRotation">-1</integer>
+    <integer name="config_deskDockRotation">90</integer>
 
     <!-- The number of degrees to rotate the display when the device is in a car dock.
          A value of -1 means no change in orientation by default. -->
@@ -124,7 +153,13 @@
          the physical keyboard.  0 means it doesn't, 1 means it is accessible
          when the lid is open, 2 means it is accessible when the lid is
          closed.  The default is 1. -->
-    <integer name="config_lidKeyboardAccessibility">0</integer>
+    <integer name="config_lidKeyboardAccessibility">1</integer>
+
+    <!-- Indicate whether the lid state impacts the accessibility of
+         the physical keyboard.  0 means it doesn't, 1 means it is accessible
+         when the lid is open, 2 means it is accessible when the lid is
+         closed.  The default is 0. -->
+    <integer name="config_lidNavigationAccessibility">0</integer>
 
     <!-- Control the behavior when the user long presses the power button.
             0 - Nothing
@@ -245,9 +280,6 @@
     -->
     <integer name="config_longPressOnHomeBehavior">2</integer>
 
-    <!-- Minimum screen brightness allowed by the power manager. -->
-    <integer name="config_screenBrightnessDim">5</integer>
-
     <!-- Flag indicating whether the we should enable the automatic brightness in Settings.
          Software implementation will be used if config_hardware_auto_brightness_available is not set -->
     <bool name="config_automatic_brightness_available">true</bool>
@@ -280,6 +312,10 @@
          <item>8000</item>
          <item>9000</item>
     </integer-array>
+
+
+    <!-- Minimum screen brightness allowed by the power manager. -->
+    <integer name="config_screenBrightnessDim">5</integer>
 
     <!-- Array of output values for LCD backlight corresponding to the LUX values
          in the config_autoBrightnessLevels array.  This array should have size one greater
@@ -388,7 +424,7 @@
     <integer name="config_datause_throttle_kbitsps">600</integer>
 
     <!-- The default iface on which to monitor data use -->
-    <string name="config_datause_iface">ppp0</string>
+    <string name="config_datause_iface">rmnet0</string>
 
     <!-- The default reduced-datarate notification mask -->
     <!-- 2 means give warning -->
@@ -423,6 +459,16 @@
     <!-- The VoiceMail default value is displayed to my own number if it is true -->
     <bool name="config_telephony_use_own_number_for_voicemail">false</bool>
 
+
+    <!-- If this value is true, The mms content-disposition field is supported correctly.
+         If false, Content-disposition fragments are ignored -->
+    <bool name="config_mms_content_disposition_support">false</bool>
+
+
+    <!-- Set to true if the RSSI should always display CDMA signal strength even on EVDO -->
+    <bool name="config_alwaysUseCdmaRssi">true</bool>
+
+
     <!-- Maximum numerical value that will be shown in a status bar
          notification icon or in the notification itself. Will be replaced
          with @string/status_bar_notification_info_overflow when shown in the
@@ -438,7 +484,7 @@
     <integer name="config_networkPolicyDefaultWarning">500</integer>
 
     <!-- Set and Unsets WiMAX -->
-    <bool name="config_wimaxEnabled">false</bool>
+    <bool name="config_wimaxEnabled">true</bool>
     <!-- Location of the wimax framwork jar location -->
     <string name="config_wimaxServiceJarLocation"></string>
     <!-- Location of the wimax native library locaiton -->

@@ -51,7 +51,7 @@ sprint.mm.http.proxy = 0.0.0.0
 sprint.mm.http.port = 0
 sprint.mm.rtsp.proxy = 0.0.0.0
 sprint.mm.rtsp.port = 0
-sprint.mm.network.type = unknow
+sprint.mm.network.type = unknown
 sprint.mm.nai = unknown
 #END IKSUNFIRE-215
 
@@ -107,9 +107,6 @@ persist.tegra.nvlog.level=4
 #persist.tegra.drmlib.asfdrm=libnvdrm.so
 #Drmdll.asfdrm=libnvdrm.so
 
-# Enable detailed GC data and SMP dexopt
-dalvik.vm.dexopt-flags=m=y,u=n
-
 # Enable HDMI mirroring
 ro.hdmi.mirror.enable=true
 
@@ -117,6 +114,8 @@ persist.sys.usb.config=mass_storage,adb
 
 # tweaks
 
+ro.com.android.dataroaming=true
+wifi.interface=wlan0
 debug.sf.hw = 1
 persist.sys.use_dithering = 0
 ro.HOME_APP_ADJ = 1

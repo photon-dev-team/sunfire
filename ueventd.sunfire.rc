@@ -13,12 +13,6 @@
 /dev/log/*                0662   root       log
 /dev/logger               0660   root       radio
 
-# the msm hw3d client device node is world writable/readable.
-/dev/msm_hw3dc            0666   root       root
-
-# gpu driver for adreno200 is globally accessible
-/dev/kgsl                 0666   root       root
-
 # these should not be world writable
 /dev/diag                 0660   radio      radio
 /dev/diag_arm9            0660   radio      radio
@@ -92,7 +86,7 @@
 /dev/psd_nsapi9           0660   root       radio
 /dev/psd_nsapi10          0660   root       radio
 /dev/sim                  0660   root       radio
-/dev/audio                0660   root       audio
+/dev/audio*                0660   root       audio
 /dev/gps                  0770   root       radio
 /dev/gps_reset            0660   root       radio
 /dev/gps_standby          0660   root       radio
@@ -194,6 +188,20 @@
 /dev/rfcomm0              0600   system     system
 # touchpad related stuff
 /dev/touchpad             0770   root       system
+
+#fixing stuff
+/dev/knvmap	0660	system	system
+/dev/nvmap	0666	system	system
+/dev/ov5650	0660	media	camera
+/dev/dw9714l    0660    media   camera
+/dev/soc2030	0660	media	camera
+/dev/spdif*	0660	system	audio
+/dev/tegra_camera	0660	media	camera
+/dev/tegra_avp	0660	media	media
+/dev/tegra_rpc	0660	media	media
+/dev/tegra_sema	0660	media	media
+/dev/tegra-crypto	0660	system	system
+/dev/nvhdcp*    0660    system  system
 
 # sysfs properties
 /sys/devices/virtual/input/input*   enable      0660  root   input
