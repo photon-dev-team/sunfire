@@ -73,6 +73,9 @@ PRODUCT_LOCALES := en_US
 # sunfire uses high-density artwork where available
 PRODUCT_LOCALES += hdpi
 
+# better code for dalvik heap size since we have space
+$(call inherit-product, frameworks/base/build/phone-xhdpi-1024-dalvik-heap.mk)
+
 # copy all kernel modules under the "modules" directory to system/lib/modules
 PRODUCT_COPY_FILES += $(shell \
     find device/moto/sunfire/modules -name '*.ko' \

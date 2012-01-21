@@ -437,4 +437,17 @@
     <!-- Default network policy warning threshold, in megabytes. -->
     <integer name="config_networkPolicyDefaultWarning">500</integer>
 
+    <!-- Set and Unsets WiMAX -->
+    <bool name="config_wimaxEnabled">false</bool>
+    <!-- Location of the wimax framwork jar location -->
+    <string name="config_wimaxServiceJarLocation"></string>
+    <!-- Location of the wimax native library locaiton -->
+    <string name="config_wimaxNativeLibLocation"></string>
+    <!-- Name of the wimax manager class -->
+    <string name="config_wimaxManagerClassname"></string>
+    <!-- Name of the wimax service class -->
+    <string name="config_wimaxServiceClassname"></string>
+    <!-- Name of the wimax state tracker clas -->
+    <string name="config_wimaxStateTrackerClassname"></string>
+
 </resources>

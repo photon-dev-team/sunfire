@@ -5,7 +5,6 @@ ro.sf.lcd_density=240
 dalvik.vm.heapsize=64m
 
 #RIL
-ro.telephony.ril_class=mototegraglobal
 rild.libpath=/system/lib/libmoto_ril.so
 persist.ril.mux.ttydevice=/dev/ttyHS3
 ro.telephony.call_ring.multiple=false
@@ -117,9 +116,7 @@ ro.hdmi.mirror.enable=true
 persist.sys.usb.config=mass_storage,adb
 
 # tweaks
-dalvik.vm.heapstartsize=5m
-dalvik.vm.heapgrowthlimit=64m
-dalvik.vm.heapsize=256m
+
 debug.sf.hw = 1
 persist.sys.use_dithering = 0
 ro.HOME_APP_ADJ = 1
