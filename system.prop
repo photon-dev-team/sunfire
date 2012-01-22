@@ -115,7 +115,6 @@ persist.sys.usb.config=mass_storage,adb
 # tweaks
 
 ro.com.android.dataroaming=true
-wifi.interface=wlan0
 debug.sf.hw = 1
 persist.sys.use_dithering = 0
 ro.HOME_APP_ADJ = 1
