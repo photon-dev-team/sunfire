@@ -107,6 +107,9 @@ persist.tegra.nvlog.level=4
 #persist.tegra.drmlib.asfdrm=libnvdrm.so
 #Drmdll.asfdrm=libnvdrm.so
 
+# Enable detailed GC data and SMP dexopt
+dalvik.vm.dexopt-flags=m=y,u=n
+
 # Enable HDMI mirroring
 ro.hdmi.mirror.enable=true
 
