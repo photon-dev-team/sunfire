@@ -2,7 +2,6 @@
 # system.prop for sunfire
 #
 ro.sf.lcd_density=240
-dalvik.vm.heapsize=64m
 
 #RIL
 rild.libpath=/system/lib/libmoto_ril.so
@@ -37,13 +36,6 @@ persist.ril.ecclist=911,*911,#911
 #ro.cdma.otaspnumschema=SELC,1,80,99
 persist.radio.cdma.min=0
 
-# ERI feature
-# 0 OFF
-# 1 ON
-ro.mot.eri=1
-
-# VVM is not bundled. Need to get it from the market!
-ro.HorizontalVVM=false
 
 #BEGIN Motorola, 30Jan2011, w19837, IKSUNFIRE-215, Feature ID: 35761.
 #[sprint tv transport protocol support]
@@ -68,12 +60,6 @@ net.tcp.buffersize.gprs=4096,8192,12288,4096,8192,12288
 # 0 -> WCDMA preferred
 ro.telephony.default_network=7
 
-# Mount the internal SD card, too
-ro.additionalmounts=/mnt/emmc
-
-#special moto usb handling
-ro.usb.use_custom_service=1
-
 # Time between scans in seconds. Keep it high to minimize battery drain.
 # This only affects the case in which there are remembered access points,
 # but none are in range.
@@ -84,20 +70,11 @@ ro.wifi-ap.fw-path=/system/etc/wl/sdio-g-cdc-roml-reclaim-wme-apsta-idauth-minio
 
 ro.bt.bdaddr_path=/pds/bt/bt_bdaddr
 
-# use 1% battery steps
-ro.product.use_charge_counter=1
-
 #OpenGL ES version
 ro.opengles.version = 131072
 
 # Forbid format of these partitions in mount menu :
 ro.cwm.forbid_format=/misc,/radio,/pds,/bootloader,/recovery,/efs
-
-# Battery light while charging, enabled by default
-ro.battery_light=true
-
-# Allow people to exchange sdcard and emmc mountpoints from CMParts
-ro.vold.switchablepair=/mnt/sdcard,/mnt/sdcard-ext
 
 # Tegra debugging
 persist.tegra.nvlog.level=4
@@ -113,11 +90,10 @@ dalvik.vm.dexopt-flags=m=y,u=n
 # Enable HDMI mirroring
 ro.hdmi.mirror.enable=true
 
-persist.sys.usb.config=mass_storage,adb
+persist.sys.usb.config=mass_storage
 
 # tweaks
 
-ro.com.android.dataroaming=true
 debug.sf.hw = 1
 persist.sys.use_dithering = 0
 ro.HOME_APP_ADJ = 1

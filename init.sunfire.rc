@@ -6,6 +6,7 @@ on init
     # create mountpoints for storage
     mkdir /mnt/sdcard 0000 system system
     mkdir /mnt/sdcard-ext 0000 system system
+	mkdir /sdcard/sdcard-ext 0000 system system
     symlink /mnt/sdcard /sdcard
     symlink /mnt/sdcard-ext /sdcard-ext
     symlink /mnt/sdcard-ext /sdcard/sdcard-ext
@@ -19,7 +20,7 @@ on fs
     mount ext4 /dev/block/mmcblk0p12 /system noatime nodiratime wait ro barrier=1
     mount ext4 /dev/block/mmcblk0p16 /data nosuid nodev noatime nodiratime wait barrier=1 noauto_da_alloc
     mount ext4 /dev/block/mmcblk0p15 /cache nosuid nodev noatime nodiratime wait barrier=1 noauto_da_alloc
-    mount ext4 /dev/block/mmcblk0p13 /osh nodev noatime nodiratime wait barrier=1 noauto_da_alloc
+    mount ext3 /dev/block/mmcblk0p13 /osh nodev noatime nodiratime wait barrier=1 noauto_da_alloc
 
     exec /system/bin/logwrapper /system/bin/pds_perm_fix.sh
 
@@ -35,6 +36,9 @@ on post-fs
     mkdir /mnt/usbdisk_1.6 0000 system system
     mkdir /mnt/usbdisk_1.7 0000 system system
     mount rootfs rootfs / ro remount
+
+    # usbd permissions
+    mkdir /data/usbd 0777 system system
 
     # We chown/chmod /data again so because mount is run as root + defaults
     chown system system /data
@@ -83,6 +87,7 @@ on post-fs
     chown root system /proc/sysrq-trigger
     chmod 0220 /proc/sysrq-trigger
 
+on post-fs-data
     # wlan permissions
     mkdir /data/misc/wifi 0771 wifi wifi
     mkdir /data/misc/wifi/sockets 0771 wifi wifi
@@ -90,11 +95,14 @@ on post-fs
     setprop wifi.interface eth0
     setprop softap.interface wl0.1
 
-    # usbd permissions
-    mkdir /data/usbd 0777 system system
+    # allow net_raw to have access to /dev/socket directory
+    # CM feat
+    chown root net_raw /dev/socket
+    chmod 0775 /dev/socket
 
 on boot
     # nvrm permissions
+    chown system system /dev/nvrm
     chmod 666 /dev/nvrm
 
     # knvrm permissions
@@ -372,7 +380,6 @@ on property:tcmd.ctrl_adb=0
 on property:sys.chargeonly.mode=1
     class_start pre-zygote_services
     class_stop post-zygote_services
-    class_stop main
     stop zygote
     exec /system/bin/charge_only_mode
 
