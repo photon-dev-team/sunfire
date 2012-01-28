@@ -418,6 +418,16 @@ service iprenew_eth0 /system/bin/dhcpcd -n
     disabled
     oneshot
 
+service dhcpcd_bnep0 /system/bin/dhcpcd -ABKL
+    class main
+    disabled
+    oneshot
+
+service iprenew_bnep0 /system/bin/dhcpcd -n
+    class main
+    disabled
+    oneshot
+
 # Ecompass daemon
 service akmd2 /system/bin/akmd2
     class post-zygote_services
