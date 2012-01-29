@@ -58,20 +58,19 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 1073741824
 BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_HAS_JANKY_BACKBUFFER := true
 TARGET_PREBUILT_KERNEL := device/moto/sunfire/kernel
-TARGET_USERIMAGES_USE_EXT4 := false
+TARGET_USERIMAGES_USE_EXT4 := true
 # Below is a sample of how you can tweak the mount points using the board config.
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_RECOVERY_IGNORE_BOOTABLES := true
 BOARD_DATA_DEVICE := /dev/block/mmcblk0p16
-BOARD_DATA_FILESYSTEM := ext3
+BOARD_DATA_FILESYSTEM := ext4
 BOARD_DATA_FILESYSTEM_OPTIONS := nosuid,nodev,relatime,barrier=1,noauto_da_alloc
 BOARD_SYSTEM_DEVICE := /dev/block/mmcblk0p12
 BOARD_SYSTEM_FILESYSTEM_OPTIONS := noatime,nodiratime,barrier=1,noauto_da_alloc
-BOARD_SYSTEM_FILESYSTEM := ext3
+BOARD_SYSTEM_FILESYSTEM := ext4
 BOARD_CACHE_DEVICE := /dev/block/mmcblk0p15
-BOARD_CACHE_FILESYSTEM := ext3
+BOARD_CACHE_FILESYSTEM := ext4
 BOARD_CACHE_FILESYSTEM_OPTIONS := nosuid,nodev,relatime,barrier=1,noauto_da_alloc
-BOARD_HIJACK_RECOVERY_PATH := /preinstall/
 BOARD_HAS_PREINSTALL := true
 TARGET_NO_BOOT := false
 TARGET_NO_RECOVERY := false
@@ -84,13 +83,7 @@ BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 
 BOARD_SDEXT_DEVICE := /dev/block/mmcblk1p2
 BOARD_UMS_LUNFILE := /sys/devices/platform/usb_mass_storage/lun0/file
-BOARD_HIJACK_BOOT_PATH := /preinstall/
-BOARD_HIJACK_EXECUTABLES := logwrapper
-BOARD_HIJACK_LOG_ENABLE := false
 BOARD_USES_MMCUTILS := true
-BOARD_HIJACK_UPDATE_BINARY := /preinstall/update-binary
-BOARD_HIJACK_BOOT_UPDATE_ZIP := /preinstall/update-boot.zip
-BOARD_HIJACK_RECOVERY_UPDATE_ZIP := /preinstall/update-recovery.zip
 BOARD_PREINSTALL_DEVICE := /dev/block/mmcblk0p17
 BOARD_PREINSTALL_FILESYSTEM := ext3
 BOARD_HAS_NO_SELECT_BUTTON := true
@@ -114,9 +107,6 @@ WIFI_DRIVER_MODULE_ARG      := "firmware_path=/system/etc/wl/sdio-ag-cdc-full11n
 WIFI_DRIVER_MODULE_NAME     := "dhd"
 WIFI_DRIVER_SOCKET_IFACE    := eth0
 
-#Fix _sync functions for RIL
-TARGET_MOTO_SYNC_FUNCTIONS := true
-
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
@@ -128,11 +118,10 @@ TARGET_SPECIFIC_HEADER_PATH := device/moto/sunfire/include
 #EGL
 BOARD_EGL_CFG := device/moto/sunfire/config/egl.cfg
 COMMON_GLOBAL_CFLAGS += -DMISSING_EGL_EXTERNAL_IMAGE -DMISSING_EGL_PIXEL_FORMAT_YV12 -DMISSING_GRALLOC_BUFFERS
-#USE_OPENGL_RENDERER := true
+# testing something 
+USE_OPENGL_RENDERER := true
 BOARD_NO_ALLOW_DEQUEUE_CURRENT_BUFFER := true
 
-#USB Tethering
-BOARD_CUSTOM_USB_CONTROLLER := ../../device/moto/sunfire/UsbController.cpp
 BOARD_HAS_LARGE_FILESYSTEM := true
 
 #UMS
