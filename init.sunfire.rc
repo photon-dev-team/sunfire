@@ -380,6 +380,7 @@ on property:tcmd.ctrl_adb=0
 on property:sys.chargeonly.mode=1
     class_start pre-zygote_services
     class_stop post-zygote_services
+    class_stop main
     stop zygote
     exec /system/bin/charge_only_mode
 
