@@ -233,6 +233,13 @@ on boot
     chmod 660 /sys/class/leds/privacy-led/brightness
     chmod 660 /sys/class/leds/flash/brightness
     chmod 660 /sys/class/leds/torch/brightness
+	chmod 0666 /dev/msm_camera/config0
+    chmod 0666 /dev/msm_camera/control0
+    chmod 0666 /dev/msm_camera/frame0
+    chmod 0666 /dev/graphics/fb0
+    chown system camera /sys/devices/platform/flashlight.0/leds/flashlight/brig$
+    chmod 0660 /sys/devices/platform/flashlight.0/leds/flashlight/brightness
+
 
 #===================================================================
 # TCMD 
@@ -304,6 +311,13 @@ on boot
 
 # Start services
     exec /system/bin/mot_boot_mode
+
+# triggered by holding down volume down, volume up and power
+service reboot_key /system/bin/reboot
+    user system
+    oneshot
+    keycodes 114 115 107
+    disabled
 
 service tcmd /system/bin/tcmd
     class post-zygote_services
