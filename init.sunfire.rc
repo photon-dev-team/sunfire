@@ -233,7 +233,7 @@ on boot
     chmod 660 /sys/class/leds/privacy-led/brightness
     chmod 660 /sys/class/leds/flash/brightness
     chmod 660 /sys/class/leds/torch/brightness
-	chmod 0666 /dev/msm_camera/config0
+    chmod 0666 /dev/msm_camera/config0
     chmod 0666 /dev/msm_camera/control0
     chmod 0666 /dev/msm_camera/frame0
     chmod 0666 /dev/graphics/fb0
@@ -312,16 +312,10 @@ on boot
 # Start services
     exec /system/bin/mot_boot_mode
 
-# triggered by holding down volume down, volume up and power
-service reboot_key /system/bin/reboot
-    user system
-    oneshot
-    keycodes 114 115 107
-    disabled
 
 service tcmd /system/bin/tcmd
     class post-zygote_services
-    group system radio input system log camera graphics sdcard_rw audio inet bluetooth wifi compass cache system mount net_bt_admin net_raw net_admin
+    group system radio input system camera graphics sdcard_rw audio inet bluetooth wifi net_admin
     socket local_tcmd stream 0660 system system
     socket batch_socket stream 0600 system system
 
