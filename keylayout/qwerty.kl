@@ -32,8 +32,8 @@ key 103   DPAD_UP           WAKE_DROPPED
 key 102   HOME              WAKE
 key 105   DPAD_LEFT         WAKE_DROPPED
 key 106   DPAD_RIGHT        WAKE_DROPPED
-key 115   VOLUME_UP         WAKE
-key 114   VOLUME_DOWN       WAKE
+key 115   VOLUME_UP         WAKE_DROPPED
+key 114   VOLUME_DOWN       WAKE_DROPPED
 key 116   POWER             WAKE
 key 212   CAMERA            WAKE_DROPPED
 
@@ -107,7 +107,7 @@ key 82    0
 key 83    PERIOD
 key 98    SLASH
 key 96    ENTER
-key 58    SHIFT_LEFT        CAPS_LOCK
+key 58    CAPS
 #END IKOLYMP-2624
 
 #BEGIN Moto:IKOLYMP-4580_krmt43:added ~ or` for webtop AIW
