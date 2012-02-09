@@ -1,15 +1,16 @@
-key 41    GRAVE             WAKE_DROPPED
-key 2     1                 WAKE_DROPPED
-key 3     2                 WAKE_DROPPED
-key 4     3                 WAKE_DROPPED
-key 5     4                 WAKE_DROPPED
-key 6     5                 WAKE_DROPPED
-key 7     6                 WAKE_DROPPED
-key 8     7                 WAKE_DROPPED
-key 9     8                 WAKE_DROPPED
-key 10    9                 WAKE_DROPPED
-key 11    0                 WAKE_DROPPED
+key 399   GRAVE
+key 41    GRAVE
 key 1     BACK              WAKE_DROPPED
+key 2     1
+key 3     2
+key 4     3
+key 5     4
+key 6     5
+key 7     6
+key 8     7
+key 9     8
+key 10    9
+key 11    0
 key 158   BACK              WAKE_DROPPED
 key 230   SOFT_RIGHT        WAKE
 key 60    SOFT_RIGHT        WAKE
@@ -21,8 +22,8 @@ key 125   MENU              WAKE_DROPPED
 key 59    MENU              WAKE_DROPPED
 key 127   SEARCH            WAKE_DROPPED
 key 217   SEARCH            WAKE_DROPPED
-key 228   POUND             WAKE_DROPPED
-key 227   STAR              WAKE_DROPPED
+key 228   POUND
+key 227   STAR
 key 231   CALL              WAKE_DROPPED
 key 61    CALL              WAKE_DROPPED
 key 232   DPAD_CENTER       WAKE_DROPPED
@@ -31,25 +32,26 @@ key 103   DPAD_UP           WAKE_DROPPED
 key 102   HOME              WAKE
 key 105   DPAD_LEFT         WAKE_DROPPED
 key 106   DPAD_RIGHT        WAKE_DROPPED
-key 115   VOLUME_UP         WAKE_DROPPED
-key 114   VOLUME_DOWN       WAKE_DROPPED
+key 115   VOLUME_UP
+key 114   VOLUME_DOWN
+key 113   MUTE
 key 116   POWER             WAKE
 key 212   CAMERA            WAKE_DROPPED
 key 226   MEDIA_POWER         WAKE
 
-key 16    Q                 WAKE_DROPPED
-key 17    W                 WAKE_DROPPED
-key 18    E                 WAKE_DROPPED
-key 19    R                 WAKE_DROPPED
-key 20    T                 WAKE_DROPPED
-key 21    Y                 WAKE_DROPPED
-key 22    U                 WAKE_DROPPED
-key 23    I                 WAKE_DROPPED
-key 24    O                 WAKE_DROPPED
-key 25    P                 WAKE_DROPPED
-key 26    LEFT_BRACKET      WAKE_DROPPED
-key 27    RIGHT_BRACKET     WAKE_DROPPED
-key 43    BACKSLASH         WAKE_DROPPED
+key 16    Q
+key 17    W
+key 18    E
+key 19    R
+key 20    T
+key 21    Y
+key 22    U
+key 23    I
+key 24    O
+key 25    P
+key 26    LEFT_BRACKET
+key 27    RIGHT_BRACKET
+key 43    BACKSLASH
 
 key 30    A                 WAKE_DROPPED
 key 31    S                 WAKE_DROPPED
