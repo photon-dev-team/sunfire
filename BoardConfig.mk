@@ -129,8 +129,9 @@ BOARD_USES_LGE_HDMI_ROTATION := true
 
 BOARD_HAS_LARGE_FILESYSTEM := true
 
-#UMS
+#UMS, MTP
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun%d/file"
+BOARD_MTP_DEVICE := "/dev/mtp"
 
 # Dock Audio
 BOARD_USE_MOTO_DOCK_HACK := true

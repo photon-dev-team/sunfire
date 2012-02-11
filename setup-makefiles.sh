@@ -105,43 +105,6 @@ PRODUCT_COPY_FILES += \\
     vendor/__VENDOR__/__DEVICE__/proprietary/bin/ftmipcd:system/bin/ftmipcd \\
     vendor/__VENDOR__/__DEVICE__/proprietary/bin/touchpad:system/bin/touchpad
 
-# LP ADD ------------------------------------------------------------------------------------
-
-# LP Added
-
-# BIN 
-
-PRODUCT_COPY_FILES += \\
-vendor/__VENDOR__/__DEVICE__/proprietary/bin/fmradioserver:system/bin/fmradioserver \\
-vendor/__VENDOR__/__DEVICE__/proprietary/bin/memtest_mode:system/bin/memtest_mode \\
-vendor/__VENDOR__/__DEVICE__/proprietary/bin/nv_hciattach:system/bin/nv_hciattach \\
-vendor/__VENDOR__/__DEVICE__/proprietary/bin/nvmm_wmaprodec.axf:system/bin/nvmm_wmaprodec.axf \\
-vendor/__VENDOR__/__DEVICE__/proprietary/bin/remountpds:system/bin/remountpds \\
-vendor/__VENDOR__/__DEVICE__/proprietary/bin/slateipcd:system/bin/slateipcd \\
-vendor/__VENDOR__/__DEVICE__/proprietary/bin/tcmd:system/bin/tcmd \\
-vendor/__VENDOR__/__DEVICE__/proprietary/bin/tegrastats:system/bin/tegrastats \\
-vendor/__VENDOR__/__DEVICE__/proprietary/bin/vpnclientpm:system/bin/vpnclientpm
-
-# LIB
-PRODUCT_COPY_FILES += \\
-vendor/__VENDOR__/__DEVICE__/proprietary/lib/libfmradio_jni.so:system/lib/libfmradio_jni.so \\
-vendor/__VENDOR__/__DEVICE__/proprietary/lib/libfmradioplayer.so:system/lib/libfmradioplayer.so \\
-vendor/__VENDOR__/__DEVICE__/proprietary/lib/libnvidia_display_jni.so:system/lib/libnvidia_display_jni.so \\
-vendor/__VENDOR__/__DEVICE__/proprietary/lib/libnvec.so:system/lib/libnvec.so \\
-vendor/__VENDOR__/__DEVICE__/proprietary/lib/libnvwinsys.so:system/lib/libnvwinsys.so \\
-vendor/__VENDOR__/__DEVICE__/proprietary/lib/libomx_amrenc_sharedlibrary.so:system/lib/libomx_amrenc_sharedlibrary.so \\
-vendor/__VENDOR__/__DEVICE__/proprietary/lib/libopencore_author.so:system/lib/libopencore_author.so \\
-vendor/__VENDOR__/__DEVICE__/proprietary/lib/libopencore_common.so:system/lib/libopencore_common.so \\
-vendor/__VENDOR__/__DEVICE__/proprietary/lib/libopencore_download.so:system/lib/libopencore_download.so \\
-vendor/__VENDOR__/__DEVICE__/proprietary/lib/libopencore_downloadreg.so:system/lib/libopencore_downloadreg.so \\
-vendor/__VENDOR__/__DEVICE__/proprietary/lib/libopencore_mp4local.so:system/lib/libopencore_mp4local.so \\
-vendor/__VENDOR__/__DEVICE__/proprietary/lib/libopencore_mp4localreg.so:system/lib/libopencore_mp4localreg.so \\
-vendor/__VENDOR__/__DEVICE__/proprietary/lib/libopencore_net_support.so:system/lib/libopencore_net_support.so \\
-vendor/__VENDOR__/__DEVICE__/proprietary/lib/libopencore_player.so:system/lib/libopencore_player.so \\
-vendor/__VENDOR__/__DEVICE__/proprietary/lib/libopencore_rtsp.so:system/lib/libopencore_rtsp.so \\
-vendor/__VENDOR__/__DEVICE__/proprietary/lib/libopencore_rtspreg.so:system/lib/libopencore_rtspreg.so \\
-vendor/__VENDOR__/__DEVICE__/proprietary/lib/libpixelflinger.so:system/lib/libpixelflinger.so
-
 #-----------------------------------------------------------------------------------------------------
 
 # Wifi/bt firmware

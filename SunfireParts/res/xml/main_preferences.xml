@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" android:title="@string/main_title">
+	<PreferenceScreen android:title="@string/navigation_configuration">
+		<intent android:action="android.intent.action.MAIN"
+			android:targetPackage="com.authentec.TrueSuiteMobile"
+			android:targetClass="com.authentec.TrueSuiteMobile.NavigationConfiguration" />
+	</PreferenceScreen>
+
+
+	<CheckBoxPreference
+		android:key="hdmi_audio"
+		android:summary="@string/hdmi_audio_summary"
+		android:title="@string/hdmi_audio_title"
+		android:defaultValue="false"
+	/>
+</PreferenceScreen>

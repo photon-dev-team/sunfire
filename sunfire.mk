@@ -59,7 +59,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_COPY_FILES += \
     device/moto/sunfire/scripts/pds_perm_fix.sh:system/bin/pds_perm_fix.sh \
     device/moto/sunfire/scripts/bt_init_wrapper.sh:system/bin/bt_init_wrapper.sh \
-    device/moto/sunfire/scripts/hciattach_wrapper.sh:system/bin/hciattach_wrapper.sh
+    device/moto/sunfire/scripts/usb_switch.sh:system/bin/usb_switch.sh
 
 # sysctl conf
 PRODUCT_COPY_FILES += \
@@ -98,8 +98,11 @@ $(call inherit-product, build/target/product/full_base_telephony.mk)
 PRODUCT_PACKAGES += Usb \
 			DockAudio \
 			Torch \
+			SunfireParts \
+			hciconfig \
+			hcitool \
+			camera.sunfire \
 			audio.primary.sunfire \
-			cmparts \
 			audio.a2dp.default
 
 DEVICE_PACKAGE_OVERLAYS += device/moto/sunfire/overlay
@@ -117,6 +120,7 @@ PRODUCT_COPY_FILES += \
     device/moto/sunfire/config/qtouch-obp-ts.idc:system/usr/idc/qtouch-obp-ts.idc \
     device/moto/sunfire/keylayout/tegra-kbc.kl:system/usr/keylayout/tegra-kbc.kl \
     device/moto/sunfire/keychars/tegra-kbc.kcm.bin:system/usr/keychars/tegra-kbc.kcm.bin \
+    device/moto/sunfire/keylayout/qwerty.kl:system/usr/keylayout/BTC_USB_Cordless_Mouse.kl \
     device/moto/sunfire/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl \
     device/moto/sunfire/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
     device/moto/sunfire/keylayout/Motorola_Mobility_Motorola_HD_Dock.kl:system/usr/keylayout/Motorola_Mobility_Motorola_HD_Dock.kl \

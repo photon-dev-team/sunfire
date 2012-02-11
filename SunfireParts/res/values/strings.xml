@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Photon Settings</string>
+    <string name="main_title">Motorola Photon Settings</string>
+    <string name="hdmi_audio_title">HDMI Audio</string>
+    <string name="hdmi_audio_summary">Enable or disable audio over HDMI</string>
+</resources>

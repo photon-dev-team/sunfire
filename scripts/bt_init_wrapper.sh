@@ -1,7 +1,5 @@
 #!/system/bin/sh
-/system/bin/bt_init -stop
-sleep 1
+# init the bluetooth stuff
 /system/bin/bt_init /system/etc/bt_init.config
-/system/xbin/hciconfig hci0 down
-killall -9 hciattach
-
+# sleep 2 years
+sleep 62208000

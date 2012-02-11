@@ -30,4 +30,4 @@ key 168   MEDIA_REWIND        WAKE
 
 key 29   MENU    WAKE_DROPPED
 key 97   MENU    WAKE_DROPPED
-key 226   MEDIA_POWER         WAKE
+key 226   POWER         WAKE

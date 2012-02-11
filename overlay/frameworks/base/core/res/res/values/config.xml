@@ -412,7 +412,7 @@
 
     <!-- Boolean indicating if current platform supports quick switch-on/off of
          Bluetooth Module -->
-    <bool name="config_bluetooth_adapter_quick_switch">true</bool>
+    <bool name="config_bluetooth_adapter_quick_switch">false</bool>
 
     <!-- The default data-use polling period. -->
     <integer name="config_datause_polling_period_sec">9000000000</integer>
@@ -424,7 +424,7 @@
     <integer name="config_datause_throttle_kbitsps">600</integer>
 
     <!-- The default iface on which to monitor data use -->
-    <string name="config_datause_iface">eth0</string>
+    <string name="config_datause_iface">ppp0</string>
 
     <!-- The default reduced-datarate notification mask -->
     <!-- 2 means give warning -->

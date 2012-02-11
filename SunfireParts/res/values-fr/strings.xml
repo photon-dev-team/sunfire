@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Paramètres Photon</string>
+    <string name="main_title">Paramètres Motorola Photon</string>
+    <string name="hdmi_audio_title">Audio HDMI</string>
+    <string name="hdmi_audio_summary">Activer la sortie audio sur la prise HDMI</string>
+</resources>

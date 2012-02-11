@@ -52,3 +52,6 @@ on property:sys.usb.config=mtp,adb
     start adbd
     setprop sys.usb.state $sys.usb.config
 
+service usb_switch /system/bin/usb_switch.sh
+    disabled
+    oneshot

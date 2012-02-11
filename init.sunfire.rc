@@ -312,10 +312,18 @@ on boot
 # Start services
     exec /system/bin/mot_boot_mode
 
+# triggered by holding down volume down, volume up and power
+service reboot_key /system/bin/reboot
+    user system
+    oneshot
+    keycodes 114 115 107
+    disabled
 
 service tcmd /system/bin/tcmd
     class post-zygote_services
+    # group option accepts at most 12 suppl. groups
     group system radio input system camera graphics sdcard_rw audio inet bluetooth wifi net_admin
+    #group log compass cache mount net_bt_admin net_raw
     socket local_tcmd stream 0660 system system
     socket batch_socket stream 0600 system system
 
@@ -396,18 +404,6 @@ service nvrm_daemon /system/bin/logwrapper /system/bin/nvrm_daemon
     class pre-zygote_services
     user root
     onrestart restart servicemanager
-
-service bt_start /system/bin/bt_init_wrapper.sh
-    class pre-zygote_services
-    user bluetooth
-    group bluetooth net_bt_admin net_raw net_admin misc
-    oneshot
-
-service bt_stop /system/bin/bt_init -stop
-    user bluetooth
-    group bluetooth net_bt_admin misc
-    disabled
-    oneshot
 
 service wpa_supplicant /system/bin/wpa_supplicant -D wext -i eth0 -c /data/misc/wifi/wpa_supplicant.conf -e /data/misc/wifi/entropy.bin
     class WLAN
@@ -498,11 +494,14 @@ service map /system/bin/sdptool add --channel=20 MAP
     disabled
     oneshot
 
-service hciattach /system/bin/hciattach_wrapper.sh
+service hciattach /system/bin/bt_init_wrapper.sh
     user bluetooth
     group bluetooth net_bt_admin
-    oneshot
     disabled
+    oneshot
+
+on property:init.svc.hciattach=stopping
+    exec /system/bin/bt_init -stop
 
 # This is product specific init script which will be appended to init.rc
 # after init.nv_common.rc. 
