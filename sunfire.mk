@@ -111,7 +111,6 @@ DEVICE_PACKAGE_OVERLAYS += device/moto/sunfire/overlay
 # Board-specific init
 PRODUCT_COPY_FILES += \
     device/moto/sunfire/config/vold.fstab:system/etc/vold.fstab \
-    device/moto/sunfire/init.vsnet:system/bin/init.vsnet \
     device/moto/sunfire/scripts/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh \
     device/moto/sunfire/prebuilts/liba2dp.so:system/lib/liba2dp.so
 
