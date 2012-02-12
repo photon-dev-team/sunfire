@@ -7,48 +7,34 @@
 #    public static final int USB_MODE_NONE = 5;
 
 on property:sys.usb.config=adb
-    exec /system/bin/am broadcast \
-        -a com.motorola.intent.action.USB_MODE_SWITCH_FROM_UI \
-        --ei USB_MODE_INDEX 5
+    exec /system/bin/start usb_switch:5
     start adbd
     setprop sys.usb.state $sys.usb.config
 
 on property:sys.usb.config=mass_storage,adb
-    exec /system/bin/am broadcast \
-        -a com.motorola.intent.action.USB_MODE_SWITCH_FROM_UI \
-        --ei USB_MODE_INDEX 2
+    exec /system/bin/start usb_switch:2
     start adbd
     setprop sys.usb.state $sys.usb.config
 
 on property:sys.usb.config=mass_storage
-    exec /system/bin/am broadcast \
-        -a com.motorola.intent.action.USB_MODE_SWITCH_FROM_UI \
-        --ei USB_MODE_INDEX 2
+    exec /system/bin/start usb_switch:2
     setprop sys.usb.state $sys.usb.config
 
 on property:sys.usb.config=rndis
-    exec /system/bin/am broadcast \
-        -a com.motorola.intent.action.USB_MODE_SWITCH_FROM_UI \
-        --ei USB_MODE_INDEX 3
+    exec /system/bin/start usb_switch:3
     setprop sys.usb.state $sys.usb.config
 
 on property:sys.usb.config=rndis,adb
-    exec /system/bin/am broadcast \
-        -a com.motorola.intent.action.USB_MODE_SWITCH_FROM_UI \
-        --ei USB_MODE_INDEX 3
+    exec /system/bin/start usb_switch:3
     start adbd
     setprop sys.usb.state $sys.usb.config
 
 on property:sys.usb.config=mtp
-    exec /system/bin/am broadcast \
-        -a com.motorola.intent.action.USB_MODE_SWITCH_FROM_UI \
-        --ei USB_MODE_INDEX 1
+    exec /system/bin/start usb_switch:1
     setprop sys.usb.state $sys.usb.config
 
 on property:sys.usb.config=mtp,adb
-    exec /system/bin/am broadcast \
-        -a com.motorola.intent.action.USB_MODE_SWITCH_FROM_UI \
-        --ei USB_MODE_INDEX 1
+    exec /system/bin/start usb_switch:1
     start adbd
     setprop sys.usb.state $sys.usb.config
 

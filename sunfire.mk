@@ -101,6 +101,7 @@ PRODUCT_PACKAGES += Usb \
 			SunfireParts \
 			hciconfig \
 			hcitool \
+			rilwrap \
 			camera.sunfire \
 			audio.primary.sunfire \
 			audio.a2dp.default
