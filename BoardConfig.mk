@@ -119,7 +119,7 @@ TARGET_SPECIFIC_HEADER_PATH := device/moto/sunfire/include
 BOARD_EGL_CFG := device/moto/sunfire/config/egl.cfg
 COMMON_GLOBAL_CFLAGS += -DMISSING_EGL_EXTERNAL_IMAGE -DMISSING_EGL_PIXEL_FORMAT_YV12 -DMISSING_GRALLOC_BUFFERS
 # testing something 
-# USE_OPENGL_RENDERER := true
+USE_OPENGL_RENDERER := true
 # false only works when opengl is turned on
 BOARD_NO_ALLOW_DEQUEUE_CURRENT_BUFFER := true
 
