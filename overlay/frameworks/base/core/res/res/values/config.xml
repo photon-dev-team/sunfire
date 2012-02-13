@@ -24,7 +24,7 @@
          alpha compositing functionality in hardware.  If set, the window
          manager will disable alpha trasformation in animations where not
          strictly needed. -->
-    <bool name="config_sf_limitedAlpha">true</bool>
+    <bool name="config_sf_limitedAlpha">false</bool>
     <!-- Flag indicating whether the surface flinger is inefficient
          at performing a blur.  Used by parts of the UI to turn off
          the blur effect where it isn't worth the performance hit.
@@ -509,7 +509,7 @@
 
     <!-- Set and Unsets WiMAX -->
     <bool name="config_wimaxEnabled">true</bool>
-    <!-- Location of the wimax framwork jar location -->
+    <!-- Location of the wimax framework jar location -->
     <string name="config_wimaxServiceJarLocation"></string>
     <!-- Location of the wimax native library locaiton -->
     <string name="config_wimaxNativeLibLocation"></string>

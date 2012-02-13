@@ -233,10 +233,6 @@ on boot
     chmod 660 /sys/class/leds/privacy-led/brightness
     chmod 660 /sys/class/leds/flash/brightness
     chmod 660 /sys/class/leds/torch/brightness
-    chmod 0666 /dev/msm_camera/config0
-    chmod 0666 /dev/msm_camera/control0
-    chmod 0666 /dev/msm_camera/frame0
-    chmod 0666 /dev/graphics/fb0
     chown system camera /sys/devices/platform/flashlight.0/leds/flashlight/brig$
     chmod 0660 /sys/devices/platform/flashlight.0/leds/flashlight/brightness
 

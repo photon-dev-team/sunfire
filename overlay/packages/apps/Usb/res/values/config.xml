@@ -1,12 +1,14 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <resources>
     <string-array name="usb_mode_entries" translatable="false">
+        <item>@string/usb_mode_mtp</item>
         <item>@string/usb_mode_msc</item>
         <item>@string/usb_mode_none</item>
     </string-array>
 
     <!-- Those values must match up with the mode constants in UsbService.java! -->
     <integer-array name="usb_mode_values" translatable="false">
+        <item>1</item>
         <item>2</item>
         <item>5</item>
     </integer-array>
