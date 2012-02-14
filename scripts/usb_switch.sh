@@ -8,6 +8,7 @@ IS_RNDIS=$(cat /data/usbd/current_state|grep rndis -c)
 if [ "$IS_RNDIS" = "1" ] ; then
     if [ ! "$1" = "3" ] ; then
         logwrapper /system/bin/am broadcast -a com.motorola.intent.action.USB_TETHERING_TOGGLED --ei state 0
+        netcfg usb1 down
     fi
 fi
 

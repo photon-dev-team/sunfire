@@ -53,6 +53,7 @@ struct legacy_camera_device {
 
    preview_stream_ops *window;
    gralloc_module_t const *gralloc;
+   camera_memory_t *clientData;
 };
 
 /** camera_hw_device implementation **/
@@ -263,19 +264,26 @@ CameraHAL_DataCb(int32_t msg_type, const android::sp<android::IMemory>& dataPtr,
    struct legacy_camera_device *lcdev = (struct legacy_camera_device *) user;
 
    //LOGV("CameraHAL_DataCb: msg_type:%d user:%p\n", msg_type, user);
+   //
+   if (lcdev->data_callback != NULL && lcdev->request_memory != NULL) {
+      /* Make sure any pre-existing heap is released */
+      if (lcdev->clientData != NULL) {
+         lcdev->clientData->release(lcdev->clientData);
+         lcdev->clientData = NULL;
+      }
+      lcdev->clientData = CameraHAL_GenClientData(dataPtr, lcdev);
+      if (lcdev->clientData != NULL) {
+         LOGV("CameraHAL_DataCb: Posting data to client\n");
+         lcdev->data_callback(msg_type, lcdev->clientData, 0, NULL, lcdev->user);
+      }
+   }
+
    if (msg_type == CAMERA_MSG_PREVIEW_FRAME) {
       int32_t previewWidth, previewHeight;
-
       android::CameraParameters hwParameters(lcdev->hwif->getParameters());
       hwParameters.getPreviewSize(&previewWidth, &previewHeight);
       //LOGV("CameraHAL_DataCb: preview size = %dx%d\n", previewWidth, previewHeight);
       CameraHAL_HandlePreviewData(dataPtr, previewWidth, previewHeight, lcdev);
-   } else if (lcdev->data_callback != NULL && lcdev->request_memory != NULL) {
-      camera_memory_t *clientData = CameraHAL_GenClientData(dataPtr, lcdev);
-      if (clientData != NULL) {
-         LOGV("CameraHAL_DataCb: Posting data to client\n");
-         lcdev->data_callback(msg_type, clientData, 0, NULL, lcdev->user);
-      }
    }
 }
 
@@ -562,6 +570,8 @@ qcom_camera_preview_enabled(struct camera_device * device)
 int
 qcom_camera_store_meta_data_in_buffers(struct camera_device * device, int enable)
 {
+   /*struct legacy_camera_device *lcdev = to_lcdev(device);
+   int ret = lcdev->hwif->storeMetaDataInBuffers(enable);*/
    LOGV("qcom_camera_store_meta_data_in_buffers:\n");
    return NO_ERROR;
 }
@@ -648,7 +658,7 @@ qcom_camera_cancel_picture(struct camera_device * device)
    struct legacy_camera_device *lcdev = to_lcdev(device);
    LOGV("camera_cancel_picture:\n");
    lcdev->hwif->cancelPicture();
-   return NO_ERROR;	
+   return NO_ERROR;
 }
 
 int
