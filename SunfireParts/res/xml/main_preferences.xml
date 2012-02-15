@@ -7,4 +7,12 @@
 		android:title="@string/hdmi_audio_title"
 		android:defaultValue="false"
 	/>
+
+	<CheckBoxPreference 
+		android:key="pref_switch_storage"	
+		android:title="@string/pref_switch_storage_title"
+		android:summaryOn="@string/pref_switch_storage_summary_on"
+		android:summaryOff="@string/pref_switch_storage_summary_off" 
+	/>
+
 </PreferenceScreen>
