@@ -26,14 +26,14 @@
     <string name="status_bar_no_recent_apps">y u no open app</string>
 
     <!-- When the battery is low, this is displayed to the user in a dialog.  The title of the low battery alert.  [CHAR LIMIT=NONE]-->
-    <string name="battery_low_title">Connect yo charger</string>
+    <string name="battery_low_title">Feed me power</string>
 
     <!-- When the battery is low, this is displayed to the user in a dialog. The subtitle of the low battery alert. [CHAR LIMIT=NONE] -->
-    <string name="battery_low_subtitle">The battery is dying of a slow death.</string>
+    <string name="battery_low_subtitle">I'm dying, please help me.</string>
 
     <!-- When the battery is low, this is the label of the button to go to the
          power usage activity to find out what drained the battery.  [CHAR LIMIT=30] -->
-    <string name="battery_low_why">where did my battery go</string>
+    <string name="battery_low_why">whats eating my battery</string>
 
     <!-- Abbreviation / label for automatic brightness mode button. Should be all caps. [CHAR LIMIT=6] -->
     <string name="status_bar_settings_auto_brightness_label">MAGIC</string>
@@ -42,5 +42,5 @@
     <string name="gps_notification_searching_text">Where are you???</string>
 
     <!-- Notification text: when GPS has found a fix [CHAR LIMIT=50] -->
-    <string name="gps_notification_found_text">Location set by green men</string>
+    <string name="gps_notification_found_text">Space men have located you</string>
 </resources>

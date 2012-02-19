@@ -4,12 +4,12 @@ on init
     export EXTERNAL_STORAGE /mnt/sdcard
     export PHONE_STORAGE /mnt/emmc
     # create mountpoints for storage
+    mkdir /mnt/emmc 0000 system system
     mkdir /mnt/sdcard 0000 system system
-    mkdir /mnt/sdcard-ext 0000 system system
-	mkdir /sdcard/sdcard-ext 0000 system system
+	mkdir /emmc/sdcard 0000 system system
+    symlink /mnt/emmc /emmc
     symlink /mnt/sdcard /sdcard
-    symlink /mnt/sdcard-ext /sdcard-ext
-    symlink /mnt/sdcard-ext /sdcard/sdcard-ext
+    symlink /mnt/sdcard /emmc/sdcard
     # battery driver permissions
     mkdir /pds 0755 root root
     mkdir /osh 0000 root root
@@ -20,7 +20,7 @@ on fs
     mount ext4 /dev/block/mmcblk0p12 /system noatime nodiratime wait ro barrier=1
     mount ext4 /dev/block/mmcblk0p16 /data nosuid nodev noatime nodiratime wait barrier=1 noauto_da_alloc
     mount ext4 /dev/block/mmcblk0p15 /cache nosuid nodev noatime nodiratime wait barrier=1 noauto_da_alloc
-    mount ext3 /dev/block/mmcblk0p13 /osh nodev noatime nodiratime wait barrier=1 noauto_da_alloc
+    mount ext4 /dev/block/mmcblk0p13 /osh nodev noatime nodiratime wait barrier=1 noauto_da_alloc
 
     exec /system/bin/logwrapper /system/bin/pds_perm_fix.sh
 

@@ -6,13 +6,20 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-public class OnBoot extends BroadcastReceiver {
+public class OlympusReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        /* HDMI audio is disabled on boot, reflect this on the settings */
+        /* This receiver is triggered by four intents:
+         * BOOT_COMPLETED: HDMI audio is disabled
+         * ENABLE_DIGITAL_AUDIO: HDMI audio is enabled
+         * ENABLE_SPEAKER_AUDIO: HDMI audio is disabled
+         * ENABLE_ANALOG_AUDIO: HDMI audio is disabled
+         */
+        boolean status = intent.getAction().equals("com.cyanogenmod.dockaudio.ENABLE_DIGITAL_AUDIO");
+
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sharedPrefs.edit();
-        editor.putBoolean("hdmi_audio", false);
+        editor.putBoolean("hdmi_audio", status);
         editor.commit();
     }
 }

@@ -16,9 +16,12 @@
                 <action android:name="com.cyanogenmod.action.LAUNCH_DEVICE_SETTINGS" />
             </intent-filter>
         </activity>
-        <receiver android:name=".OnBoot" android:enabled="true" android:exported="false">
+        <receiver android:name=".OlympusReceiver" android:enabled="true" android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="com.cyanogenmod.dockaudio.ENABLE_DIGITAL_AUDIO" />
+                <action android:name="com.cyanogenmod.dockaudio.ENABLE_ANALOG_AUDIO" />
+                <action android:name="com.cyanogenmod.dockaudio.ENABLE_SPEAKER_AUDIO" />
             </intent-filter>
         </receiver>
     </application>
