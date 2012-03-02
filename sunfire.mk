@@ -33,27 +33,11 @@ $(call inherit-product-if-exists, vendor/moto/sunfire/sunfire-vendor.mk)
 
 ## (3)  Finally, the least specific parts, i.e. the non-GSM-specific aspects
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.ril.ntmodeglobal=true \
-    ro.kernel.android.ril=yes \
-    persist.ril.mux.noofchannels=10 \
-    persist.radio.reset_on_switch=true \
-    persist.ril.mux.ttydevice=/dev/ttyHS3 \
-    persist.ril.modem.ttydevice=/dev/ttySPI0 \
-    persist.ril.features=0x0C \
-    persist.ril.mux.retries=500 \
-    persist.ril.mux.sleep=2 \
     ro.telephony.sms_segment_size=160 \
-    ro.telephony.ril.v3=datacall,icccardstatus,signalstrength,facilitylock,skipbrokendatacall  \
-    ro.setupwizard.mode=OPTIONAL \
     ro.telephony.call_ring.multiple=false \
-    ro.telephony.call_ring.delay=500 \
     ro.setupwizard.enable_bypass=1 \
     ro.url.legal=http://www.google.com/intl/%s/mobile/android/basic/phone-legal.html \
     ro.url.legal.android_privacy=http://www.google.com/intl/%s/mobile/android/basic/privacy.html \
-    ro.cdma.home.operator.numeric=310120 \
-    ro.cdma.home.operator.alpha=Sprint \
-    ro.cdma.homesystem=64,65,76,77,78,79,80,81,82,83 \
-    ro.cdma.otaspnumschema=SELC,1,80,99
 
 # motorola helper scripts
 PRODUCT_COPY_FILES += \
