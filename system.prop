@@ -75,3 +75,6 @@ persist.sys.usb.config=mass_storage
 
 # Allow people to exchange sdcard and emmc mountpoints from CMParts
 ro.vold.switchablepair=/mnt/sdcard,/mnt/emmc
+
+# CRT animation speed
+debug.sf.electron_frames=42

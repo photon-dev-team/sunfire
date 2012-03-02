@@ -4,12 +4,12 @@ on init
     export EXTERNAL_STORAGE /mnt/sdcard
     export PHONE_STORAGE /mnt/emmc
     # create mountpoints for storage
+    mkdir /mnt/emmc 0000 system system
     mkdir /mnt/sdcard 0000 system system
-    mkdir /mnt/sdcard-ext 0000 system system
-	mkdir /sdcard/sdcard-ext 0000 system system
+	mkdir /emmc/sdcard 0000 system system
+    symlink /mnt/emmc /emmc
     symlink /mnt/sdcard /sdcard
-    symlink /mnt/sdcard-ext /sdcard-ext
-    symlink /mnt/sdcard-ext /sdcard/sdcard-ext
+    symlink /mnt/sdcard /emmc/sdcard
     # battery driver permissions
     mkdir /pds 0755 root root
     mkdir /osh 0000 root root
@@ -20,7 +20,7 @@ on fs
     mount ext4 /dev/block/mmcblk0p12 /system noatime nodiratime wait ro barrier=1
     mount ext4 /dev/block/mmcblk0p16 /data nosuid nodev noatime nodiratime wait barrier=1 noauto_da_alloc
     mount ext4 /dev/block/mmcblk0p15 /cache nosuid nodev noatime nodiratime wait barrier=1 noauto_da_alloc
-    mount ext3 /dev/block/mmcblk0p13 /osh nodev noatime nodiratime wait barrier=1 noauto_da_alloc
+    mount ext4 /dev/block/mmcblk0p13 /osh nodev noatime nodiratime wait barrier=1 noauto_da_alloc
 
     exec /system/bin/logwrapper /system/bin/pds_perm_fix.sh
 
@@ -233,10 +233,6 @@ on boot
     chmod 660 /sys/class/leds/privacy-led/brightness
     chmod 660 /sys/class/leds/flash/brightness
     chmod 660 /sys/class/leds/torch/brightness
-    chmod 0666 /dev/msm_camera/config0
-    chmod 0666 /dev/msm_camera/control0
-    chmod 0666 /dev/msm_camera/frame0
-    chmod 0666 /dev/graphics/fb0
     chown system camera /sys/devices/platform/flashlight.0/leds/flashlight/brig$
     chmod 0660 /sys/devices/platform/flashlight.0/leds/flashlight/brightness
 
@@ -321,7 +317,9 @@ service reboot_key /system/bin/reboot
 
 service tcmd /system/bin/tcmd
     class post-zygote_services
+    # group option accepts at most 12 suppl. groups
     group system radio input system camera graphics sdcard_rw audio inet bluetooth wifi net_admin
+    #group log compass cache mount net_bt_admin net_raw
     socket local_tcmd stream 0660 system system
     socket batch_socket stream 0600 system system
 
@@ -402,18 +400,6 @@ service nvrm_daemon /system/bin/logwrapper /system/bin/nvrm_daemon
     class pre-zygote_services
     user root
     onrestart restart servicemanager
-
-service bt_start /system/bin/bt_init_wrapper.sh
-    class pre-zygote_services
-    user bluetooth
-    group bluetooth net_bt_admin net_raw net_admin misc
-    oneshot
-
-service bt_stop /system/bin/bt_init -stop
-    user bluetooth
-    group bluetooth net_bt_admin misc
-    disabled
-    oneshot
 
 service wpa_supplicant /system/bin/wpa_supplicant -D wext -i eth0 -c /data/misc/wifi/wpa_supplicant.conf -e /data/misc/wifi/entropy.bin
     class WLAN
@@ -504,11 +490,14 @@ service map /system/bin/sdptool add --channel=20 MAP
     disabled
     oneshot
 
-service hciattach /system/bin/hciattach_wrapper.sh
+service hciattach /system/bin/bt_init_wrapper.sh
     user bluetooth
     group bluetooth net_bt_admin
-    oneshot
     disabled
+    oneshot
+
+on property:init.svc.hciattach=stopping
+    exec /system/bin/bt_init -stop
 
 # This is product specific init script which will be appended to init.rc
 # after init.nv_common.rc. 

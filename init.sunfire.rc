@@ -6,7 +6,7 @@ on init
     # create mountpoints for storage
     mkdir /mnt/emmc 0000 system system
     mkdir /mnt/sdcard 0000 system system
-	mkdir /emmc/sdcard 0000 system system
+    mkdir /emmc/sdcard 0000 system system
     symlink /mnt/emmc /emmc
     symlink /mnt/sdcard /sdcard
     symlink /mnt/sdcard /emmc/sdcard

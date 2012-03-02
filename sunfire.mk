@@ -85,6 +85,7 @@ PRODUCT_PACKAGES += Usb \
 			SunfireParts \
 			hciconfig \
 			hcitool \
+			hwcomposer.default \
 			rilwrap \
 			camera.sunfire \
 			audio.primary.sunfire \
