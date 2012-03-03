@@ -32,7 +32,7 @@ touch.size.isSummed = 0
 # A normal thumb touch typically registers about 200 signal strength
 # units although we don't expect these values to be accurate.
 touch.pressure.calibration = amplitude
-touch.pressure.scale = 0.005
+touch.pressure.scale = 0.009
 
 # Orientation
 touch.orientation.calibration = none
