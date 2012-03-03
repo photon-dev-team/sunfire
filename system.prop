@@ -4,7 +4,8 @@
 ro.sf.lcd_density=240
 
 #RIL
-rild.libpath=/system/lib/libmoto_ril.so
+rild.libpath=/system/lib/rilwrap.so
+rild.wraplib=/system/lib/libmoto_ril.so
 persist.ril.mux.ttydevice=/dev/ttyHS3
 ro.telephony.call_ring.multiple=false
 ro.telephony.call_ring.delay=1000

@@ -7,7 +7,7 @@ ro.sf.lcd_density=240
 rild.libpath=/system/lib/libmoto_ril.so
 persist.ril.mux.ttydevice=/dev/ttyHS3
 ro.telephony.call_ring.multiple=false
-ro.telephony.call_ring.delay=500
+ro.telephony.call_ring.delay=1000
 persist.ril.modem.ttydevice=/dev/ttySPI0
 persist.ril.modem.mode=1
 persist.ril.mux.retries=500
@@ -15,25 +15,17 @@ persist.ril.mux.sleep=2
 ro.kernel.android.ril=yes
 persist.ril.pppd.start.fail.max=16
 mobiledata.interfaces=ppp0
-
-# From Motorola's own.
+ro.ril.ntmodeglobal=true
+ro.telephony.ril.v3=datacall,signalstrength,skipbrokendatacall
 persist.ril.mux.noofchannels=10
 persist.ril.features=0x0C
 
-# From MOTO
-# Feature 33857 support DualMode switch, UMTS/CDMA
-# This does not apply to Etna as it is not a Global phone.
-# IKXETNA-337 turned off this flag.
-# Enabling the flag for sunfire.
-ro.mot.FTR.33857=true
-
-# RIL hardcodes imported from Motorola's own
-ro.mot.ril.danlist=611,*611,#611
-persist.ril.ecclist=911,*911,#911
 
 # CDMA Carrier support - Native carrier is Sprint
-#ro.cdma.homesystem=64,65,76,77,78,79,80,81,82,83
-#ro.cdma.otaspnumschema=SELC,1,80,99
+ro.cdma.home.operator.numeric=310120
+ro.cdma.home.operator.alpha=Sprint
+ro.cdma.homesystem=64,65,76,77,78,79,80,81,82,83
+ro.cdma.otaspnumschema=SELC,1,80,99
 persist.radio.cdma.min=0
 
 
@@ -47,15 +39,6 @@ sprint.mm.network.type = unknown
 sprint.mm.nai = unknown
 #END IKSUNFIRE-215
 
-#Define TCP buffer sizes for various networks
-#ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
-net.tcp.buffersize.default=131072,262144,524288,4096,16384,147456
-net.tcp.buffersize.wifi=131072,262144,524288,4096,16384,147456
-net.tcp.buffersize.hspa=131072,262144,524288,4096,16384,147456
-net.tcp.buffersize.umts=131072,262144,524288,4096,16384,147456
-net.tcp.buffersize.edge=16384,32768,65536,4096,16384,32768
-net.tcp.buffersize.gprs=4096,8192,12288,4096,8192,12288
-
 # Default network type.
 # 0 -> WCDMA preferred
 ro.telephony.default_network=7
@@ -63,7 +46,7 @@ ro.telephony.default_network=7
 # Time between scans in seconds. Keep it high to minimize battery drain.
 # This only affects the case in which there are remembered access points,
 # but none are in range.
-wifi.supplicant_scan_interval=30
+wifi.supplicant_scan_interval=120
 
 # To set wifi (AP) driver's firmware path
 ro.wifi-ap.fw-path=/system/etc/wl/sdio-g-cdc-roml-reclaim-wme-apsta-idauth-minioctl.bin
@@ -87,17 +70,11 @@ persist.tegra.nvlog.level=4
 # Enable detailed GC data and SMP dexopt
 dalvik.vm.dexopt-flags=m=y,u=n
 
-# Enable HDMI mirroring
-ro.hdmi.mirror.enable=true
 
 persist.sys.usb.config=mass_storage
 
-# tweaks
+# Allow people to exchange sdcard and emmc mountpoints from CMParts
+ro.vold.switchablepair=/mnt/sdcard,/mnt/emmc
 
-debug.sf.hw = 1
-persist.sys.use_dithering = 0
-ro.HOME_APP_ADJ = 1
-pm.sleep_mode = 1
-windowsmgr.max_events_per_sec=150
-debug.performance.tuning=1
-video.accelerate.hw=1
+# CRT animation speed
+debug.sf.electron_frames=42
