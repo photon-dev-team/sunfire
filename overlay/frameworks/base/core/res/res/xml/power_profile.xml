@@ -21,7 +21,8 @@
 <device name="Android">
   <item name="none">0</item>
   <item name="screen.on">84</item>
-  <item name="bluetooth.active">142</item> <!-- In call -->
+  <item name="screen.full">99</item>
+  <item name="bluetooth.active">14.2</item> <!-- In call -->
   <item name="bluetooth.on">1</item>
   <item name="bluetooth.at">25730</item>
   <item name="screen.full">181</item>
@@ -46,7 +47,7 @@
     <value>608000</value>
     <value>456000</value>
     <value>312000</value>
-    <value>70216</value>
+    <value>216000</value>
   </array>
   <!-- Power consumption in suspend -->
   <item name="cpu.idle">30</item>

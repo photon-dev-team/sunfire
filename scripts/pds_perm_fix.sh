@@ -32,3 +32,7 @@ else
 
     echo "Mounted PDS only."
 fi
+
+chmod 755 /config
+mkdir /config/public/
+ln -s /pds/public/battd/ /config/public/battd

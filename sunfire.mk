@@ -47,7 +47,8 @@ PRODUCT_COPY_FILES += \
 
 # sysctl conf
 PRODUCT_COPY_FILES += \
-    device/moto/sunfire/config/sysctl.conf:system/etc/sysctl.conf
+    device/moto/sunfire/config/sysctl.conf:system/etc/sysctl.conf \
+    device/moto/sunfire/config/init.d/01sysctl:system/etc/init.d/01sysctl
 
 ## (3)  Finally, the least specific parts, i.e. the non-GSM-specific aspects
 
