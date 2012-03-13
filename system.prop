@@ -81,4 +81,4 @@ persist.sys.usb.config=mass_storage
 ro.vold.switchablepair=/mnt/sdcard,/mnt/emmc
 
 # CRT animation speed
-debug.sf.electron_frames=42
+debug.sf.electron_frames=36

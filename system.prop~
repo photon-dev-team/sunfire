@@ -4,7 +4,8 @@
 ro.sf.lcd_density=240
 
 #RIL
-rild.libpath=/system/lib/libmoto_ril.so
+rild.libpath=/system/lib/rilwrap.so
+rild.wraplib=/system/lib/libmoto_ril.so
 persist.ril.mux.ttydevice=/dev/ttyHS3
 ro.telephony.call_ring.multiple=false
 ro.telephony.call_ring.delay=1000
@@ -19,6 +20,9 @@ ro.ril.ntmodeglobal=true
 ro.telephony.ril.v3=datacall,signalstrength,skipbrokendatacall
 persist.ril.mux.noofchannels=10
 persist.ril.features=0x0C
+ro.cdma.data_retry_config=default_randomization=2000,0,0,120000,180000,540000,960000
+ro.gsm.data_retry_config=max_retries=infinite,default_randomization=2000,0,0,80000,125000,485000,905000
+ro.gsm.2nd_data_retry_config=max_retries=infinite,default_randomization=2000,0,0,80000,125000,485000,905000
 
 
 # CDMA Carrier support - Native carrier is Sprint
@@ -46,7 +50,7 @@ ro.telephony.default_network=7
 # Time between scans in seconds. Keep it high to minimize battery drain.
 # This only affects the case in which there are remembered access points,
 # but none are in range.
-wifi.supplicant_scan_interval=120
+wifi.supplicant_scan_interval=30
 
 # To set wifi (AP) driver's firmware path
 ro.wifi-ap.fw-path=/system/etc/wl/sdio-g-cdc-roml-reclaim-wme-apsta-idauth-minioctl.bin

@@ -99,6 +99,7 @@ PRODUCT_COPY_FILES += \
     device/moto/sunfire/config/vold.fstab:system/etc/vold.fstab \
     device/moto/sunfire/scripts/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh \
     device/moto/sunfire/prebuilts/liba2dp.so:system/lib/liba2dp.so
+    device/moto/sunfire/config/media_profiles.xml:system/etc/media_profiles.xml 
 
 #keyboard files
 PRODUCT_COPY_FILES += \
