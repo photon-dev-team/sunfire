@@ -45,7 +45,7 @@ sprint.mm.nai = unknown
 
 # Default network type.
 # 0 -> WCDMA preferred
-ro.telephony.default_network=7
+# ro.telephony.default_network=7
 
 # Time between scans in seconds. Keep it high to minimize battery drain.
 # This only affects the case in which there are remembered access points,
@@ -81,4 +81,4 @@ persist.sys.usb.config=mass_storage
 ro.vold.switchablepair=/mnt/sdcard,/mnt/emmc
 
 # CRT animation speed
-debug.sf.electron_frames=42
+debug.sf.electron_frames=36
