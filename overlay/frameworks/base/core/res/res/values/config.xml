@@ -27,12 +27,9 @@
         <item>usb1</item>
     </string-array>
 
-    <bool name="config_sf_limitedAlpha">true</bool>
 
     <bool name="config_allowAllRotations">true</bool>
 
-    <!-- Software blur is too slow on this device. -->
-    <bool name="config_sf_slowBlur">true</bool>
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
          Wifi interfaces.  If the device doesn't want to support tethering over Wifi this
