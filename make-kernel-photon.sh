@@ -24,3 +24,5 @@ make -C $PLATFORM_DIR/vendor/bcm/wlan/osrc/open-src/src/dhd/linux
 cp ~/cm9/kernel/tegra-temp/arch/arm/boot/zImage ~/cm9/device/moto/sunfire/kernel
 cp ~/cm9/vendor/authentec/safenet/vpndriver/vpnclient.ko ~/cm9/device/moto/sunfire/modules
 cp ~/cm9/vendor/bcm/wlan/osrc/open-src/src/dhd/linux/dhd.ko ~/cm9/device/moto/sunfire/modules
+cp ~/cm9/kernel/tegra-temp/arch/arm/mach-tegra/aev.ko ~/cm9/device/moto/sunfire/modules
+cp ~/cm9/kernel/tegra-temp/arch/arm/mach-tegra/evfwd.ko ~/cm9/device/moto/sunfire/modules
