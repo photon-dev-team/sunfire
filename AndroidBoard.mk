@@ -28,5 +28,18 @@ include $(CLEAR_VARS)
 #$(file) : $(LOCAL_PATH)/postrecoveryboot.sh | $(ACP)
 #	$(transform-prebuilt-to-target)
 
+TARGET_KERNEL_CONFIG := tegra_sunfire_cm9_defconfig
+TARGET_PREBUILT_KERNEL := device/moto/sunfire/kernel
+
+OLYMPUS_WIFI_MODULE:
+	make -C kernel/moto/olympus/wifi-module/open-src/src/dhd/linux/ \
+	ARCH="arm" CROSS_COMPILE="arm-eabi-" LINUXSRCDIR=kernel/sunfire/ \
+	LINUXBUILDDIR=$(KERNEL_OUT) \
+	LINUXVER=$(shell strings "$(KERNEL_OUT)/vmlinux"|grep '2.6.*MB855'|tail -n1) \
+	BCM_INSTALLDIR="$(ANDROID_BUILD_TOP)/$(KERNEL_MODULES_OUT)"
+
+TARGET_KERNEL_MODULES := OLYMPUS_WIFI_MODULE
+
+
 # include the non-open-source counterpart to this file
 -include vendor/moto/sunfire/AndroidBoardVendor.mk

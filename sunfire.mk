@@ -138,6 +138,6 @@ PRODUCT_COPY_FILES += device/moto/sunfire/apns-conf.xml:system/etc/apns-conf.xml
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
-PRODUCT_NAME := generic_sunfire
+PRODUCT_NAME := full_sunfire
 PRODUCT_DEVICE := sunfire
 PRODUCT_MODEL := MB855
