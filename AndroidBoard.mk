@@ -28,7 +28,7 @@ include $(CLEAR_VARS)
 #$(file) : $(LOCAL_PATH)/postrecoveryboot.sh | $(ACP)
 #	$(transform-prebuilt-to-target)
 
-TARGET_KERNEL_CONFIG := tegra_sunfire_cm9_defconfig
+TARGET_KERNEL_CONFIG := tegra_sunfire_cyanogenmod_defconfig
 TARGET_PREBUILT_KERNEL := device/moto/sunfire/kernel
 
 OLYMPUS_WIFI_MODULE:
