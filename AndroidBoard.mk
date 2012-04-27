@@ -35,7 +35,7 @@ OLYMPUS_WIFI_MODULE:
 	make -C kernel/moto/olympus/wifi-module/wlan/osrc/open-src/src/dhd/linux/ \
 	ARCH="arm" CROSS_COMPILE="arm-eabi-" LINUXSRCDIR=kernel/moto/sunfire/ \
 	LINUXBUILDDIR=$(KERNEL_OUT) \
-	LINUXVER=$(shell strings "$(KERNEL_OUT)/vmlinux"|grep '2.6.*MB855'|tail -n1) \
+	LINUXVER=$(shell strings "$(KERNEL_OUT)/vmlinux"|grep '2.6.*|tail -n1) \
 	BCM_INSTALLDIR="$(ANDROID_BUILD_TOP)/$(KERNEL_MODULES_OUT)"
 
 TARGET_KERNEL_MODULES := OLYMPUS_WIFI_MODULE
