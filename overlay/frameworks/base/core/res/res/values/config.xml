@@ -451,16 +451,6 @@
     <!-- The VoiceMail default value is displayed to my own number if it is true -->
     <bool name="config_telephony_use_own_number_for_voicemail">false</bool>
 
-
-    <!-- If this value is true, The mms content-disposition field is supported correctly.
-         If false, Content-disposition fragments are ignored -->
-    <bool name="config_mms_content_disposition_support">true</bool>
-
-
-    <!-- Set to true if the RSSI should always display CDMA signal strength even on EVDO -->
-    <bool name="config_alwaysUseCdmaRssi">false</bool>
-
-
     <!-- Maximum numerical value that will be shown in a status bar
          notification icon or in the notification itself. Will be replaced
          with @string/status_bar_notification_info_overflow when shown in the
