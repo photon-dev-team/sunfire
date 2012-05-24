@@ -40,11 +40,22 @@ TARGET_ARCH_VARIANT := armv7-a
 TARGET_ARCH_VARIANT_CPU := cortex-a9
 TARGET_ARCH_VARIANT_FPU := vfpv3-d16
 TARGET_HAVE_TEGRA_ERRATA_657451 := true
-ARCH_ARM_HAVE_TLS_REGISTER := true
 
 BOARD_CUSTOM_GRAPHICS := ../../../device/moto/sunfire/recovery/graphics.c
 BOARD_CUSTOM_RECOVERY_KEYMAPPING:= ../../device/moto/sunfire/recovery/recovery_ui.c
 BOARD_HAS_SDCARD_INTERNAL := true
+
+TARGET_KERNEL_CONFIG := tegra_sunfire_cyanogenmod_defconfig
+TARGET_PREBUILT_KERNEL := device/moto/sunfire/kernel
+
+SUNFIRE_WIFI_MODULE:
+	make -C kernel/moto/olympus/wifi-module/wlan/osrc/open-src/src/dhd/linux/ \
+	ARCH="arm" CROSS_COMPILE="arm-eabi-" LINUXSRCDIR=~/cm9/kernel/moto/sunfire/ \
+	LINUXBUILDDIR=$(KERNEL_OUT) PLATFORM_DIR=~/cm9 \
+	KERNEL_SRC=$PLATFORM_DIR/kernel/moto/sunfire ANDROID_BUILD_TOP=/$PLATFORM_DIR \
+	BCM_INSTALLDIR="$(ANDROID_BUILD_TOP)/$(KERNEL_MODULES_OUT)"
+
+TARGET_KERNEL_MODULES := SUNFIRE_WIFI_MODULE
 
 BOARD_KERNEL_CMDLINE :=
 BOARD_KERNEL_BASE := 0x10000000
