@@ -23,7 +23,7 @@
 
     <!-- Message shown in the middle of the screen after clicking on the recent apps button
          when there are no recent apps to show. Also used for accessibility. [CHAR LIMIT=45]-->
-    <string name="status_bar_no_recent_apps">Peanut butter jelly and bacon</string>
+    <string name="status_bar_no_recent_apps">Please try again later</string>
 
     <!-- When the battery is low, this is displayed to the user in a dialog.  The title of the low battery alert.  [CHAR LIMIT=NONE]-->
     <string name="battery_low_title">Feed me power</string>
@@ -42,5 +42,5 @@
     <string name="gps_notification_searching_text">Classified</string>
 
     <!-- Notification text: when GPS has found a fix [CHAR LIMIT=50] -->
-    <string name="gps_notification_found_text">Im Watching your movements</string>
+    <string name="gps_notification_found_text">You done got signal</string>
 </resources>
