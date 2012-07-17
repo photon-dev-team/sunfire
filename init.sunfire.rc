@@ -1,5 +1,8 @@
 import init.sunfire.usb.rc
 
+on early-init
+    mount debugfs debugfs /sys/kernel/debug
+
 on init
     export EXTERNAL_STORAGE /mnt/sdcard
     export PHONE_STORAGE /mnt/emmc
@@ -168,6 +171,9 @@ on boot
 
     # sdcard tweaks
     write /sys/block/mmcblk1/bdi/read_ahead_kb 4096
+
+    # network JIT
+    write /proc/sys/net/core/bpf_jit_enable 1
 
     # create the necessary dirs for tpapi with proper permission
     mkdir /data/tpapi
@@ -495,7 +501,7 @@ service hciattach /system/bin/bt_init_wrapper.sh
     user bluetooth
     group bluetooth net_bt_admin
     disabled
-
+    oneshot
 
 on property:init.svc.hciattach=stopping
     exec /system/bin/bt_init -stop

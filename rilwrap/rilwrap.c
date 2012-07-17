@@ -21,12 +21,12 @@ void OnRequestComplete_wrapper (RIL_Token t, RIL_Errno e,
 {
 	/* Debug code */
 	RequestInfo *pRI = (RequestInfo *)t;
-	LOGV("OnRequestComplete token='%u' errno='%u' responselen='%u'",
+	ALOGV("OnRequestComplete token='%u' errno='%u' responselen='%u'",
 		pRI->token, e, responselen);
 
 	/* keep phone awake */
 	if (pRI->token == current_calls_token && e == RIL_E_SUCCESS) {
-		LOGV("Got answer to GET_CURRENT_CALLS");
+		ALOGV("Got answer to GET_CURRENT_CALLS");
 
 		/* XOR logic, either it's locked and needing unlock *
 		 * or viceversa                                     */
@@ -38,7 +38,7 @@ void OnRequestComplete_wrapper (RIL_Token t, RIL_Errno e,
 			fputs("in_call", file);
 			fclose(file);
 
-			LOGV(current_calls_lock ? "Unlocked wakelock!" : "Locked wakelock!");
+			ALOGV(current_calls_lock ? "Unlocked wakelock!" : "Locked wakelock!");
 
 			current_calls_lock = (current_calls_lock ? 0 : 1);
 		}
@@ -55,7 +55,7 @@ void OnUnsolicitedResponse_wrapper (int unsolResponse, const void *data,
 	size_t datalen)
 {
 	/* Debug code */
-	LOGV("OnUnsolicitedResponse unsolResponse='%d' datalen='%u'",
+	ALOGV("OnUnsolicitedResponse unsolResponse='%d' datalen='%u'",
 		unsolResponse, datalen);
 
 	/* Call the orig function */
@@ -66,7 +66,7 @@ void RequestTimedCallback_wrapper (RIL_TimedCallback callback,
 	void *param, const struct timeval *relativeTime)
 {
 	/* Debug code */
-	LOGV("RequestTimedCallback relativeTime='%lu'",
+	ALOGV("RequestTimedCallback relativeTime='%lu'",
 		(relativeTime->tv_sec * 1000) + (relativeTime->tv_usec / 1000));
 
 	/* Call the orig function */
@@ -85,13 +85,13 @@ void RIL_RequestFunc_wrapper (int request, void *data, size_t datalen, RIL_Token
 {
 	/* Debug code */
 	RequestInfo *pRI = (RequestInfo *)t;
-	LOGV("RIL_RequestFunc request='%d' datalen='%u' token='%u'",
+	ALOGV("RIL_RequestFunc request='%d' datalen='%u' token='%u'",
 		request, datalen, pRI->token);
 
 	/* Store token if calling RIL_REQUEST_GET_CURRENT_CALLS */
 	if (request == RIL_REQUEST_GET_CURRENT_CALLS)
 	{
-		LOGV("Detected RIL_REQUEST_GET_CURRENT_CALLS");
+		ALOGV("Detected RIL_REQUEST_GET_CURRENT_CALLS");
 		current_calls_token = pRI->token;
 	}
 
@@ -102,7 +102,7 @@ void RIL_RequestFunc_wrapper (int request, void *data, size_t datalen, RIL_Token
 RIL_RadioState RIL_RadioStateRequest_wrapper (int argc, char *argv[])
 {
 	/* Debug code */
-	LOGV("RIL_RadioStateRequest");
+	ALOGV("RIL_RadioStateRequest");
 
 	/* Call the orig function */
 	return RIL_RadioStateRequest_wrapee(argc, argv);
@@ -111,7 +111,7 @@ RIL_RadioState RIL_RadioStateRequest_wrapper (int argc, char *argv[])
 int RIL_Supports_wrapper (int requestCode)
 {
 	/* Debug code */
-	LOGV("RIL_Supports requestCode='%d'", requestCode);
+	ALOGV("RIL_Supports requestCode='%d'", requestCode);
 
 	/* Call the orig function */
 	return RIL_Supports_wrapee(requestCode);
@@ -121,7 +121,7 @@ void RIL_Cancel_wrapper (RIL_Token t)
 {
 	/* Debug code */
 	RequestInfo *pRI = (RequestInfo *)t;
-	LOGV("RIL_Cancel token='%d'", pRI->token);
+	ALOGV("RIL_Cancel token='%d'", pRI->token);
 
 	/* Call the orig function */
 	return RIL_Cancel_wrapee(t);
@@ -129,7 +129,7 @@ void RIL_Cancel_wrapper (RIL_Token t)
 
 const char * RIL_GetVersion_wrapper (void)
 {
-	LOGV("RIL_GetVersion");
+	ALOGV("RIL_GetVersion");
 	/* Call the orig function */
 	return RIL_GetVersion_wrapee();
 }
@@ -186,7 +186,7 @@ const RIL_RadioFunctions *RIL_Init (const struct RIL_Env *env, int argc, char **
 	RIL_RadioFunctions_wrap.onCancel = RIL_Cancel_wrapper;
 	RIL_RadioFunctions_wrap.getVersion = RIL_GetVersion_wrapper;
 
-	LOGV("RIL_Init wrapper returning!");
+	ALOGV("RIL_Init wrapper returning!");
 
 	return &RIL_RadioFunctions_wrap;
 }

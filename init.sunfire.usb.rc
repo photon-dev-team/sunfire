@@ -6,6 +6,10 @@
 #    public static final int USB_MODE_MODEM = 4;
 #    public static final int USB_MODE_NONE = 5;
 
+on property:sys.usb.config=none
+    exec /system/bin/start usb_switch:5
+    setprop sys.usb.state $sys.usb.config
+
 on property:sys.usb.config=adb
     exec /system/bin/start usb_switch:5
     start adbd

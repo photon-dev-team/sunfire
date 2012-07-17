@@ -1,4 +1,8 @@
+ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),sunfire)
+
 LOCAL_PATH := $(call my-dir)
+$(shell mkdir -p $(OUT)/obj/SHARED_LIBRARIES/libcamera_intermediates/)
+$(shell touch $(OUT)/obj/SHARED_LIBRARIES/libcamera_intermediates/export_includes)
 
 include $(CLEAR_VARS)
 
@@ -21,3 +25,5 @@ LOCAL_SHARED_LIBRARIES += \
 LOCAL_SHARED_LIBRARIES += libdl
 
 include $(BUILD_SHARED_LIBRARY)
+
+endif

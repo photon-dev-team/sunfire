@@ -215,7 +215,6 @@
     <!-- Default value for LED on time when the battery is low on charge in miliseconds -->
     <integer name="config_notificationsBatteryLedOn">125</integer>
 
-
     <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
     <bool name="config_intrusiveNotificationLed">true</bool>
 
@@ -361,10 +360,10 @@
     <string name="default_wallpaper_component">@null</string>
 
     <!-- Component name of the service providing network location support. -->
-    <string name="config_networkLocationProviderPackageName">com.google.android.location.NetworkLocationProvider</string>
+    <string name="config_networkLocationProvider">com.google.android.location.NetworkLocationProvider</string>
 
     <!-- Component name of the service providing geocoder API support. -->
-    <string name="config_geocodeProviderPackageName">com.google.android.location.GeocodeProvider</string>
+    <string name="config_geocodeProvider">com.google.android.location.GeocodeProvider</string>
 
     <!-- Boolean indicating if current platform supports bluetooth SCO for off call
     use cases -->

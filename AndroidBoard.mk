@@ -28,8 +28,5 @@ include $(CLEAR_VARS)
 #$(file) : $(LOCAL_PATH)/postrecoveryboot.sh | $(ACP)
 #	$(transform-prebuilt-to-target)
 
-
-
-
 # include the non-open-source counterpart to this file
 -include vendor/moto/sunfire/AndroidBoardVendor.mk

@@ -33,37 +33,22 @@ $(call inherit-product-if-exists, vendor/moto/sunfire/sunfire-vendor.mk)
 
 ## (3)  Finally, the least specific parts, i.e. the non-GSM-specific aspects
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.ril.ntmodeglobal=true \
-    ro.kernel.android.ril=yes \
-    persist.ril.mux.noofchannels=10 \
-    persist.radio.reset_on_switch=true \
-    persist.ril.mux.ttydevice=/dev/ttyHS3 \
-    persist.ril.modem.ttydevice=/dev/ttySPI0 \
-    persist.ril.features=0x0C \
-    persist.ril.mux.retries=500 \
-    persist.ril.mux.sleep=2 \
     ro.telephony.sms_segment_size=160 \
-    ro.telephony.ril.v3=datacall,icccardstatus,signalstrength,facilitylock,skipbrokendatacall  \
-    ro.setupwizard.mode=OPTIONAL \
     ro.telephony.call_ring.multiple=false \
-    ro.telephony.call_ring.delay=500 \
     ro.setupwizard.enable_bypass=1 \
     ro.url.legal=http://www.google.com/intl/%s/mobile/android/basic/phone-legal.html \
     ro.url.legal.android_privacy=http://www.google.com/intl/%s/mobile/android/basic/privacy.html \
-    ro.cdma.home.operator.numeric=310120 \
-    ro.cdma.home.operator.alpha=Sprint \
-    ro.cdma.homesystem=64,65,76,77,78,79,80,81,82,83 \
-    ro.cdma.otaspnumschema=SELC,1,80,99
 
 # motorola helper scripts
 PRODUCT_COPY_FILES += \
     device/moto/sunfire/scripts/pds_perm_fix.sh:system/bin/pds_perm_fix.sh \
     device/moto/sunfire/scripts/bt_init_wrapper.sh:system/bin/bt_init_wrapper.sh \
-    device/moto/sunfire/scripts/hciattach_wrapper.sh:system/bin/hciattach_wrapper.sh
+    device/moto/sunfire/scripts/usb_switch.sh:system/bin/usb_switch.sh
 
 # sysctl conf
 PRODUCT_COPY_FILES += \
-    device/moto/sunfire/config/sysctl.conf:system/etc/sysctl.conf
+    device/moto/sunfire/config/sysctl.conf:system/etc/sysctl.conf \
+    device/moto/sunfire/config/init.d/01sysctl:system/etc/init.d/01sysctl
 
 ## (3)  Finally, the least specific parts, i.e. the non-GSM-specific aspects
 
@@ -72,6 +57,9 @@ PRODUCT_LOCALES := en_US
 
 # sunfire uses high-density artwork where available
 PRODUCT_LOCALES += hdpi
+
+# better code for dalvik heap size since we have space
+$(call inherit-product, frameworks/base/build/phone-xhdpi-1024-dalvik-heap.mk)
 
 # copy all kernel modules under the "modules" directory to system/lib/modules
 PRODUCT_COPY_FILES += $(shell \
@@ -95,8 +83,13 @@ $(call inherit-product, build/target/product/full_base_telephony.mk)
 PRODUCT_PACKAGES += Usb \
 			DockAudio \
 			Torch \
+			SunfireParts \
+			hciconfig \
+			hcitool \
+			hwcomposer.default \
+			rilwrap \
+			camera.sunfire \
 			audio.primary.sunfire \
-			cmparts \
 			audio.a2dp.default
 
 DEVICE_PACKAGE_OVERLAYS += device/moto/sunfire/overlay
@@ -104,9 +97,9 @@ DEVICE_PACKAGE_OVERLAYS += device/moto/sunfire/overlay
 # Board-specific init
 PRODUCT_COPY_FILES += \
     device/moto/sunfire/config/vold.fstab:system/etc/vold.fstab \
-    device/moto/sunfire/init.vsnet:system/bin/init.vsnet \
     device/moto/sunfire/scripts/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh \
-    device/moto/sunfire/prebuilts/liba2dp.so:system/lib/liba2dp.so
+    device/moto/sunfire/prebuilts/liba2dp.so:system/lib/liba2dp.so \
+    device/moto/sunfire/config/media_profiles.xml:system/etc/media_profiles.xml 
 
 #keyboard files
 PRODUCT_COPY_FILES += \
@@ -114,6 +107,7 @@ PRODUCT_COPY_FILES += \
     device/moto/sunfire/config/qtouch-obp-ts.idc:system/usr/idc/qtouch-obp-ts.idc \
     device/moto/sunfire/keylayout/tegra-kbc.kl:system/usr/keylayout/tegra-kbc.kl \
     device/moto/sunfire/keychars/tegra-kbc.kcm.bin:system/usr/keychars/tegra-kbc.kcm.bin \
+    device/moto/sunfire/keylayout/qwerty.kl:system/usr/keylayout/BTC_USB_Cordless_Mouse.kl \
     device/moto/sunfire/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl \
     device/moto/sunfire/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
     device/moto/sunfire/keylayout/Motorola_Mobility_Motorola_HD_Dock.kl:system/usr/keylayout/Motorola_Mobility_Motorola_HD_Dock.kl \
@@ -144,6 +138,6 @@ PRODUCT_COPY_FILES += device/moto/sunfire/apns-conf.xml:system/etc/apns-conf.xml
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
-PRODUCT_NAME := generic_sunfire
+PRODUCT_NAME := full_sunfire
 PRODUCT_DEVICE := sunfire
 PRODUCT_MODEL := MB855
