@@ -4,15 +4,22 @@ on early-init
     mount debugfs debugfs /sys/kernel/debug
 
 on init
-    export EXTERNAL_STORAGE /mnt/sdcard
-    export PHONE_STORAGE /mnt/emmc
+    export EXTERNAL_STORAGE /storage/sdcard0
+    export SECONDARY_STORAGE /storage/sdcard1
     # create mountpoints for storage
-    mkdir /mnt/emmc 0000 system system
-    mkdir /mnt/sdcard 0000 system system
-    mkdir /emmc/sdcard 0000 system system
-    symlink /mnt/emmc /emmc
-    symlink /mnt/sdcard /sdcard
-    symlink /mnt/sdcard /emmc/sdcard
+    mkdir /storage 0050 system sdcard_r
+    mkdir /storage/sdcard0 0000 system system
+    mkdir /storage/sdcard1 0000 system system
+    symlink /storage/sdcard0 /sdcard
+    symlink /storage/sdcard0 /mnt/sdcard
+    mkdir /mnt/usbdisk_1.0 0000 system system
+    mkdir /mnt/usbdisk_1.1 0000 system system
+    mkdir /mnt/usbdisk_1.2 0000 system system
+    mkdir /mnt/usbdisk_1.3 0000 system system
+    mkdir /mnt/usbdisk_1.4 0000 system system
+    mkdir /mnt/usbdisk_1.5 0000 system system
+    mkdir /mnt/usbdisk_1.6 0000 system system
+    mkdir /mnt/usbdisk_1.7 0000 system system
     # battery driver permissions
     mkdir /pds 0755 root root
     mkdir /osh 0000 root root
@@ -28,16 +35,7 @@ on fs
     exec /system/bin/logwrapper /system/bin/pds_perm_fix.sh
 
 on post-fs
-    symlink /system/lib /vendor/lib
     # once everything is setup, no need to modify /
-    mkdir /mnt/usbdisk_1.0 0000 system system
-    mkdir /mnt/usbdisk_1.1 0000 system system
-    mkdir /mnt/usbdisk_1.2 0000 system system
-    mkdir /mnt/usbdisk_1.3 0000 system system
-    mkdir /mnt/usbdisk_1.4 0000 system system
-    mkdir /mnt/usbdisk_1.5 0000 system system
-    mkdir /mnt/usbdisk_1.6 0000 system system
-    mkdir /mnt/usbdisk_1.7 0000 system system
     mount rootfs rootfs / ro remount
 
     # usbd permissions

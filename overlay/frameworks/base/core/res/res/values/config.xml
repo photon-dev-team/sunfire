@@ -215,12 +215,17 @@
     <!-- Default value for LED on time when the battery is low on charge in miliseconds -->
     <integer name="config_notificationsBatteryLedOn">125</integer>
 
+    <!-- Default value for LED off time when the battery is low on charge in miliseconds -->
+    <integer name="config_notificationsBatteryLedOff">2875</integer>
 
     <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
     <bool name="config_intrusiveNotificationLed">true</bool>
 
-    <!-- Default value for LED off time when the battery is low on charge in miliseconds -->
-    <integer name="config_notificationsBatteryLedOff">2875</integer>
+    <!-- Is the battery LED intrusive? Used to decide if there should be a disable option -->
+    <!--  <bool name="config_intrusiveBatteryLed">true</bool>-->
+
+    <!-- Does the battery LED support multiple colors? Used to decide if the user can change the colors -->
+    <!--  <bool name="config_multiColorBatteryLed">true</bool>-->
 
     <!-- Allow the menu hard key to be disabled in LockScreen on some devices -->
     <bool name="config_disableMenuKeyInLockScreen">false</bool>
@@ -358,12 +363,12 @@
 
     <!-- Component name of the default wallpaper. This will be ImageWallpaper if not
          specified -->
-    <string name="default_wallpaper_component">@null</string>
+    <string name="default_wallpaper_component" translatable="false">@null</string>
 
-    <!-- Component name of the service providing network location support. -->
+    <!-- Package name providing network location support. --> 
     <string name="config_networkLocationProviderPackageName">com.google.android.location.NetworkLocationProvider</string>
 
-    <!-- Component name of the service providing geocoder API support. -->
+    <!-- Package name providing geocoder API support. -->
     <string name="config_geocodeProviderPackageName">com.google.android.location.GeocodeProvider</string>
 
     <!-- Boolean indicating if current platform supports bluetooth SCO for off call
@@ -395,7 +400,7 @@
     <integer name="config_datause_notification_type">2</integer>
 
     <!-- IP address of the dns server to use if nobody else suggests one -->
-    <string name="config_default_dns_server" translatable="false">8.8.8.8</string>
+    <string name="config_default_dns_server">8.8.8.8</string>
 
     <!-- Boolean indicating if restoring network selection should be skipped -->
     <!-- The restoring is handled by modem if it is true-->
@@ -406,7 +411,7 @@
          OMA-TS-UAProf-V2_0-20060206-A Section 8.1.1.1. If the URL contains a '%s'
          format string then that substring will be replaced with the value of
          Build.MODEL. The format string shall not be escaped. -->
-    <string name="config_useragentprofile_url"></string>
+    <string name="config_useragentprofile_url" translatable="false"></string>
 
     <!-- When a database query is executed, the results retuned are paginated
          in pages of size (in KB) indicated by this value -->
@@ -417,7 +422,7 @@
     <bool name="config_showMenuShortcutsWhenKeyboardPresent">false</bool>
 
     <!-- Do not translate. Defines the slots is Two Digit Number for dialing normally not USSD -->
-    <string-array name="config_twoDigitNumberPattern">
+    <string-array name="config_twoDigitNumberPattern" translatable="false">
     </string-array>
 
     <!-- The VoiceMail default value is displayed to my own number if it is true -->
@@ -462,4 +467,6 @@
     </string-array>
 
 
+    <!-- Enables built-in SIP phone capability -->
+    <bool name="config_built_in_sip_phone">true</bool>
 </resources>

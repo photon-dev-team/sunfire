@@ -50,6 +50,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/moto/sunfire/config/sysctl.conf:system/etc/sysctl.conf \
     device/moto/sunfire/config/init.d/01sysctl:system/etc/init.d/01sysctl
+    device/moto/sunfire/config/audio_policy.conf:system/etc/audio_policy.conf
 
 ## (3)  Finally, the least specific parts, i.e. the non-GSM-specific aspects
 
@@ -74,21 +75,24 @@ else
 	LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_KERNEL):kernel
 
 $(call inherit-product-if-exists, vendor/moto/sunfire/sunfire-vendor.mk)
 
 $(call inherit-product, build/target/product/full_base_telephony.mk)
 
+PRODUCT_PACKAGES += make_ext4fs \
+ 			setup_fs
+
 PRODUCT_PACKAGES += Usb \
 			DockAudio \
 			Torch \
 			SunfireParts \
+			LegacyCamera \
 			hciconfig \
 			hcitool \
-			hwcomposer.default \
 			rilwrap \
+			hwcomposer.default \
+			lights.sunfire \
 			camera.sunfire \
 			audio.primary.sunfire \
 			audio.a2dp.default
@@ -100,6 +104,7 @@ PRODUCT_COPY_FILES += \
     device/moto/sunfire/config/vold.fstab:system/etc/vold.fstab \
     device/moto/sunfire/scripts/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh \
     device/moto/sunfire/prebuilts/liba2dp.so:system/lib/liba2dp.so \
+    device/moto/sunfire/config/media_codecs.xml:system/etc/media_codecs.xml \
     device/moto/sunfire/config/media_profiles.xml:system/etc/media_profiles.xml 
 
 #keyboard files

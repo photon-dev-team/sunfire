@@ -45,6 +45,9 @@ BOARD_CUSTOM_GRAPHICS := ../../../device/moto/sunfire/recovery/graphics.c
 BOARD_CUSTOM_RECOVERY_KEYMAPPING:= ../../device/moto/sunfire/recovery/recovery_ui.c
 BOARD_HAS_SDCARD_INTERNAL := true
 
+TARGET_BOOTANIMATION_PRELOAD := true
+TARGET_BOOTANIMATION_TEXTURE_CACHE := false
+
 TARGET_KERNEL_CONFIG := tegra_sunfire_cyanogenmod_defconfig
 TARGET_PREBUILT_KERNEL := device/moto/sunfire/kernel
 
