@@ -69,13 +69,6 @@ PRODUCT_COPY_FILES += $(shell \
     | sed -r 's/^\/?(.*\/)([^/ ]+)$$/\1\2:system\/lib\/modules\/\2/' \
     | tr '\n' ' ')
 
-ifeq ($(TARGET_PREBUILT_KERNEL),)
-	LOCAL_KERNEL := device/moto/sunfire/kernel
-else
-	LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-endif
-
-
 $(call inherit-product-if-exists, vendor/moto/sunfire/sunfire-vendor.mk)
 
 $(call inherit-product, build/target/product/full_base_telephony.mk)

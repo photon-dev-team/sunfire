@@ -466,6 +466,12 @@
         <item>"7,1"</item>
     </string-array>
 
+    <!-- Values greater or equal to 0 will enable electronbeam screen-on
+         animation with the specified delay (in milliseconds), -1 will disable the animation -->
+<!--tempdisable    <integer name="config_screenOnAnimation">0</integer>-->
+
+    <!-- True will enable the electron beam screen-off animation. -->
+<!--tempdisable    <bool name="config_screenOffAnimation">true</bool>-->
 
     <!-- Enables built-in SIP phone capability -->
     <bool name="config_built_in_sip_phone">true</bool>
