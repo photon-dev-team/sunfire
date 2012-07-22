@@ -473,3 +473,5 @@
     <!-- True will enable the electron beam screen-off animation. -->
 <!--tempdisable    <bool name="config_screenOffAnimation">true</bool>-->
 
+</resources>
+
