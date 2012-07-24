@@ -26,21 +26,21 @@ ro.gsm.2nd_data_retry_config=max_retries=infinite,default_randomization=2000,0,0
 
 
 # CDMA Carrier support - Native carrier is Sprint
-ro.cdma.home.operator.numeric=310120
-ro.cdma.home.operator.alpha=Sprint
-ro.cdma.homesystem=64,65,76,77,78,79,80,81,82,83
-ro.cdma.otaspnumschema=SELC,1,80,99
-persist.radio.cdma.min=0
+#ro.cdma.home.operator.numeric=310120
+#ro.cdma.home.operator.alpha=Sprint
+#ro.cdma.homesystem=64,65,76,77,78,79,80,81,82,83
+#ro.cdma.otaspnumschema=SELC,1,80,99
+#persist.radio.cdma.min=0
 
 
 #BEGIN Motorola, 30Jan2011, w19837, IKSUNFIRE-215, Feature ID: 35761.
 #[sprint tv transport protocol support]
-sprint.mm.http.proxy = 0.0.0.0
-sprint.mm.http.port = 0
-sprint.mm.rtsp.proxy = 0.0.0.0
-sprint.mm.rtsp.port = 0
-sprint.mm.network.type = unknown
-sprint.mm.nai = unknown
+#sprint.mm.http.proxy = 0.0.0.0
+#sprint.mm.http.port = 0
+#sprint.mm.rtsp.proxy = 0.0.0.0
+#sprint.mm.rtsp.port = 0
+#sprint.mm.network.type = unknown
+#sprint.mm.nai = unknown
 #END IKSUNFIRE-215
 
 # Default network type.

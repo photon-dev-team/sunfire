@@ -23,10 +23,10 @@
 ######################
 
 # external Sdcard
-dev_mount sdcard /storage/sdcard1 auto /devices/platform/tegra-sdhci.2/mmc_host/mmc3 /devices/platform/tegra-sdhci.2/mmc_host/mmc1
+dev_mount sdcard /storage/sdcard0 auto /devices/platform/tegra-sdhci.2/mmc_host/mmc3 /devices/platform/tegra-sdhci.2/mmc_host/mmc1
 
 # internal eMMC storage
-dev_mount emmc /storage/sdcard0 18 /devices/platform/tegra-sdhci.3/mmc_host/mmc0
+dev_mount emmc /storage/sdcard1 18 /devices/platform/tegra-sdhci.3/mmc_host/mmc0
 
 # flash drive connection to USB1
 #dev_mount usbdisk_1.0 /mnt/usbdisk_1.0 auto /devices/platform/tegra-ehci.0
