@@ -49,8 +49,10 @@ PRODUCT_COPY_FILES += \
 # sysctl conf
 PRODUCT_COPY_FILES += \
     device/moto/sunfire/config/sysctl.conf:system/etc/sysctl.conf \
-    device/moto/sunfire/config/init.d/01sysctl:system/etc/init.d/01sysctl
+    device/moto/sunfire/config/init.d/01sysctl:system/etc/init.d/01sysctl \
     device/moto/sunfire/config/audio_policy.conf:system/etc/audio_policy.conf
+
+PRODUCT_COPY_FILES += vendor/cm/prebuilt/common/bin/modelid_cfg.sh:system/bin/modelid_cfg.sh
 
 ## (3)  Finally, the least specific parts, i.e. the non-GSM-specific aspects
 

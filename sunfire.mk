@@ -82,7 +82,6 @@ PRODUCT_PACKAGES += Usb \
 			DockAudio \
 			Torch \
 			SunfireParts \
-			LegacyCamera \
 			hciconfig \
 			hcitool \
 			rilwrap \
