@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Setari Hwa</string>
+    <string name="hwa_settings_image_content" >Imagine</string>
+    <string name="hwa_settings_hwa_disabled_toast">HWA dezactivat pentru %1$s.</string>
+    <string name="hwa_settings_hwa_disable_failed_toast">Dezactivare HWA pentru %1$s esuata!!</string>
+    <string name="hwa_settings_hwa_enabled_toast">HWA activat pentru %1$s.</string>
+    <string name="hwa_settings_hwa_enable_failed_toast">Activarea HWA pentru %1$s esuata!!</string>
+    <string name="hwa_settings_search_hint">Scrie pentru a filtra</string>
+    <string name="hwa_settings_database_upgrade">Baza de date se actualizeaza (%1$d &gt;&gt;&gt; %1$d).</string>
+
+</resources>

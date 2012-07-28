@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Postavke za Hwa</string>
+    <string name="hwa_settings_image_content">Slika</string>
+    <string name="hwa_settings_hwa_disabled_toast">Hwa isključena za %1$s.</string>
+    <string name="hwa_settings_hwa_disable_failed_toast">Isključivanje hwa za %1$s neuspješno!!</string>
+    <string name="hwa_settings_hwa_enabled_toast">Uključena hwa za %1$s.</string>
+    <string name="hwa_settings_hwa_enable_failed_toast">Uključivanje hwa za %1$s neuspješno!!</string>
+    <string name="hwa_settings_search_hint">Upiši za filtriranje</string>
+
+</resources>

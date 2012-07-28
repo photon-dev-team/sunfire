@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Hwa Settings</string>
+    <string name="hwa_settings_image_content">Image</string>
+    <string name="hwa_settings_hwa_disabled_toast">Accélération pour %1$s désactivée.</string>
+    <string name="hwa_settings_hwa_disable_failed_toast">Impossible de blacklister %1$s !</string>
+    <string name="hwa_settings_hwa_enabled_toast">Accélération pour %1$s réactivée.</string>
+    <string name="hwa_settings_hwa_enable_failed_toast">Impossible de réactiver l\'accélération pour %1$s !</string>
+    <string name="hwa_settings_search_hint">Saisir un filtre</string>
+    <string name="hwa_settings_database_upgrade">La base de données a été mise à jour (%1$d &gt;&gt;&gt; %1$d).</string>
+
+</resources>

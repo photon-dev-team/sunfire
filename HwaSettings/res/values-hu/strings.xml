@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">HWA Beállítások</string>
+    <string name="hwa_settings_image_content" >Kép</string>
+    <string name="hwa_settings_hwa_disabled_toast">HWA kikapcsolva %1$ elemnél</string>
+    <string name="hwa_settings_hwa_disable_failed_toast">Kikapcsolás %1$ elemnél sikertelen!</string>
+    <string name="hwa_settings_hwa_enabled_toast">HWA engedélyezve %1$ elemnél.</string>
+    <string name="hwa_settings_hwa_enable_failed_toast">Engedélyezés %1$ elemnél sikertelen!</string>
+    <string name="hwa_settings_search_hint">Adj meg szűrőt</string>
+    <string name="hwa_settings_database_upgrade">Adatbázis frissítve (%1$d >>> %1$d).</string>
+
+</resources>

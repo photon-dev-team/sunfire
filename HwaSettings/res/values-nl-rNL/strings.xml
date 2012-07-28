@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">HWA Instellingen</string>
+    <string name="hwa_settings_image_content">Beeld</string>
+    <string name="hwa_settings_hwa_disabled_toast">HWA is uitgeschakeld voor %1$s.</string>
+    <string name="hwa_settings_hwa_disable_failed_toast">Uitschakelen HWA is mislukt voor %1$s!!</string>
+    <string name="hwa_settings_hwa_enabled_toast">HWA is ingeschakeld voor %1$s.</string>
+    <string name="hwa_settings_hwa_enable_failed_toast">Inschakelen HWA is mislukt voor %1$s!!</string>
+    <string name="hwa_settings_search_hint">Tekstinvoer voor filter</string>
+
+</resources>

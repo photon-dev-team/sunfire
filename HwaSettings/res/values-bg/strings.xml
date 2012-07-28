@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Hwa Настройки</string>
+    <string name="hwa_settings_image_content" >Снимка</string>
+    <string name="hwa_settings_hwa_disabled_toast">Забранено hwa за %1$s.</string>
+    <string name="hwa_settings_hwa_disable_failed_toast">Неуспешна забрана на hwa за %1$s !!</string>
+    <string name="hwa_settings_hwa_enabled_toast">Активирано hwa за %1$s.</string>
+    <string name="hwa_settings_hwa_enable_failed_toast">Неуспешно активиране на hwa за %1$s !!</string>
+    <string name="hwa_settings_search_hint">Пишете за филтриране</string>
+    <string name="hwa_settings_database_upgrade">Базата данни се обновява (%1$d &gt;&gt;&gt; %1$d).</string>
+
+</resources>

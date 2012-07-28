@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">HWA Einstellungen</string>
+    <string name="hwa_settings_image_content">Bild</string>
+    <string name="hwa_settings_hwa_disabled_toast">HWA für %1$s deaktiviert.</string>
+    <string name="hwa_settings_hwa_disable_failed_toast">HWA Deaktivieren für %1$s fehlgeschlagen!!</string>
+    <string name="hwa_settings_hwa_enabled_toast">HWA für %1$s aktiviert.</string>
+    <string name="hwa_settings_hwa_enable_failed_toast">HWA Aktivieren für %1$s fehlgeschlagen!!</string>
+    <string name="hwa_settings_search_hint">Eingabe zur Auswahl</string>
+    <string name="hwa_settings_database_upgrade">Datenbank wird aktualisiert (%1$d &gt;&gt;&gt; %1$d).</string>
+
+</resources>

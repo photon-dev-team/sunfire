@@ -1,0 +1,5 @@
+# Keep all Fragments in this package, which are used by reflection.
+-keep class com.cyanogenmod.settings.device.hwa.*Fragment
+-keep class com.cyanogenmod.settings.device.hwa.*Provider
+-keep class com.cyanogenmod.settings.device.hwa.*Settings
+

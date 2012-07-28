@@ -1,0 +1,12 @@
+<resources>
+
+    <string name="app_name">Nastavenie HWA</string>
+    <string name="hwa_settings_image_content" >Obraz</string>
+    <string name="hwa_settings_hwa_disabled_toast">HWA pre %1$s bola vypnutá.</string>
+    <string name="hwa_settings_hwa_disable_failed_toast">Vypnutie HWA pre %1$s zlyhalo!!</string>
+    <string name="hwa_settings_hwa_enabled_toast">Povolená HWA pre %1$s.</string>
+    <string name="hwa_settings_hwa_enable_failed_toast">Povolenie HWA pre %1$s zlyhalo!!</string>
+    <string name="hwa_settings_search_hint">Zadajte text pre filtrovanie</string>
+    <string name="hwa_settings_database_upgrade">Databáza sa aktualizuje (%1$d &gt;&gt;&gt; %1$d).</string>
+
+</resources>

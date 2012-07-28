@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Nastavení Hwa</string>
+    <string name="hwa_settings_image_content">Obraz</string>
+    <string name="hwa_settings_hwa_disabled_toast">HWA zakázáno pro %1$s.</string>
+    <string name="hwa_settings_hwa_disable_failed_toast">Zakázání HWA pro %1$s selhalo!</string>
+    <string name="hwa_settings_hwa_enabled_toast">HWA povoleno pro %1$s.</string>
+    <string name="hwa_settings_hwa_enable_failed_toast">Povolení HWA pro %1$s selhalo!</string>
+    <string name="hwa_settings_search_hint">Zadejte pro filtrování</string>
+    <string name="hwa_settings_database_upgrade">Databáze byla zaktualizována (%1$d &gt;&gt;&gt; %1$d).</string>
+
+</resources>

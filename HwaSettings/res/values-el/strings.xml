@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Ρυθμισεις Hwa </string>
+    <string name="hwa_settings_image_content">Εικονα</string>
+    <string name="hwa_settings_hwa_disabled_toast">Απενεργοποιηθηκε το hwa για %1$s.</string>
+    <string name="hwa_settings_hwa_disable_failed_toast">Απενεργοποιηση hwa για %1$s απετυχε!!</string>
+    <string name="hwa_settings_hwa_enabled_toast">Ενεργοποιηθηκε το hwa για %1$s.</string>
+    <string name="hwa_settings_hwa_enable_failed_toast">Ενεργοποιηση hwa για %1$s απετυχε!!</string>
+    <string name="hwa_settings_search_hint">Τυπος φιλτρου</string>
+    <string name="hwa_settings_database_upgrade">Ενημερωση βασης δεδομενων (%1$d &gt;&gt;&gt; %1$d).</string>
+
+</resources>

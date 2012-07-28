@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Настройки hwa</string>
+    <string name="hwa_settings_hwa_disabled_toast">Отключение hwa для %1$s.</string>
+    <string name="hwa_settings_hwa_disable_failed_toast">Не удалось отключить hwa для %1$s!!</string>
+    <string name="hwa_settings_hwa_enabled_toast">Включение hwa для %1$s.</string>
+    <string name="hwa_settings_hwa_enable_failed_toast">Не удалось включить hwa для %1$s!!</string>
+    <string name="hwa_settings_search_hint">Поиск</string>
+    <string name="hwa_settings_database_upgrade">База данных обновляется (%1$d &gt;&gt;&gt; %1$d).</string>
+
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Pengaturan Hwa</string>
+    <string name="hwa_settings_image_content">Gambar</string>
+    <string name="hwa_settings_hwa_disabled_toast">Matikan HWA untuk %1$ detik.</string>
+    <string name="hwa_settings_hwa_disable_failed_toast">Mematikan HWA untuk %1$ detik gagal!!</string>
+    <string name="hwa_settings_hwa_enabled_toast">Atifkan HWA untuk %1$ detik.</string>
+    <string name="hwa_settings_hwa_enable_failed_toast">Mengaktifkan HWA untuk %1$ detik gagal!!</string>
+    <string name="hwa_settings_search_hint">Tulis untuk melakukan filter</string>
+
+</resources>

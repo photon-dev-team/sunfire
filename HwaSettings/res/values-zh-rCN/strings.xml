@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">硬體加速設定</string>
+    <string name="hwa_settings_image_content" >圖片</string>
+    <string name="hwa_settings_hwa_disabled_toast">停用對 %1$s 的硬體加速</string>
+    <string name="hwa_settings_hwa_disable_failed_toast">停用對 %1$s 的硬體加速失敗!!</string>
+    <string name="hwa_settings_hwa_enabled_toast">啟用對 %1$s的硬體加速</string>
+    <string name="hwa_settings_hwa_enable_failed_toast">啟用對 %1$s 的硬體加速失敗!!</string>
+    <string name="hwa_settings_search_hint">應用程式/套件名稱</string>
+</resources>
