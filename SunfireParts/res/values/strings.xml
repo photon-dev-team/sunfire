@@ -9,6 +9,7 @@
     <string name="storage_switch_summary_on">Using expanded internal storage for apps and media</string>
     <string name="storage_switch_summary_off">Using SD Card for apps and media</string>
     <string name="storage_switch_unavailable">This device doesn\'t have expanded internal storage</string>
-    <string name="category_audio">Audio</string>
+    <string name="category_audiovideo">Audio &amp; Video</string>
     <string name="category_storage">Storage</string>
+    <string name="hwa_settings">Hardware Acceleration</string>
 </resources>

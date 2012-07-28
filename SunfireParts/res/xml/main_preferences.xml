@@ -2,13 +2,18 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" android:title="@string/main_title">
 
-    <PreferenceCategory android:title="@string/category_audio" />
+    <PreferenceCategory android:title="@string/category_audiovideo" />
 	<CheckBoxPreference
 		android:key="hdmi_audio"
 		android:summaryOn="@string/hdmi_audio_summary_on"
 		android:summaryOff="@string/hdmi_audio_summary_off"
 		android:title="@string/hdmi_audio_title"
 		android:defaultValue="false" />
+	<PreferenceScreen android:title="@string/hwa_settings">
+		<intent android:action="android.intent.action.MAIN"
+			android:targetPackage="com.cyanogenmod.settings.device.hwa"
+			android:targetClass="com.cyanogenmod.settings.device.hwa.HwaSettingsActivity" />
+	</PreferenceScreen>
 
     <PreferenceCategory android:title="@string/category_storage" />
     <CheckBoxPreference
