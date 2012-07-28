@@ -3,10 +3,13 @@
     <string name="app_name">Photon Settings</string>
     <string name="main_title">Motorola Photon Settings</string>
     <string name="hdmi_audio_title">HDMI Audio</string>
-    <string name="hdmi_audio_summary">Enable or disable audio over HDMI</string>
-    <!-- Application Settings : Switch storage mountpoints -->
-    <string name="pref_switch_storage_title">Use internal storage</string>
-    <string name="pref_switch_storage_summary_on">Using expanded internal storage for apps and media (requires reboot)</string>
-    <string name="pref_switch_storage_summary_off">Using removable card for apps and media (requires reboot)</string>
-    <string name="pref_storage_switch_unavailable">This device doesn\'t have expanded internal storage</string>
+    <string name="hdmi_audio_summary_on">Using HDMI for audio output</string>
+    <string name="hdmi_audio_summary_off">Using speaker for audio output</string>
+    <string name="storage_switch_title">Use internal storage</string>
+    <string name="storage_switch_summary_on">Using expanded internal storage for apps and media</string>
+    <string name="storage_switch_summary_off">Using SD Card for apps and media</string>
+    <string name="storage_switch_unavailable">This device doesn\'t have expanded internal storage</string>
+    <string name="category_audiovideo">Audio &amp; Video</string>
+    <string name="category_storage">Storage</string>
+    <string name="hwa_settings">Hardware Acceleration</string>
 </resources>

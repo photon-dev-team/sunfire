@@ -3,5 +3,6 @@
     <string name="app_name">Ajustes Photon</string>
     <string name="main_title">Ajustes para Motorola Photon</string>
     <string name="hdmi_audio_title">Audio sobre HDMI</string>
-    <string name="hdmi_audio_summary">Habilitar o deshabilitar audio sobre HDMI</string>
+    <string name="hdmi_audio_summary_on">Habilitar o deshabilitar audio sobre HDMI</string>
+    <string name="hdmi_audio_summary_off">Habilitar o deshabilitar audio sobre HDMI</string>
 </resources>
