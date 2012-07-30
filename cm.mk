@@ -9,7 +9,7 @@ PRODUCT_RELEASE_NAME := Sunfire
 TARGET_BOOTANIMATION_NAME :=
  
 PRODUCT_COPY_FILES += \
-	        device/motorola/olympus/bootanimation/bootanimation.zip:system/media/bootanimation.zip
+	        device/moto/sunfire/bootanimation/bootanimation.zip:system/media/bootanimation.zip
 
 ## Inherit some common CM stuff.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
