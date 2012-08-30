@@ -82,7 +82,7 @@ PRODUCT_PACKAGES += make_ext4fs \
 PRODUCT_PACKAGES += Usb \
 			DockAudio \
 			Torch \
-			OlympusParts \
+			SunfireParts \
 			HwaSettings \
 			hciconfig \
 			hcitool \

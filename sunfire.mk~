@@ -75,14 +75,15 @@ $(call inherit-product-if-exists, vendor/moto/sunfire/sunfire-vendor.mk)
 
 $(call inherit-product, build/target/product/full_base_telephony.mk)
 
+
 PRODUCT_PACKAGES += make_ext4fs \
  			setup_fs
 
 PRODUCT_PACKAGES += Usb \
 			DockAudio \
 			Torch \
-			SunfireParts \
-			LegacyCamera \
+			OlympusParts \
+			HwaSettings \
 			hciconfig \
 			hcitool \
 			rilwrap \
