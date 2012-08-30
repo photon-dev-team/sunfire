@@ -27,8 +27,8 @@
  *            - some wrapper functions are needed (please see the libui.patch)
  */
 
+//#define LOG_NDEBUG 0
 #define LOG_TAG "CameraHAL"
-#define LOG_NDEBUG 0
 
 #include "CameraHardwareInterface.h"
 #include <hardware/hardware.h>
@@ -37,6 +37,7 @@
 #include <fcntl.h>
 #include <linux/ioctl.h>
 #include <hardware/gralloc.h>
+#include <utils/Errors.h>
 
 #define NO_ERROR 0
 
@@ -574,7 +575,7 @@ qcom_camera_store_meta_data_in_buffers(struct camera_device * device, int enable
    /*struct legacy_camera_device *lcdev = to_lcdev(device);
    int ret = lcdev->hwif->storeMetaDataInBuffers(enable);*/
    ALOGV("qcom_camera_store_meta_data_in_buffers:\n");
-   return NO_ERROR;
+   return android::INVALID_OPERATION;
 }
 
 int

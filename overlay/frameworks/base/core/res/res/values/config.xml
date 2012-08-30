@@ -240,6 +240,10 @@
          If unlock screen is disabled, the puk should be unlocked through Emergency Dialer -->
     <bool name="config_enable_puk_unlock_screen">true</bool>
 
+    <!-- If this value is true, The mms content-disposition field is supported correctly.
+         If false, Content-disposition fragments are ignored -->
+    <bool name="config_mms_content_disposition_support">false</bool>
+
     <!-- Control the behavior when the user long presses the home button.
             0 - Nothing
             1 - Recent apps dialog
@@ -476,5 +480,11 @@
 
     <!-- Enables built-in SIP phone capability -->
     <bool name="config_built_in_sip_phone">true</bool>
-</resources>
 
+    <!-- Possible names from /devices/virtual/switch/dock for a dock device.
+         Some kernels use names like CAR and DESK. -->
+    <string-array translatable="false" name="config_accessoryDockNames">
+        <item>"CAR"</item>
+        <item>"DESK"</item>
+    </string-array>
+</resources>

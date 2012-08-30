@@ -3,8 +3,8 @@
     <CallPromptId Id="0" CallPromptText="CallPromptId0" />
     <CallPromptId Id="1" CallPromptText="CallPromptId1" />
     <CallPromptId Id="2" CallPromptText="CallPromptId2" />
-    <EriInfo RoamingIndicator="0" IconIndex="0" IconMode="0" EriText="joker's CM10 beta 0.1.1 ROAMING" CallPromptId="0" AlertId="0" />
-    <EriInfo RoamingIndicator="1" IconIndex="1" IconMode="0" EriText="joker's CM10 beta 0.1.1" CallPromptId="0" AlertId="0" />
+    <EriInfo RoamingIndicator="0" IconIndex="0" IconMode="0" EriText="joker's CM10 beta 0.2.0 ROAMING" CallPromptId="0" AlertId="0" />
+    <EriInfo RoamingIndicator="1" IconIndex="1" IconMode="0" EriText="joker's CM10 beta 0.2.0" CallPromptId="0" AlertId="0" />
     <EriInfo RoamingIndicator="2" IconIndex="2" IconMode="0" EriText="Roaming like a boss" CallPromptId="0" AlertId="0" />
     <EriInfo RoamingIndicator="64" IconIndex="64" IconMode="0" EriText="Preferred System" CallPromptId="0" AlertId="0" />
     <EriInfo RoamingIndicator="65" IconIndex="65" IconMode="0" EriText="Available System" CallPromptId="0" AlertId="0" />

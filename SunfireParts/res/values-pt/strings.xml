@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Configurações do Atrix</string>
+    <string name="main_title">Configurações do Motorola Atrix</string>
+    <string name="navigation_configuration">Navegação por impressão digital</string>
+    <string name="database_administration">Gerenciar impressões digitais</string>
+    <string name="hdmi_audio_title">Audio HDMI</string>
+    <string name="hdmi_audio_summary_on">Usando HDMI como saída de audio</string>
+    <string name="hdmi_audio_summary_off">Usando alto-falante como saída de audio</string>
+    <string name="storage_switch_title">Usar armazenamento externo</string>
+    <string name="storage_switch_summary_off">Usando armazenamento interno expandido para apps e mídia</string>
+    <string name="storage_switch_summary_on">Usando SD-Card para apps e mídia</string>
+    <string name="storage_switch_unavailable">Não disponível</string>
+    <string name="category_fingerprint">Impressão digital</string>
+    <string name="category_storage">Armazenamento</string>
+    <string name="hwa_settings">Aceleração por hardware</string>
+</resources>

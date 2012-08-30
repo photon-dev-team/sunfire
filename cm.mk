@@ -5,12 +5,8 @@ $(call inherit-product, vendor/cm/config/gsm.mk)
 PRODUCT_RELEASE_NAME := Sunfire
 
 ## Boot animation
-#TARGET_BOOTANIMATION_NAME := vertical-540x960
-TARGET_BOOTANIMATION_NAME :=
+TARGET_BOOTANIMATION_NAME := vertical-540
  
-PRODUCT_COPY_FILES += \
-	        device/moto/sunfire/bootanimation/bootanimation.zip:system/media/bootanimation.zip
-
 ## Inherit some common CM stuff.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
  
